@@ -4,13 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import IzgledProzora.ToolBar;
 
 public class GlavniProzor extends JFrame {
 	
-private ToolBar toolbar;
+	private ToolBar toolbar;
 	
 	public GlavniProzor() {
 	Toolkit kit = Toolkit.getDefaultToolkit();
@@ -26,6 +29,9 @@ private ToolBar toolbar;
 	add(toolbar, BorderLayout.NORTH);
 	toolbar.setVisible(true);
 	setResizable(true);
+
+	
+	
 	}
 	
 
