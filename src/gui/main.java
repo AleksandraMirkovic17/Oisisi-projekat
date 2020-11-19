@@ -2,14 +2,14 @@ package gui;
 
 import java.util.*; 
 
-import izledProzora.glavni_prozor;
-import izledProzora.ToolBar;
+import IzgledProzora.GlavniProzor;
+import IzgledProzora.ToolBar;
 
 public class main  {
 
 	public static void main(String[] args)
 	{
-		glavni_prozor glavni= new glavni_prozor();
+		GlavniProzor glavni= new GlavniProzor();
 		glavni.setVisible(true);
 	}
 }
