@@ -11,6 +11,7 @@ public class main  {
 	{
 		GlavniProzor glavni= new GlavniProzor();
 		glavni.setVisible(true);
+
 	}
 }
 
