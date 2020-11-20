@@ -25,6 +25,9 @@ public class GlavniProzor extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setLocationRelativeTo(null);
 	
+	MyMenuBar menu = new MyMenuBar();
+	this.setJMenuBar(menu);
+	
 	toolbar=new ToolBar();
 	add(toolbar, BorderLayout.NORTH);
 	toolbar.setVisible(true);
