@@ -1,9 +1,11 @@
 package IzgledProzora;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -28,12 +30,15 @@ public class GlavniProzor extends JFrame {
 	MyMenuBar menu = new MyMenuBar(this);
 	this.setJMenuBar(menu);
 	
+	StatusBar statusBar = new StatusBar();
+	add(statusBar, BorderLayout.SOUTH);
+	statusBar.setVisible(true);
+	statusBar.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //Postavljanje granicne linije 
+	
 	toolbar=new ToolBar();
 	add(toolbar, BorderLayout.NORTH);
 	toolbar.setVisible(true);
 	setResizable(true);
-
-	
 	
 	}
 	
