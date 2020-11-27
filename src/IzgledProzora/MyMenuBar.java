@@ -39,7 +39,7 @@ public class MyMenuBar extends JMenuBar {
 	
 	//pravimo konstruktor bez parametara klase MyMenuBar
 	
-	public MyMenuBar(final GlavniProzor parent)
+	public MyMenuBar(GlavniProzor parent)
 	{
 		JMenu file = new JMenu("File");
 		
@@ -51,21 +51,9 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem close = new JMenuItem ("Close"); //zatvaranje aplikacije
 		close.setMnemonic(KeyEvent.VK_C);
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); //CTRL+C sluzi za zatvaranje otvorenog prozora
-		close.setIcon(new ImageIcon(new ImageIcon("Slike/close.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
-		/*	
-					@Override
-	public void windowClosing(WindowEvent arg0) {
-		JFrame frame = (JFrame) arg0.getComponent();
-		int code = JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da želite da zatvorite aplikaciju?",
-				"Zatvaranje aplikacije?", JOptionPane.YES_NO_OPTION);
-		if (code != JOptionPane.YES_OPTION) {
-			frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		} else {
-			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		}
+		close.setIcon(new ImageIcon("Slike/close.png"));
 
-			}*/
-	/*close.addWiListener(new ActionListener() {
+	/*//.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -73,14 +61,14 @@ public class MyMenuBar extends JMenuBar {
 				int YN = JOptionPane.showConfirmDialog(parent, "Da li ste sigurni da zelite da zatvrite aplikaciju?",
 						"Zatvaranje aplikacije?", JOptionPane.YES_NO_OPTION);
 				if(YN != JOptionPane.YES_OPTION) {
-					//parent.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+					parent.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 				} else {
 					parent.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 				}
 				
-			}
-		});
-*/
+			}*/
+		//});
+
 		file.add(myNew);
 		file.addSeparator();
 		file.add(close);
@@ -109,7 +97,7 @@ public class MyMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JTextArea helpTekst= new JTextArea("\t\t Detaljan opis o nacinu koriscenje aplikacije \t\t\n", 20, 60);
+				JTextArea helpTekst= new JTextArea("\t\t Detaljan opis o nacinu koriscenja aplikacije \t\t\n", 20, 60);
 				Font f = new Font("Arial", Font.BOLD, 14);
 				helpTekst.setFont(f);
 				JScrollPane sp = new JScrollPane(helpTekst); //postavljamo panel koji ima mogucnost skrolovanja
