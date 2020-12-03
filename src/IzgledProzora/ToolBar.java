@@ -21,7 +21,7 @@ public class ToolBar extends JToolBar  {
 			super(SwingConstants.HORIZONTAL);
 			JButton btnNew = new JButton();
 			btnNew.setToolTipText("PLUSIC");
-			ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/plusic.png").getImage().getScaledInstance(22, 22, Image.SCALE_DEFAULT));
+			ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/plus.png").getImage());
 			btnNew.setIcon(imageIcon);
 			add(btnNew);
 			addSeparator();
@@ -29,21 +29,21 @@ public class ToolBar extends JToolBar  {
 			
 			JButton btnNew1 = new JButton();
 			btnNew1.setToolTipText("IZMENE");
-			ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike/olovka.png").getImage().getScaledInstance(22, 22, Image.SCALE_DEFAULT));
+			ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike/olovka.png").getImage());
 			btnNew1.setIcon(imageIcon1);
 			add(btnNew1);
 			addSeparator();
 			
 			JButton btnNew2 = new JButton();
-			btnNew2.setToolTipText("Delet");
-			ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike/kanta.jpg").getImage().getScaledInstance(22, 22, Image.SCALE_DEFAULT));
+			btnNew2.setToolTipText("IZBRISI");
+			ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike/kanta.png").getImage());
 			btnNew2.setIcon(imageIcon2);
 			add(btnNew2);
 			addSeparator();
 			
 			JButton btnNew22 = new JButton();
 			btnNew22.setToolTipText("Search");
-			ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike/lupa.jpg").getImage().getScaledInstance(22, 22, Image.SCALE_DEFAULT));
+			ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike/lupa.png").getImage());
 			btnNew22.setIcon(imageIcon22);
 			add(btnNew22);
 			addSeparator();
