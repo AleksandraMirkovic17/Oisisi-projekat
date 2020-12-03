@@ -46,12 +46,12 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem myNew = new JMenuItem("New"); //dodavanje novog entiteta u sistem
 		//postavljanje akcelaratora /*REFERENCIRAN KOD https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html#mnemonic*/
 		myNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK)); //CTRL+N sluzi za dodavanje novog entiteta
-		myNew.setIcon(new ImageIcon(new ImageIcon("Slike/plus.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
+		myNew.setIcon(new ImageIcon("Slike/plus.png"));
 		
 		JMenuItem close = new JMenuItem ("Close"); //zatvaranje aplikacije
 		close.setMnemonic(KeyEvent.VK_C);
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); //CTRL+C sluzi za zatvaranje otvorenog prozora
-		close.setIcon(new ImageIcon(new ImageIcon("Slike/close.png").getImage().getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
+		close.setIcon(new ImageIcon("Slike/iks.png"));
 		/*	
 					@Override
 	public void windowClosing(WindowEvent arg0) {
@@ -90,10 +90,13 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem edit1 = new JMenuItem("Edit"); //izmena postojeceg entiteta
 		edit1.setMnemonic(KeyEvent.VK_E);
 		edit1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+		edit1.setIcon(new ImageIcon("Slike/olovka.png"));
+
 		
 		JMenuItem delete = new JMenuItem ("Delete"); //brisanje postojeceg entiteta
 		delete.setMnemonic(KeyEvent.VK_D);
 		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+		delete.setIcon(new ImageIcon("Slike/kanta.png"));
 		
 		edit.add(edit1);
 		edit.addSeparator();
