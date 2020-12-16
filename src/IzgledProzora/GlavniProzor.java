@@ -22,7 +22,7 @@ public class GlavniProzor extends JFrame {
 	private TabPane tabpane;
 	
 	private static GlavniProzor instance=null;
-	
+	 
 	public static GlavniProzor getInstance()
 	{
 		if(instance==null)
