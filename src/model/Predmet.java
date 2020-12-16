@@ -2,12 +2,15 @@ package model;
 import java.util.*; 
 
 enum Semestar {LETNJI,ZIMSKI};
+
+
  
 public class Predmet {
 	private String sifraPredmeta;
 	private String nazivPredmeta;
 	public Semestar semestar;
 	private int godinaStudija;
+	private String sem;
 	private List<Profesor> profesori;
 	private int espb;
 	private List<Student> poloziliPredmet;
@@ -17,17 +20,22 @@ public class Predmet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Predmet(String sifraPredmeta, String nazivPredmeta, Semestar semestar, int godinaStudija,
-			List<Profesor> profesori, int espb, List<Student> poloziliPredmet, List<Student> nisuPoloziliPredmet) {
-		super();
-		this.sifraPredmeta = sifraPredmeta;
-		this.nazivPredmeta = nazivPredmeta;
-		this.semestar = semestar;
-		this.godinaStudija = godinaStudija;
-		this.profesori = profesori;
-		this.espb = espb;
-		this.poloziliPredmet = poloziliPredmet;
-		this.nisuPoloziliPredmet = nisuPoloziliPredmet;
+	public Predmet(String s, String s1,int br,int god,String sem)
+	{
+		
+		this.sifraPredmeta = s;
+		this.nazivPredmeta = s1;
+		this.espb = br;
+		this.godinaStudija = god;
+		this.sem=sem;
+		
+	}
+	
+	public String getSem() {
+		return sem;
+	}
+	public void setSem(String sem) {
+		this.sem = sem;
 	}
 	@Override
 	public String toString() {
