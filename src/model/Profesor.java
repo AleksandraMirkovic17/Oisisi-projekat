@@ -50,6 +50,13 @@ public class Profesor {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Profesor(String string, String string2, String string3, String string4) {
+		this.ime = string;
+		this.prezime = string2;
+		this.titula = string3;
+		this.zvanjeProfesora = string4;
+		
+	}
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}

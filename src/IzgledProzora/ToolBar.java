@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -27,25 +29,25 @@ public class ToolBar extends JToolBar  {
 			addSeparator();
 			
 			
-			JButton btnNew1 = new JButton();
-			btnNew1.setToolTipText("IZMENE");
+			JButton btnIzmeni = new JButton();
+			btnIzmeni.setToolTipText("IZMENE");
 			ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike/olovka.png").getImage());
-			btnNew1.setIcon(imageIcon1);
-			add(btnNew1);
+			btnIzmeni.setIcon(imageIcon1);
+			add(btnIzmeni);
 			addSeparator();
 			
-			JButton btnNew2 = new JButton();
-			btnNew2.setToolTipText("IZBRISI");
+			JButton btnIzbrisi = new JButton();
+			btnIzbrisi.setToolTipText("IZBRISI");
 			ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike/kanta.png").getImage());
-			btnNew2.setIcon(imageIcon2);
-			add(btnNew2);
+			btnIzbrisi.setIcon(imageIcon2);
+			add(btnIzbrisi);
 			addSeparator();
 			
-			JButton btnNew22 = new JButton();
-			btnNew22.setToolTipText("PRETRAZI");
+			JButton btnPretrazi = new JButton();
+			btnPretrazi.setToolTipText("PRETRAZI");
 			ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike/lupa.png").getImage());
-			btnNew22.setIcon(imageIcon22);
-			add(btnNew22);
+			btnPretrazi.setIcon(imageIcon22);
+			add(btnPretrazi);
 			addSeparator();
 			
 			JTextField pretraga=new JTextField();
@@ -53,7 +55,9 @@ public class ToolBar extends JToolBar  {
 			add(Box.createHorizontalStrut(700));
 			add(pretraga);
 			add(Box.createHorizontalStrut(10));
-			add(btnNew22);
+			add(btnPretrazi);
 			addSeparator();
+			
+			
 		}
 }
