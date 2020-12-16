@@ -42,7 +42,7 @@ public class ToolBar extends JToolBar  {
 			addSeparator();
 			
 			JButton btnNew22 = new JButton();
-			btnNew22.setToolTipText("Search");
+			btnNew22.setToolTipText("PRETRAZI");
 			ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike/lupa.png").getImage());
 			btnNew22.setIcon(imageIcon22);
 			add(btnNew22);
