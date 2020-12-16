@@ -1,13 +1,15 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Ocena {
 	private Student student;
 	private Predmet predmet;
 	private int brojcanaVrednost;
-	private String datumPolaganja;
+	private LocalDate datumPolaganja;
 	
 	//constructor using fields
-	public Ocena(Student student, Predmet predmet, int brojcanaVrednost, String datumPolaganja) {
+	public Ocena(Student student, Predmet predmet, int brojcanaVrednost, LocalDate datumPolaganja) {
 		super();
 		this.student = student;
 		this.predmet = predmet;
@@ -43,11 +45,11 @@ public class Ocena {
 		this.brojcanaVrednost = brojcanaVrednost;
 	}
 
-	public String getDatumPolaganja() {
+	public LocalDate getDatumPolaganja() {
 		return datumPolaganja;
 	}
 
-	public void setDatumPolaganja(String datumPolaganja) {
+	public void setDatumPolaganja(LocalDate datumPolaganja) {
 		this.datumPolaganja = datumPolaganja;
 	}
 
