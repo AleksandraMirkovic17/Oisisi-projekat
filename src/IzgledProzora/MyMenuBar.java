@@ -31,12 +31,22 @@ import javax.swing.WindowConstants;
 
 import pomocneKlase.SimpleDialog;
 
+
 public class MyMenuBar extends JMenuBar {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static MyMenuBar instance = null;
+	private static GlavniProzor parent;
 	
+	public static MyMenuBar getInstance() {
+		if (instance == null) {
+			instance = new MyMenuBar(parent);
+		}
+		return instance;
+	}
+
 	//pravimo konstruktor bez parametara klase MyMenuBar
 	
 	public MyMenuBar(GlavniProzor parent)
@@ -215,5 +225,9 @@ public class MyMenuBar extends JMenuBar {
 		add(file);
 		add(edit);
 		add(help);
+	}
+
+	public MyMenuBar() {
+		// TODO Auto-generated constructor stub
 	}
 }
