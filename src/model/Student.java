@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -8,7 +9,7 @@ enum statusStudenta {B,S};
 public class Student {
 	private String prezime;
 	private String ime;
-	private String datumRodjenja;
+	private LocalDate datumRodjenja;
 	private String adresaStanovanja;
 	private String kontaktTelefon;
 	private String email;
@@ -21,7 +22,7 @@ public class Student {
 	
 	
 	//constructor using fields
-   public Student(String prezime, String ime, String datumRodjenja, String adresaStanovanja, String kontaktTelefon,
+   public Student(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
 			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, statusStudenta status,
 			double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti) {
 		super();
@@ -39,12 +40,12 @@ public class Student {
 		this.polozeniPredmeti = polozeniPredmeti;
 	}
    
-   //constructor from superclas
+   //constructor from superclass
 	public Student() {
 	super();
 	this.prezime = new String("Prezime");
 	this.ime = "Ime";
-	this.datumRodjenja = new String("1.1.1990.");
+	this.datumRodjenja = LocalDate.of(1990, 1, 1);
 	this.adresaStanovanja = "Adresa stanovanja nije uneta";
 	this.brIndeksa = "Broj indeksa nije unet";
 	this.godinaUpisa = 0;
@@ -69,10 +70,10 @@ public class Student {
 	public void setIme(String ime) {
 		this.ime = ime;
 	}
-	public String getDatumRodjenja() {
+	public LocalDate getDatumRodjenja() {
 		return datumRodjenja;
 	}
-	public void setDatumRodjenja(String datumRodjenja) {
+	public void setDatumRodjenja(LocalDate datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 	public String getAdresaStanovanja() {
