@@ -228,7 +228,5 @@ public class MyMenuBar extends JMenuBar {
 		add(help);
 	}
 
-	public MyMenuBar() {
-		// TODO Auto-generated constructor stub
-	}
+
 }
