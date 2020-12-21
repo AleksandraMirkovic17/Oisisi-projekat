@@ -23,7 +23,7 @@ public class StudentTablePanel extends JPanel{
 	
 	private void prikazStudenta()
 	{
-		studentiTable = new StudentiJTable();
+		studentiTable = StudentiJTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(studentiTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

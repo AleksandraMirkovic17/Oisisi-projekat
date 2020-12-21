@@ -46,8 +46,6 @@ public class MyMenuBar extends JMenuBar {
 		}
 		return instance;
 	}
-
-	//pravimo konstruktor bez parametara klase MyMenuBar
 	
 	public MyMenuBar(GlavniProzor parent)
 	{
@@ -56,13 +54,13 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem myNew = new JMenuItem("New"); //dodavanje novog entiteta u sistem
 		//postavljanje akcelaratora /*REFERENCIRAN KOD https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html#mnemonic*/
 		myNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK)); //CTRL+N sluzi za dodavanje novog entiteta
+		myNew.setMnemonic(KeyEvent.VK_N);
 		myNew.setIcon(new ImageIcon("Slike/plus.png"));
 		myNew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				DodavanjeStudentaDialog dialog = new DodavanjeStudentaDialog();
 				dialog.setVisible(true);
-				//StudentiJTable.getInstance().refresTabelu();
 			}
 		});
 		

@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -27,6 +28,7 @@ public class GlavniProzor extends JFrame {
 	private TabPane tabpane;
 	
 	private static GlavniProzor instance=null;
+	private JTable tabelaStudent;
 	 
 	public static GlavniProzor getInstance()
 	{
@@ -67,19 +69,6 @@ public class GlavniProzor extends JFrame {
 	add(toolbar, BorderLayout.NORTH);  
 	toolbar.setVisible(true);
 	setResizable(true);
-	}
-	
-/*	public void azurirajPrikaz(String akcija, int vrednost) {
-		AbstractTableModelStudenti model = (AbstractTableModelStudenti) tabelaIgraca.getModel();
-		if (akcija != null) {
-			if (akcija.toUpperCase().trim().equals("DODAT")) {
-				model.igracDodat();
-			} else if (akcija.toUpperCase().trim().equals("UKLONJEN")) {
-				model.igracUklonjen(vrednost);
-			}
-		}
-		model.fireTableDataChanged();
-		validate();
 	}
 
 /*	private void inicijalizujAkcije() {

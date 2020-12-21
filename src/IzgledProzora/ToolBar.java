@@ -23,6 +23,13 @@ public class ToolBar extends JToolBar  {
 			super(SwingConstants.HORIZONTAL);
 			JButton btnNew = new JButton();
 			btnNew.setToolTipText("PLUSIC");
+			btnNew.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					DodavanjeStudentaDialog dialog = new DodavanjeStudentaDialog();
+					dialog.setVisible(true);
+				}
+			});
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/plus.png").getImage());
 			btnNew.setIcon(imageIcon);
 			add(btnNew);

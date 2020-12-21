@@ -18,7 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import controller.StudentController;
 import model.BazaStudent;
+
 
 public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 
@@ -214,13 +216,12 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 			} else {
 				/*REFERENCIRAN KOD ZA PARSIRANJE DATUMA > https://mkyong.com/java8/java-8-how-to-convert-string-to-localdate/*/
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-				BazaStudent.getInstance().dodajStudenta(tekst[0], tekst[1], LocalDate.parse(tekst[2], formatter), tekst[3], tekst[4], tekst[5],
+				BazaStudent.getInstance().dodajStudenta(tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter), tekst[3], tekst[4], tekst[5],
 							tekst[6], Integer.parseInt(tekst[7]), Integer.parseInt(tekst[8]), tekst[9].charAt(0));
-		
+				StudentController.getInstance().dodajStudenta();
+				setVisible(false);	
 		}
-		
-
-		
 
 		}}
+
 
