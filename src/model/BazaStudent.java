@@ -89,11 +89,18 @@ public class BazaStudent {
 		}
 	}
 
-	/*public void dodajIgrac(String ime, String prezime, String klub) {
-		this.igraci.add(new Igrac(generateId(), ime, prezime, klub));
+	public void dodajStudenta(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
+			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, char statusc) {
+		statusStudenta status;
+		if(statusc == 'S') 
+			status = statusStudenta.S;
+		else status = statusStudenta.B;
+		
+		this.studenti.add(new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon,
+				email, brIndeksa, godinaUpisa, trenutnaGodinaStudija, status, 0, null));
 	}
 
-	public void izbrisiIgraca(long id) {
+/*	public void izbrisiIgraca(long id) {
 		for (Igrac i : igraci) {
 			if (i.getId() == id) {
 				igraci.remove(i);

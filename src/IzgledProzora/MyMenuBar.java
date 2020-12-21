@@ -57,6 +57,14 @@ public class MyMenuBar extends JMenuBar {
 		//postavljanje akcelaratora /*REFERENCIRAN KOD https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html#mnemonic*/
 		myNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK)); //CTRL+N sluzi za dodavanje novog entiteta
 		myNew.setIcon(new ImageIcon("Slike/plus.png"));
+		myNew.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DodavanjeStudentaDialog dialog = new DodavanjeStudentaDialog();
+				dialog.setVisible(true);
+				//StudentiJTable.getInstance().refresTabelu();
+			}
+		});
 		
 		JMenuItem close = new JMenuItem ("Close"); //zatvaranje aplikacije
 		close.setMnemonic(KeyEvent.VK_C);
@@ -95,6 +103,7 @@ public class MyMenuBar extends JMenuBar {
 		file.add(myNew);
 		file.addSeparator();
 		file.add(close);
+		file.setMnemonic(KeyEvent.VK_F);
 		
 		JMenu edit = new JMenu("Edit"); 
 		
@@ -112,6 +121,7 @@ public class MyMenuBar extends JMenuBar {
 		edit.add(edit1);
 		edit.addSeparator();
 		edit.add(delete);
+		edit.setMnemonic(KeyEvent.VK_E);
 	
 		JMenu help = new JMenu("Help");
 		
@@ -218,10 +228,12 @@ public class MyMenuBar extends JMenuBar {
 		about.addSeparator();
 		about.add(aboutStudent1);
 		about.add(aboutStudent2);
+		about.setMnemonic(KeyEvent.VK_A);
 		
 		
 		help.add(help1);
 		help.add(about);
+		help.setMnemonic(KeyEvent.VK_H);
 		
 		add(file);
 		add(edit);
