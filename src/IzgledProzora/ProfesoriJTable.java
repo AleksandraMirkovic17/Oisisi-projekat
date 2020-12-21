@@ -12,6 +12,11 @@ import javax.swing.table.TableCellRenderer;
 public class ProfesoriJTable extends  JTable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7475213618819842792L;
+
 	public ProfesoriJTable()
 	{
 		this.setRowSelectionAllowed(true);
@@ -31,6 +36,12 @@ public class ProfesoriJTable extends  JTable {
 			c.setBackground(Color.WHITE);
 		}
 		return c;
+	}
+	
+	public void azurirajPrikaz() {
+		AbstractTableModelStudenti model = (AbstractTableModelStudenti) this.getModel();
+		model.fireTableDataChanged();
+		validate();
 	}
 
 }

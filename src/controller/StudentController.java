@@ -1,6 +1,7 @@
 package controller;
 
 import IzgledProzora.GlavniProzor;
+import IzgledProzora.StudentiJTable;
 import model.BazaStudent;
 
 public class StudentController {
@@ -22,7 +23,7 @@ public class StudentController {
 		// izmena modela
 		//BazaStudent.getInstance().dodajStudenta(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, email, brIndeksa, godinaUpisa, trenutnaGodinaStudija, status, prosecnaOcena, polozeniPredmeti);;
 		// azuriranje prikaza
-		//GlavniProzor.getInstance().azurirajPrikaz("DODAT", -1);
+     	StudentiJTable.getInstance().refresTabelu();
 	}
 }
 
