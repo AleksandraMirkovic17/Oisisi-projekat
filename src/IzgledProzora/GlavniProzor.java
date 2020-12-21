@@ -4,10 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -62,8 +67,67 @@ public class GlavniProzor extends JFrame {
 	add(toolbar, BorderLayout.NORTH);  
 	toolbar.setVisible(true);
 	setResizable(true);
-	
 	}
+	
+/*	public void azurirajPrikaz(String akcija, int vrednost) {
+		AbstractTableModelStudenti model = (AbstractTableModelStudenti) tabelaIgraca.getModel();
+		if (akcija != null) {
+			if (akcija.toUpperCase().trim().equals("DODAT")) {
+				model.igracDodat();
+			} else if (akcija.toUpperCase().trim().equals("UKLONJEN")) {
+				model.igracUklonjen(vrednost);
+			}
+		}
+		model.fireTableDataChanged();
+		validate();
+	}
+
+/*	private void inicijalizujAkcije() {
+		JPanel panelTop = new JPanel();
+		JButton btnDodaj = new JButton("Dodaj");
+		JButton btnIzbrisi = new JButton("Izbrisi");
+		JButton btnIzmeni = new JButton("Izmeni");
+
+		panelTop.add(btnDodaj);
+		panelTop.add(btnIzbrisi);
+		panelTop.add(btnIzmeni);
+
+		this.add(panelTop, BorderLayout.NORTH);
+
+		btnDodaj.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IgraciController.getInstance().dodajIgraca();
+			}
+		});
+
+		btnIzbrisi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IgraciController.getInstance().izbrisiIgraca(tabelaIgraca.getSelectedRow());
+			}
+		});
+
+		btnIzmeni.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IgraciController.getInstance().izmeniIgraca(tabelaIgraca.getSelectedRow());
+			}
+		});
+	}
+
+	private void prikaziTabeluIgraca() {
+		tabelaIgraca = new IgraciJTable();
+
+		JScrollPane scrollPane = new JScrollPane(tabelaIgraca);
+		add(scrollPane, BorderLayout.CENTER);
+
+		this.azurirajPrikaz(null, -1);
+	}
+*/
 	
 
 }
