@@ -22,7 +22,7 @@ public class ToolBar extends JToolBar  {
 		{
 			super(SwingConstants.HORIZONTAL);
 			JButton btnNew = new JButton();
-			btnNew.setToolTipText("PLUSIC");
+			btnNew.setToolTipText("PLUS");
 			btnNew.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {

@@ -32,5 +32,12 @@ public class TabPane extends JTabbedPane{
 		addTab("Profesori", imageIcon, profesoriTable, "Tabela profesora");
 		addTab("Predmeti", imageIcon2, predmetiTable, "Tabela profesora");
 	}
+public static int getPritisnutTab()
+ {
+	return TabPane.getInstance().getSelectedIndex();
+	
+ }
 }
+
+
 
