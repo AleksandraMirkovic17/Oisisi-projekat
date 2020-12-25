@@ -9,7 +9,7 @@ public class main  {
 
 	public static void main(String[] args)
 	{
-		GlavniProzor glavni= new GlavniProzor();
+		GlavniProzor glavni= GlavniProzor.getInstance();
 		glavni.setVisible(true);
 
 	}
