@@ -65,7 +65,7 @@ public class GlavniProzor extends JFrame {
 	statusBar.setVisible(true);
 	statusBar.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //Postavljanje granicne linije 
 	
-	toolbar=new ToolBar();
+	toolbar=ToolBar.getInstance();
 	add(toolbar, BorderLayout.NORTH);  
 	toolbar.setVisible(true);
 	setResizable(true);
