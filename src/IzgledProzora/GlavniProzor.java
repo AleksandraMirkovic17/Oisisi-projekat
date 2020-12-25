@@ -46,12 +46,12 @@ public class GlavniProzor extends JFrame {
 	int screenHeight = screenSize.height;
 	int screenWidth = screenSize.width;
 	setTitle("Studentska sluzba"); 
-	setSize(screenWidth * 3/4, screenHeight / 2); 
+	setSize(screenWidth * 3/4, screenHeight * 3/4); 
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setLocationRelativeTo(null);
 	
-	tabpane = new TabPane();
+	tabpane = TabPane.getInstance();
 	add(tabpane, BorderLayout.CENTER);
 	System.out.println(tabpane.getPreferredSize());
 	
@@ -70,53 +70,5 @@ public class GlavniProzor extends JFrame {
 	toolbar.setVisible(true);
 	setResizable(true);
 	}
-
-/*	private void inicijalizujAkcije() {
-		JPanel panelTop = new JPanel();
-		JButton btnDodaj = new JButton("Dodaj");
-		JButton btnIzbrisi = new JButton("Izbrisi");
-		JButton btnIzmeni = new JButton("Izmeni");
-
-		panelTop.add(btnDodaj);
-		panelTop.add(btnIzbrisi);
-		panelTop.add(btnIzmeni);
-
-		this.add(panelTop, BorderLayout.NORTH);
-
-		btnDodaj.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				IgraciController.getInstance().dodajIgraca();
-			}
-		});
-
-		btnIzbrisi.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				IgraciController.getInstance().izbrisiIgraca(tabelaIgraca.getSelectedRow());
-			}
-		});
-
-		btnIzmeni.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				IgraciController.getInstance().izmeniIgraca(tabelaIgraca.getSelectedRow());
-			}
-		});
-	}
-
-	private void prikaziTabeluIgraca() {
-		tabelaIgraca = new IgraciJTable();
-
-		JScrollPane scrollPane = new JScrollPane(tabelaIgraca);
-		add(scrollPane, BorderLayout.CENTER);
-
-		this.azurirajPrikaz(null, -1);
-	}
-*/
 	
-
 }
