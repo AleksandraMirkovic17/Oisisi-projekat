@@ -35,11 +35,11 @@ public class BazaStudent {
 
 	private void initStudent() {
 		this.studenti = new ArrayList<Student>();
-		studenti.add(new Student("Markovic", "Marko", LocalDate.of(1999, 5, 25), "Kireska 5", "9231234", "marko@uns.ac.rs", "RA756", 2018, 3, statusStudenta.B, 8.5, null));
+		studenti.add(new Student("Markovic", "Marko", LocalDate.of(1999, 5, 25), "Kireska 5", "9231234", "marko@uns.ac.rs", "ra-12-2018", 2018, 3, statusStudenta.B, 0.0, null));
 		generateIns();
-		studenti.add(new Student("Ivanovic", "Ana", LocalDate.of(1998, 12, 7), "Uskocka 35", "923788234", "ana@uns.ac.rs", "RA758", 2018, 3, statusStudenta.S, 7.5, null));
+		studenti.add(new Student("Ivanovic", "Ana", LocalDate.of(1998, 12, 7), "Uskocka 35", "923788234", "ana@uns.ac.rs", "ra-14-2018", 2018, 3, statusStudenta.S, 0.0, null));
 		generateIns();
-		studenti.add(new Student("Jovanov", "Dunja", LocalDate.of(1996, 7, 14), "Dusanova 13", "065432", "dunjajo@uns.ac.rs", "E56", 2017, 4, statusStudenta.S, 8.5, null));
+		studenti.add(new Student("Jovanov", "Dunja", LocalDate.of(1996, 7, 14), "Dusanova 13", "065432", "dunjajo@uns.ac.rs", "sw-123-2017", 2017, 4, statusStudenta.S, 0.0, null));
         generateIns();
 	}
 
@@ -98,6 +98,7 @@ public class BazaStudent {
 		
 		this.studenti.add(new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon,
 				email, brIndeksa, godinaUpisa, trenutnaGodinaStudija, status, 0, null));
+		generateIns();
 	}
 
 }
