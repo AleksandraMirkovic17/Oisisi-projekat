@@ -9,6 +9,10 @@ import javax.swing.JScrollPane;
 
 public class ProfesoriTablePane extends JPanel{
  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3934304876755044503L;
 	private ProfesoriJTable profesoriTable;
 	public ProfesoriTablePane()
 	{

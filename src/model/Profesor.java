@@ -12,7 +12,7 @@ public class Profesor {
 	private String adresaStanovanja;
 	private String email;
 	private String adresaKancelarije;
-	private int brLicneKarte;
+	private String brLicneKarte;
 	private String titula;
 	private String zvanjeProfesora;
 	private List <Predmet> predmeti;
@@ -26,7 +26,7 @@ public class Profesor {
 		return prezime;
 	}
 	public Profesor(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
-			String email, String adresaKancelarije, int brLicneKarte, String titula, String zvanjeProfesora) {
+			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora,ArrayList<Predmet> predmeti) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
@@ -38,7 +38,7 @@ public class Profesor {
 		this.brLicneKarte = brLicneKarte;
 		this.titula = titula;
 		this.zvanjeProfesora = zvanjeProfesora;
-		this.predmeti = new ArrayList<Predmet>();
+		this.predmeti = predmeti;
 	}
 	@Override
 	public String toString() {
@@ -50,13 +50,6 @@ public class Profesor {
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public Profesor(String string, String string2, String string3, String string4) {
-		this.ime = string;
-		this.prezime = string2;
-		this.titula = string3;
-		this.zvanjeProfesora = string4;
-		
 	}
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
@@ -91,10 +84,10 @@ public class Profesor {
 	public void setAdresaKancelarije(String adresaKancelarije) {
 		this.adresaKancelarije = adresaKancelarije;
 	}
-	public int getBrLicneKarte() {
+	public String getBrLicneKarte() {
 		return brLicneKarte;
 	}
-	public void setBrLicneKarte(int brLicneKarte) {
+	public void setBrLicneKarte(String brLicneKarte) {
 		this.brLicneKarte = brLicneKarte;
 	}
 	public String getTitula() {

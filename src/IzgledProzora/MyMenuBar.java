@@ -62,7 +62,8 @@ public class MyMenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				if(TabPane.getInstance().getSelectedIndex()==1)
 				{
-				
+				  DodavanjeProfesorDialog dialog=new DodavanjeProfesorDialog();
+				  dialog.setVisible(true);
 				}
 			}
 		});

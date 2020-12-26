@@ -7,6 +7,10 @@ import javax.swing.JScrollPane;
 
 public class PredmetiTablePanel extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3935959611551288022L;
 	private PredmetJTable predmetiTable;
 	
 	public PredmetiTablePanel()
