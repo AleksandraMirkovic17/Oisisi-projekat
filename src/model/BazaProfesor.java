@@ -1,6 +1,7 @@
  package model;
 
- import java.util.*;
+ import java.time.LocalDate;
+import java.util.*;
 
 
 public class BazaProfesor {
@@ -16,7 +17,7 @@ public class BazaProfesor {
 		
 	}
 	
-	private long  brojac=0;
+	private long  broj_profesora=0;
 	
 	private List<Profesor> profesori;
 	private List<String> kolone;
@@ -35,17 +36,20 @@ public class BazaProfesor {
 
 	private void initProfesor() {
 		this.profesori = new ArrayList<Profesor>();
-		profesori.add(new Profesor("Petar","Petrovic","Doktor","Vandredni Profesor"));
-		profesori.add(new Profesor("Petar","Nestorovic","Doktor Nauka","Profesor"));
+		profesori.add(new Profesor("Petar","Petrovic",LocalDate.of(1999, 5, 25),"+38169877633","Tolstojeva 10","petarpetrovic@gmail.com","Radnicka 17","199928277745","Prof. dr","Redovni profesor",null));
+		getBroj_Profesora();
+		profesori.add(new Profesor("Nikola","Nikolic",LocalDate.of(1980, 4, 17),"+38169667633","Tolstojeva 1","nikolanikolic@gmail.com","Radnicka 17","1980777166111","MSc","Saradnik u nastavi",null));
+		getBroj_Profesora();
+		
 		
 	}
-	public long getBrojac() {
-		return brojac;
+	public long getBroj_Profesora() {
+		return broj_profesora++;
 	}
 
 
-	public void setBrojac(long brojac) {
-		this.brojac = brojac;
+	public void setBroj_Profesora(long broj_profesora) {
+		this.broj_profesora = broj_profesora;
 	}
 
 
@@ -99,5 +103,11 @@ public class BazaProfesor {
 				return null;
 			}
 		}
+	public void dodajProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
+			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
+		
+		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,titula,zvanjeProfesora,null));
+		getBroj_Profesora();
 	}
+}
 

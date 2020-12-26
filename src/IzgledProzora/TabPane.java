@@ -11,6 +11,10 @@ import javax.swing.JTabbedPane;
 
 public class TabPane extends JTabbedPane{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -89465387623306890L;
 	private static TabPane instance = null;
 	public static int pritisnutTab = 0;
 
@@ -32,5 +36,12 @@ public class TabPane extends JTabbedPane{
 		addTab("Profesori", imageIcon, profesoriTable, "Tabela profesora");
 		addTab("Predmeti", imageIcon2, predmetiTable, "Tabela profesora");
 	}
+public static int getPritisnutTab()
+ {
+	return TabPane.getInstance().getSelectedIndex();
+	
+ }
 }
+
+
 

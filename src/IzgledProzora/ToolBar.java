@@ -16,18 +16,32 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 public class ToolBar extends JToolBar  {
-		
-		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -491100101152257518L;
+	private static ToolBar instance=null;	
+	public static ToolBar getInstance()
+	{
+		if(instance==null)
+		{
+			instance=new ToolBar();
+		}
+		return instance;
+     };
 		public ToolBar()
 		{
 			super(SwingConstants.HORIZONTAL);
 			JButton btnNew = new JButton();
-			btnNew.setToolTipText("PLUSIC");
+			btnNew.setToolTipText("PLUS");
 			btnNew.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					DodavanjeStudentaDialog dialog = new DodavanjeStudentaDialog();
-					dialog.setVisible(true);
+					if(TabPane.getInstance().getSelectedIndex()==1)
+					{
+					  DodavanjeProfesorDialog dialog=new DodavanjeProfesorDialog();
+					  dialog.setVisible(true);
+					}
 				}
 			});
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/plus.png").getImage());

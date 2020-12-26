@@ -39,6 +39,7 @@ public class MyMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1L;
 	private static MyMenuBar instance = null;
 	private static GlavniProzor parent;
+
 	
 	public static MyMenuBar getInstance() {
 		if (instance == null) {
@@ -59,8 +60,11 @@ public class MyMenuBar extends JMenuBar {
 		myNew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				DodavanjeStudentaDialog dialog = new DodavanjeStudentaDialog();
-				dialog.setVisible(true);
+				if(TabPane.getInstance().getSelectedIndex()==1)
+				{
+				  DodavanjeProfesorDialog dialog=new DodavanjeProfesorDialog();
+				  dialog.setVisible(true);
+				}
 			}
 		});
 		

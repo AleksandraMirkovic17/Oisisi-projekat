@@ -9,6 +9,10 @@ import javax.swing.table.TableCellRenderer;
 
 public class PredmetJTable extends JTable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 199113098313326605L;
 	public PredmetJTable()
 	{
 		this.setRowSelectionAllowed(true);
