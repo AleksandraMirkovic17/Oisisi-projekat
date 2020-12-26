@@ -41,7 +41,7 @@ public class BazaPredmet {
 			
 			this.predmeti = new ArrayList<Predmet>();
 		     Semestar s=Semestar.LETNJI;
-			predmeti.add(new Predmet("EE123","Verovatnoca",9,6,s.name()));
+			predmeti.add(new Predmet("EE123","Verovatnoca",9,6,s));
 		}
 		
 
@@ -102,7 +102,9 @@ public class BazaPredmet {
 				case 3:
 					return String.valueOf(predmeti.getGodinaStudija());
 				case 4:
-					 return predmeti.getSem();
+					String sem = new String();
+					if(predmeti.getSemestar() == Semestar.LETNJI) sem="LETNJI"; else sem= "SAMOFINANSIRAJUCI";
+					return sem;
 				default:
 					return null;
 				}

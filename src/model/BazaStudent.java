@@ -100,22 +100,4 @@ public class BazaStudent {
 				email, brIndeksa, godinaUpisa, trenutnaGodinaStudija, status, 0, null));
 	}
 
-/*	public void izbrisiIgraca(long id) {
-		for (Igrac i : igraci) {
-			if (i.getId() == id) {
-				igraci.remove(i);
-				break;
-			}
-		}
-	}
-
-	public void izmeniIgraca(long id, String ime, String prezime, String klub) {
-		for (Igrac i : igraci) {
-			if (i.getId() == id) {
-				i.setIme(ime);
-				i.setPrezime(prezime);
-				i.setKlub(klub);
-			}
-		}
-	}*/
 }

@@ -22,6 +22,10 @@ import IzgledProzora.ToolBar;
 
 public class GlavniProzor extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3488386386134502451L;
 	private ToolBar toolbar;
 	private MyMenuBar menu;
 	private StatusBar statusBar;

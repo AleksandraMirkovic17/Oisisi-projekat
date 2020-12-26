@@ -11,10 +11,14 @@ import javax.swing.table.TableCellRenderer;
 
 public class ProfesoriJTable extends  JTable {
 
-	
-	/**
-	 * 
-	 */
+	private static ProfesoriJTable instance = null;
+
+	static public ProfesoriJTable getInstance() {
+		if (instance == null) {
+			instance = new ProfesoriJTable();
+		}
+		return instance;
+	}
 	private static final long serialVersionUID = -7475213618819842792L;
 
 	public ProfesoriJTable()
@@ -39,7 +43,7 @@ public class ProfesoriJTable extends  JTable {
 	}
 	
 	public void azurirajPrikaz() {
-		AbstractTableModelStudenti model = (AbstractTableModelStudenti) this.getModel();
+		AbstractTableModelProfesori model = (AbstractTableModelProfesori) this.getModel();
 		model.fireTableDataChanged();
 		validate();
 	}

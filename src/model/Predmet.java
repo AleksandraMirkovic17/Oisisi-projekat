@@ -10,7 +10,6 @@ public class Predmet {
 	private String nazivPredmeta;
 	public Semestar semestar;
 	private int godinaStudija;
-	private String sem;
 	private List<Profesor> profesori;
 	private int espb;
 	private List<Student> poloziliPredmet;
@@ -20,23 +19,17 @@ public class Predmet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Predmet(String s, String s1,int br,int god,String sem)
+	public Predmet(String s, String s1,int br,int god,Semestar sem)
 	{
 		
 		this.sifraPredmeta = s;
 		this.nazivPredmeta = s1;
 		this.espb = br;
 		this.godinaStudija = god;
-		this.sem=sem;
+		this.semestar=sem;
 		
 	}
 	
-	public String getSem() {
-		return sem;
-	}
-	public void setSem(String sem) {
-		this.sem = sem;
-	}
 	@Override
 	public String toString() {
 		return "Predmet [sifraPredmeta=" + sifraPredmeta + ", nazivPredmeta=" + nazivPredmeta + ", semestar=" + semestar
