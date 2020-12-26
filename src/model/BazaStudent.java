@@ -101,7 +101,10 @@ public class BazaStudent {
 		generateIns();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> dodavanjeStudenta
+=======
+>>>>>>> e50a537fd69a213012e4b4257efb192731dc5877
 }
