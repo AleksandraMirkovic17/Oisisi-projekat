@@ -107,5 +107,5 @@ public class Profesor {
 	}
 	public void setPredmeti(List<Predmet> predmeti) {
 		this.predmeti = predmeti;
-	}	
+	}
 }
