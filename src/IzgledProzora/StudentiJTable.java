@@ -7,13 +7,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class StudentiJTable extends JTable{
+public class StudentiJTable extends JTable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private static StudentiJTable instance = null;
 
 	static public StudentiJTable getInstance() {
@@ -22,16 +22,15 @@ public class StudentiJTable extends JTable{
 		}
 		return instance;
 	}
-	
-	private StudentiJTable()
-	{
+
+	private StudentiJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudenti());
-	
-		
+
 	}
+
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
@@ -41,7 +40,8 @@ public class StudentiJTable extends JTable{
 		} else {
 			c.setBackground(Color.WHITE);
 		}
-		return c;}
+		return c;
+	}
 
 	public void refresTabelu() {
 		AbstractTableModelStudenti model = (AbstractTableModelStudenti) this.getModel();
