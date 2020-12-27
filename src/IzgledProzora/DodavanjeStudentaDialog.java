@@ -137,6 +137,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		txtDatumRodjenja = new JTextField();
 		txtDatumRodjenja.setPreferredSize(dim);
 		txtDatumRodjenja.setName("txtDatumRodjenja");
+		txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
 		txtDatumRodjenja.addFocusListener(focusListener);
 		txtDatumRodjenja.addKeyListener(new KeyListener() {
 
@@ -353,7 +354,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		// Trenutna godina studija
 		JPanel panTrenutnaGodina = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblTrenutnaGodina = new JLabel("Trenutna godina studija*:");
-		String godina[] = { "	", "1", "2", "3", "4" };
+		String godina[] = { "1", "2", "3", "4" };
 		trenutnaGodinaCombo = new JComboBox<String>(godina);
 		lblTrenutnaGodina.setPreferredSize(dim);
 		trenutnaGodinaCombo.setPreferredSize(dim);
@@ -374,7 +375,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		// Nacin finansiranja
 		JPanel panFinans = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblFinans = new JLabel("Nacin finansiranja*:");
-		String finansiranje[] = { "	", "Budzet", "Samofinansiranje" };
+		String finansiranje[] = { "Budzet", "Samofinansiranje" };
 		finansCombo = new JComboBox<String>(finansiranje);
 		lblFinans.setPreferredSize(dim);
 		finansCombo.setPreferredSize(dim);
@@ -562,7 +563,8 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		}
 		if (tekst[6].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-z]{2,3}-[0-9]{1,3}-[0-9]{4}", tekst[6])) {
+			if (!Pattern.matches("[a-z]{2,3}-[0-9]{1,3}-[0-9]{4}", tekst[6])
+					&& !Pattern.matches("[a-zA-z0-9 ]*", tekst[6])) {
 				txtIndeks.setBackground(incorrect);
 				txtIndeks.setForeground(Color.black);
 				ok1 = false;
