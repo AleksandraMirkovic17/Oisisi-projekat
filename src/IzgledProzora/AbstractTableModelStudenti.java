@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import model.BazaProfesor;
 import model.BazaStudent;
 
-public class AbstractTableModelStudenti extends AbstractTableModel{
+public class AbstractTableModelStudenti extends AbstractTableModel {
 
 	/**
 	 * 
@@ -15,7 +15,7 @@ public class AbstractTableModelStudenti extends AbstractTableModel{
 	public AbstractTableModelStudenti() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
@@ -33,7 +33,7 @@ public class AbstractTableModelStudenti extends AbstractTableModel{
 		// TODO Auto-generated method stub
 		return BazaStudent.getInstance().getValueAt(rowIndex, columnIndex);
 	}
-	
+
 	public String getColumnName(int arg0) {
 		// TODO Auto-generated method stub
 		return BazaStudent.getInstance().getColumnName(arg0);

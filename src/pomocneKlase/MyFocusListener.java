@@ -119,8 +119,7 @@ public class MyFocusListener implements FocusListener {
 				focusRequested = false;
 				txt.setForeground(Color.BLACK);
 			}
-		}
-		else if (txt.getName().equals("txtKancelarija")) {
+		} else if (txt.getName().equals("txtKancelarija")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite adresu kancelarije...")) {
 				if (!focusRequested) {
 					txt.setText("Unesite adresu kancelarije...");
@@ -132,8 +131,7 @@ public class MyFocusListener implements FocusListener {
 				focusRequested = false;
 				txt.setForeground(Color.BLACK);
 			}
-		}
-		else if (txt.getName().equals("txtBrLicneKarte")) {
+		} else if (txt.getName().equals("txtBrLicneKarte")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite licnu kartu(9 cifara)...")) {
 				if (!focusRequested) {
 					txt.setText("Unesite licnu kartu(9 cifara)...");
@@ -145,8 +143,7 @@ public class MyFocusListener implements FocusListener {
 				focusRequested = false;
 				txt.setForeground(Color.BLACK);
 			}
-		}
-		else if (txt.getName().equals("txtTitula")) {
+		} else if (txt.getName().equals("txtTitula")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite titulu profesora...")) {
 				if (!focusRequested) {
 					txt.setText("Unesite titulu profesora...");
@@ -158,8 +155,7 @@ public class MyFocusListener implements FocusListener {
 				focusRequested = false;
 				txt.setForeground(Color.BLACK);
 			}
-		}
-		else if (txt.getName().equals("txtZvanje")) {
+		} else if (txt.getName().equals("txtZvanje")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite zvanje profesora...")) {
 				if (!focusRequested) {
 					txt.setText("Unesite zvanje profesora...");

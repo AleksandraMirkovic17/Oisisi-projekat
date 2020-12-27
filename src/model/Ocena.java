@@ -17,7 +17,6 @@ public class Ocena {
 			// greska kasnije ispisati
 		} else
 			this.brojcanaVrednost = brojcanaVrednost;
-		this.brojcanaVrednost = brojcanaVrednost;
 		this.datumPolaganja = datumPolaganja;
 	}
 
