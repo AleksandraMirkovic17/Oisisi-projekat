@@ -498,7 +498,7 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 				if (dodaj) {
 				/*REFERENCIRAN KOD ZA PARSIRANJE DATUMA > https://mkyong.com/java8/java-8-how-to-convert-string-to-localdate/*/
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-				BazaProfesor.getInstance().dodajProfesora(tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter), tekst[3], tekst[4], tekst[5],
+				BazaProfesor.getInstance().dodajProfesora(tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter), tekst[4], tekst[3], tekst[5],
 							tekst[6], tekst[7], tekst[8],tekst[9]);
 				ProfesorController.getInstance().dodajProfesora();
 				setVisible(false);	

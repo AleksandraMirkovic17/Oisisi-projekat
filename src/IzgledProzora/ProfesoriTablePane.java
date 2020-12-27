@@ -22,7 +22,7 @@ public class ProfesoriTablePane extends JPanel{
 	
 	private void prikazProfesora()
 	{
-		profesoriTable=new ProfesoriJTable();
+		profesoriTable=ProfesoriJTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(profesoriTable);
 		add(scrollPane,BorderLayout.CENTER);
 	}
