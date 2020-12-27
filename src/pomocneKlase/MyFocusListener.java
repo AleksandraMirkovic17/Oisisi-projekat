@@ -120,6 +120,58 @@ public class MyFocusListener implements FocusListener {
 				txt.setForeground(Color.BLACK);
 			}
 		}
+		else if (txt.getName().equals("txtKancelarija")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite adresu kancelarije...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite adresu kancelarije...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		}
+		else if (txt.getName().equals("txtBrLicneKarte")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite licnu kartu(9 cifara)...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite licnu kartu(9 cifara)...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		}
+		else if (txt.getName().equals("txtTitula")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite titulu profesora...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite titulu profesora...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		}
+		else if (txt.getName().equals("txtZvanje")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite zvanje profesora...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite zvanje profesora...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		}
 
 	}
 
