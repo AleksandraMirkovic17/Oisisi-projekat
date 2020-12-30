@@ -11,9 +11,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import controller.StudentController;
+import model.BazaStudent;
 
 public class ToolBar extends JToolBar  {
 	/**
@@ -46,6 +50,10 @@ public class ToolBar extends JToolBar  {
 					  DodavanjeProfesorDialog dialog=new DodavanjeProfesorDialog();
 					  dialog.setVisible(true);
 					}
+					if (TabPane.getInstance().getSelectedIndex()==2) {
+						DodavanjePredmetaDialog dialog = new DodavanjePredmetaDialog();
+						dialog.setVisible(true);
+					}
 				}
 			});
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike/plus.png").getImage());
@@ -56,6 +64,23 @@ public class ToolBar extends JToolBar  {
 			
 			JButton btnIzmeni = new JButton();
 			btnIzmeni.setToolTipText("IZMENE");
+			btnIzmeni.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					if (TabPane.getInstance().getSelectedIndex() == 0) {
+						int red = StudentiJTable.getInstance().getSelectedRow();
+						if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+							StudentController.getInstance().izmeniStudenta(red);
+						} else {
+							JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
+									JOptionPane.WARNING_MESSAGE);
+						}
+					}
+
+				}
+			});
 			ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike/olovka.png").getImage());
 			btnIzmeni.setIcon(imageIcon1);
 			add(btnIzmeni);
