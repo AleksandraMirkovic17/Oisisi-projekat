@@ -28,13 +28,13 @@ public class ToolBar extends JToolBar  {
 			instance=new ToolBar();
 		}
 		return instance;
-     };
+     }
 		public ToolBar()
 		{
 			super(SwingConstants.HORIZONTAL);
 			JButton btnNew = new JButton();
 			btnNew.setToolTipText("PLUS");
-			btnNew.addActionListener(new ActionListener() {
+			btnNew.addActionListener(new ActionListener() { //dodali smo akciju koja ce da pozove diaolg dodavanje studenta, profesora..
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if(TabPane.getInstance().getSelectedIndex()==0) {
@@ -63,6 +63,7 @@ public class ToolBar extends JToolBar  {
 			
 			JButton btnIzbrisi = new JButton();
 			btnIzbrisi.setToolTipText("IZBRISI");
+			
 			ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike/kanta.png").getImage());
 			btnIzbrisi.setIcon(imageIcon2);
 			add(btnIzbrisi);

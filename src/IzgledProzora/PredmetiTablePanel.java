@@ -24,4 +24,5 @@ public class PredmetiTablePanel extends JPanel{
 		JScrollPane scrollPane = new JScrollPane(predmetiTable);
 		add(scrollPane,BorderLayout.CENTER);
 	}
+	
 }

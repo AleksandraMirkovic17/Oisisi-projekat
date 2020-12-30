@@ -103,7 +103,7 @@ public class BazaPredmet {
 					return String.valueOf(predmeti.getGodinaStudija());
 				case 4:
 					String sem = new String();
-					if(predmeti.getSemestar() == Semestar.LETNJI) sem="LETNJI"; else sem= "SAMOFINANSIRAJUCI";
+					if(predmeti.getSemestar() == Semestar.LETNJI) sem="LETNJI"; else sem= "ZIMSKI";
 					return sem;
 				default:
 					return null;

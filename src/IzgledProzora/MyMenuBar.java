@@ -74,8 +74,6 @@ public class MyMenuBar extends JMenuBar {
 		close.setMnemonic(KeyEvent.VK_C);
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); // CTRL+C sluzi za
 																							// prozora
-
-
 		close.addActionListener(new ActionListener() {
 
 			@Override

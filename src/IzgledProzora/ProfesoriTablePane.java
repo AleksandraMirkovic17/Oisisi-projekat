@@ -23,7 +23,7 @@ public class ProfesoriTablePane extends JPanel{
 	private void prikazProfesora()
 	{
 		profesoriTable=ProfesoriJTable.getInstance();
-		JScrollPane scrollPane = new JScrollPane(profesoriTable);
+		JScrollPane scrollPane = new JScrollPane(profesoriTable); //pravimo scrollPane da bi mogli da skrolujemo ako budemo imali vise redova
 		add(scrollPane,BorderLayout.CENTER);
 	}
 

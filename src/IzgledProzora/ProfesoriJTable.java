@@ -20,12 +20,12 @@ public class ProfesoriJTable extends  JTable {
 		return instance;
 	}
 	private static final long serialVersionUID = -7475213618819842792L;
-
+   //vrsimo neku konfiguraciju 
 	public ProfesoriJTable()
 	{
-		this.setRowSelectionAllowed(true);
-		this.setColumnSelectionAllowed(true);
-		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.setRowSelectionAllowed(true); //selektovanje redova
+		this.setColumnSelectionAllowed(true); //selektovanje kolona
+		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //da mozemo samo jednu koloonu da selektujemo
 		this.setModel(new AbstractTableModelProfesori());
 	
 		
@@ -43,9 +43,9 @@ public class ProfesoriJTable extends  JTable {
 	}
 	
 	public void azurirajPrikaz() {
-		AbstractTableModelProfesori model = (AbstractTableModelProfesori) this.getModel();
-		model.fireTableDataChanged();
-		validate();
+		AbstractTableModelProfesori model = (AbstractTableModelProfesori) this.getModel(); 
+		model.fireTableDataChanged(); //obavestavamo da je doslo do promene podatak i da model treba da se azurira
+		validate(); //ugradjena metoda
 	}
 
 }

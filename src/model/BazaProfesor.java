@@ -7,7 +7,7 @@ import java.util.*;
 public class BazaProfesor {
 
 	//singlton
-	// sablon koji nam omogucava da imamo jednu instancu necega, mi zelimo da imamo jednu instancu profesora, jer ne zelimo da neko drugi sa vise strana to menja 
+	// sablon koji nam omogucava da imamo jednu instancu necega, mi zelimo da imamo jednu instancu profesora, jer ne zelimo da neko drugi sa vise strana to menja,zelimo da kontrolisemo podatke 
 	private static BazaProfesor instance =null;
 	
 	public static BazaProfesor getInstance() {
@@ -19,14 +19,14 @@ public class BazaProfesor {
 	
 	private long  broj_profesora=0;
 	
-	private List<Profesor> profesori;
-	private List<String> kolone;
+	private List<Profesor> profesori;//konkretni objekat
+	private List<String> kolone; //predtsvlja nazive kolone
 	
 	
 	private BazaProfesor()
 	{
 	
-		this.kolone = new ArrayList<String>();
+		this.kolone = new ArrayList<String>(); //kreiramo novu listu za kolonu
 		initProfesor();
 		this.kolone.add("IME");
 		this.kolone.add("PREZIME");
@@ -35,9 +35,10 @@ public class BazaProfesor {
 	}
 
 	private void initProfesor() {
-		this.profesori = new ArrayList<Profesor>();
+		this.profesori = new ArrayList<Profesor>(); //postavljamo da je prazna lista
+		//kreiramo novog profesora koja je stavljena u listu
 		profesori.add(new Profesor("Petar","Petrovic",LocalDate.of(1999, 5, 25),"+38169877633","Tolstojeva 10","petarpetrovic@gmail.com","Radnicka 17","199928277745","Prof. dr","Redovni profesor",null));
-		getBroj_Profesora();
+		getBroj_Profesora(); //povecavamo broj profesora
 		profesori.add(new Profesor("Nikola","Nikolic",LocalDate.of(1980, 4, 17),"+38169667633","Tolstojeva 1","nikolanikolic@gmail.com","Radnicka 17","1980777166111","MSc","Saradnik u nastavi",null));
 		getBroj_Profesora();
 		
@@ -78,18 +79,18 @@ public class BazaProfesor {
 	public static void setInstance(BazaProfesor instance) {
 		BazaProfesor.instance = instance;
 	}
-	public String getColumnName(int index)
+	public String getColumnName(int index) //vrati mi naziv kolone
 	{
-		return this.kolone.get(index);
+		return this.kolone.get(index); //iz liste kolone vrati mi kolonu sa tim indexom koju sam prosledila
 	}
 	
-	public Profesor getRow(int  row)
+	public Profesor getRow(int  row) //dobavljamo ceo red, i po indexu dobavi mi taj red tj, tog profesora, dobijamo jednog celog profesora
 	{
 		return this.profesori.get(row);
 	}
 	
 	public String getValueAt(int row, int column) {
-		    Profesor profesori = this.profesori.get(row); //dobavi mi ceo red
+		    Profesor profesori = this.profesori.get(row); //dobavi mi ceo red i smesti mi u objekat profesori. i ukoliko smo postavili da je kolona 0 dobavice se ime profesora, da smo 1 dobavice se prezime itd..
 			switch (column) {
 			case 0:
 				return profesori.getIme();
@@ -109,5 +110,8 @@ public class BazaProfesor {
 		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,titula,zvanjeProfesora,null));
 		getBroj_Profesora();
 	}
+	  
 }
+	  
+
 
