@@ -1,6 +1,5 @@
 package controller;
 
-import IzgledProzora.GlavniProzor;
 import IzgledProzora.IzmenaStudentaDialog;
 import IzgledProzora.StudentiJTable;
 import model.BazaStudent;

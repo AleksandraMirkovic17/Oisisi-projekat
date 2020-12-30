@@ -29,7 +29,9 @@ import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
+import controller.PredmetController;
 import controller.StudentController;
+import model.BazaPredmet;
 import model.BazaStudent;
 import pomocneKlase.SimpleDialog;
 
@@ -112,6 +114,15 @@ public class MyMenuBar extends JMenuBar {
 						StudentController.getInstance().izmeniStudenta(red);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				if (TabPane.getInstance().getSelectedIndex() == 2) {
+					int red = PredmetJTable.getInstance().getSelectedRow();
+					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
+						PredmetController.getInstance().izmeniPredmet(red);
+					} else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}

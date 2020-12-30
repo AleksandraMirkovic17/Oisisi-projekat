@@ -18,7 +18,7 @@ public class BazaPredmet {
 
 	}
 
-	private long brojac = 0;
+	private int brojac = 0;
 
 	private List<Predmet> predmeti;
 	private List<String> kolone;
@@ -42,11 +42,11 @@ public class BazaPredmet {
 		brojac++;
 	}
 
-	public long getBrojac() {
+	public int getBrojac() {
 		return brojac;
 	}
 
-	public void setBrojac(long brojac) {
+	public void setBrojac(int brojac) {
 		this.brojac = brojac;
 	}
 
@@ -114,6 +114,25 @@ public class BazaPredmet {
 
 		this.predmeti.add(new Predmet(sifra, naziv, espb, godina, semestar));
 		brojac++;
+	}
+	
+	public void izmeniPredmet(String pocetnaSifra, String sifra, String naziv, int godina, int espb, char semestarc) {
+		Semestar semestar;
+		if (semestarc == 'L')
+			semestar = Semestar.LETNJI;
+		else
+			semestar = Semestar.ZIMSKI;
+		
+		for(Predmet p : predmeti) {
+			if(pocetnaSifra.equals(p.getSifraPredmeta())){
+				p.setSifraPredmeta(sifra);
+				p.setNazivPredmeta(naziv);
+				p.setGodinaStudija(godina);
+				p.setEspb(espb);
+				p.setSemestar(semestar);
+			}
+		}
+	
 	}
 
 }
