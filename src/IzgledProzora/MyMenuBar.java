@@ -67,6 +67,10 @@ public class MyMenuBar extends JMenuBar {
 					DodavanjeProfesorDialog dialog = new DodavanjeProfesorDialog();
 					dialog.setVisible(true);
 				}
+				if (TabPane.getInstance().getSelectedIndex() == 2) {
+					DodavanjePredmetaDialog dialog = new DodavanjePredmetaDialog();
+					dialog.setVisible(true);
+				}
 			}
 		});
 

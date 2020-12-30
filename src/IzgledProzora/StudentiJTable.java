@@ -47,6 +47,5 @@ public class StudentiJTable extends JTable {
 		AbstractTableModelStudenti model = (AbstractTableModelStudenti) this.getModel();
 		model.fireTableDataChanged();
 		validate();
-
 	}
 }

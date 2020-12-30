@@ -167,8 +167,56 @@ public class MyFocusListener implements FocusListener {
 				focusRequested = false;
 				txt.setForeground(Color.BLACK);
 			}
+		} else if (txt.getName().equals("txtSifra")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite sifru predmeta...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite sifru predmeta...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		} else if (txt.getName().equals("txtNaziv")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite naziv predmeta...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite naziv predmeta...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		} else if (txt.getName().equals("txtGodina")) {
+			if (txt.getText().trim().equals("")
+					|| txt.getText().trim().equals("Unesite godinu na kojoj se slusa predmet...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite godinu na kojoj se slusa predmet...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
+		} else if (txt.getName().equals("txtEspb")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite ESPB bodove za predmet...")) {
+				if (!focusRequested) {
+					txt.setText("Unesite ESPB bodove za predmet...");
+					txt.requestFocus();
+					txt.setForeground(Color.RED);
+					focusRequested = true;
+				}
+			} else {
+				focusRequested = false;
+				txt.setForeground(Color.BLACK);
+			}
 		}
-
 	}
 
 }
