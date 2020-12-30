@@ -138,6 +138,22 @@ public class Student {
 		this.status = status;
 	}
 
+	public char getStatusChar() {
+		if (this.status == statusStudenta.B) {
+			return 'B';
+		} else {
+			return 'S';
+		}
+	}
+
+	public void setStatusChar(char s) {
+		if (s == 'B') {
+			this.status = statusStudenta.B;
+		} else {
+			this.status = statusStudenta.S;
+		}
+	}
+
 	public double getProsecnaOcena() {
 		return prosecnaOcena;
 	}

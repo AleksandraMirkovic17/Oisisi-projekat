@@ -43,7 +43,6 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 		setSize(400, 400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-		setVisible(true);
 		setResizable(false);
 
 		JPanel panCenter = new JPanel();
@@ -252,6 +251,7 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 		panBottom.add(Box.createVerticalStrut(40));
 
 		add(panBottom, BorderLayout.SOUTH);
+		setModal(true);
 		pack();
 
 	}

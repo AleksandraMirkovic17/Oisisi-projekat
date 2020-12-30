@@ -28,32 +28,33 @@ import model.BazaStudent;
 import model.Student;
 import pomocneKlase.MyFocusListener;
 
-public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
+public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 	/**
 	* 
 	*/
 	private static final long serialVersionUID = 5282385078335739861L;
-	
-	private static GlavniProzor parent;
+
 	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtIndeks, txtGodinaUpisa;
 	JComboBox<String> trenutnaGodinaCombo, finansCombo;
+	Student student;
 
-	DodavanjeStudentaDialog() {
+	public IzmenaStudentaDialog(Student student) {
 		super();
-		setTitle("Dodavanje studenta");
+		setTitle("Izmena studenta");
 		setSize(400, 400);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
 
+		this.student = student;
 
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		MyFocusListener focusListener = new MyFocusListener();
 
-		JButton btnOk = new JButton("POTVRDI");
+		JButton btnOk = new JButton("IZMENI");
 		JButton btnCancel = new JButton("ODUSTANI");
 
 		// dimenzije labela i tekstualnih komponenti
@@ -64,7 +65,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblPrezime = new JLabel("Prezime*:");
 		lblPrezime.setPreferredSize(dim);
 
-		txtPrezime = new JTextField();
+		txtPrezime = new JTextField(student.getPrezime());
 		txtPrezime.setPreferredSize(dim);
 		txtPrezime.setName("txtPrezime");
 		txtPrezime.addFocusListener(focusListener);
@@ -100,7 +101,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblIme = new JLabel("Ime*:");
 		lblIme.setPreferredSize(dim);
 
-		txtIme = new JTextField();
+		txtIme = new JTextField(student.getIme());
 		txtIme.setPreferredSize(dim);
 		txtIme.setName("txtIme");
 		txtIme.addFocusListener(focusListener);
@@ -134,9 +135,15 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		// datum rodjenja
 		JPanel panDatumRodjenja = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblDatumRodjenja = new JLabel("Datum rodjenja*:");
+		/*
+		 * REFERENCIRAN KOD ZA FORMATIRANJE DATUMA RODJENJA:
+		 * https://howtodoinjava.com/java/date-time/localdate-format-example
+		 */
+		LocalDate dr = student.getDatumRodjenja();
+		String formattedDate = dr.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		lblDatumRodjenja.setPreferredSize(dim);
 
-		txtDatumRodjenja = new JTextField();
+		txtDatumRodjenja = new JTextField(formattedDate);
 		txtDatumRodjenja.setPreferredSize(dim);
 		txtDatumRodjenja.setName("txtDatumRodjenja");
 		txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
@@ -173,7 +180,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblAdresa = new JLabel("Adresa*:");
 		lblAdresa.setPreferredSize(dim);
 
-		txtAdresa = new JTextField();
+		txtAdresa = new JTextField(student.getAdresaStanovanja());
 		txtAdresa.setPreferredSize(dim);
 		txtAdresa.setName("txtAdresa");
 		txtAdresa.addFocusListener(focusListener);
@@ -210,7 +217,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblTel = new JLabel("Broj telefona*:");
 		lblTel.setPreferredSize(dim);
 
-		txtTel = new JTextField();
+		txtTel = new JTextField(student.getKontaktTelefon().toString());
 		txtTel.setPreferredSize(dim);
 		txtTel.setName("txtTel");
 		txtTel.addFocusListener(focusListener);
@@ -247,7 +254,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblEmail = new JLabel("E-mail adresa*:");
 		lblEmail.setPreferredSize(dim);
 
-		txtEmail = new JTextField();
+		txtEmail = new JTextField(student.getEmail());
 		txtEmail.setPreferredSize(dim);
 		txtEmail.setName("txtEmail");
 		txtEmail.addFocusListener(focusListener);
@@ -284,7 +291,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblIndeks = new JLabel("Broj indeksa*:");
 		lblIndeks.setPreferredSize(dim);
 
-		txtIndeks = new JTextField();
+		txtIndeks = new JTextField(student.getBrIndeksa());
 		txtIndeks.setPreferredSize(dim);
 		txtIndeks.setName("txtIndeks");
 		txtIndeks.addFocusListener(focusListener);
@@ -320,8 +327,10 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JPanel panGodinaUpisa = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblGodinaUpisa = new JLabel("Godina upisa*:");
 		lblGodinaUpisa.setPreferredSize(dim);
-
-		txtGodinaUpisa = new JTextField();
+		int gu = student.getGodinaUpisa();
+		System.out.println(gu);
+		String guString = "" + gu;
+		txtGodinaUpisa = new JTextField(guString);
 		txtGodinaUpisa.setPreferredSize(dim);
 		txtGodinaUpisa.setName("txtGodinaUpisa");
 		txtGodinaUpisa.addFocusListener(focusListener);
@@ -358,6 +367,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		JLabel lblTrenutnaGodina = new JLabel("Trenutna godina studija*:");
 		String godina[] = { "1", "2", "3", "4" };
 		trenutnaGodinaCombo = new JComboBox<String>(godina);
+		trenutnaGodinaCombo.setSelectedIndex(student.getTrenutnaGodinaStudija() - 1);
 		lblTrenutnaGodina.setPreferredSize(dim);
 		trenutnaGodinaCombo.setPreferredSize(dim);
 		trenutnaGodinaCombo.addActionListener(new ActionListener() {
@@ -381,6 +391,11 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		finansCombo = new JComboBox<String>(finansiranje);
 		lblFinans.setPreferredSize(dim);
 		finansCombo.setPreferredSize(dim);
+		if (student.getStatusChar() == 'B') {
+			finansCombo.setSelectedIndex(0);
+		} else {
+			finansCombo.setSelectedIndex(1);
+		}
 		panFinans.add(lblFinans);
 		panFinans.add(finansCombo);
 
@@ -403,7 +418,8 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 
 		btnOk.setPreferredSize(new Dimension(150, 25));
 		btnOk.addActionListener(this);
-		btnOk.setEnabled(false);
+		btnOk.setEnabled(true); // na pocetku je true, kako bi mogli da sacuvamo studenta sa neizmenjenim
+								// podacima
 
 		btnCancel.setPreferredSize(new Dimension(150, 25));
 		btnCancel.addActionListener(this);
@@ -418,6 +434,8 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 
 		add(panBottom, BorderLayout.SOUTH);
 		setModal(true);
+		provera(); // proveravamo da bismo na pocetku imali sva polja zelena i dugme "IZMENI"
+					// upotrebljivo iako jos nista nismo kucali
 		pack();
 
 	}
@@ -446,34 +464,34 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String tekst[] = pokupiTekst();
-		boolean dodaj = true; // flag koji nam pokazuje da li je dozvoljeno dodati studenta sa tim parametrima
+		boolean izmeni = true; // flag koji nam pokazuje da li je dozvoljeno izmeniti studenta sa zeljenim
+								// parametrima (brojem indeksa)
 
 		// metoda getActionCommand(), vraca string koji je ispisan na kliknutom
 		// JButton-u
 		if (e.getActionCommand().equals("ODUSTANI")) {
 			dispose();
 		} else {
-			if (BazaStudent.getInstance().getStudenti().size() == 0) {
-				dodaj = true;
-			} else {
+			if (!student.getBrIndeksa().equals(tekst[6])) {
 				for (Student s : BazaStudent.getInstance().getStudenti()) {
 					if (s.getBrIndeksa().equals(tekst[6])) {
-						dodaj = false;
+						izmeni = false;
 						JOptionPane.showMessageDialog(null, "Student sa unetim brojem indeksa vec postoji!",
 								"Upozorenje", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
-			if (dodaj) {
+			if (izmeni) {
 				/*
 				 * REFERENCIRAN KOD ZA PARSIRANJE DATUMA >
 				 * https://mkyong.com/java8/java-8-how-to-convert-string-to-localdate/
 				 */
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-				BazaStudent.getInstance().dodajStudenta(tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter),
+				String pocetniIndeks = student.getBrIndeksa();
+				BazaStudent.getInstance().izmeniStudenta(pocetniIndeks, tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter),
 						tekst[3], tekst[4], tekst[5], tekst[6], Integer.parseInt(tekst[7]), Integer.parseInt(tekst[8]),
 						tekst[9].charAt(0));
-				StudentController.getInstance().dodajStudenta();
+				//StudentiJTable.getInstance().refresTabelu();
 				setVisible(false);
 			}
 		}
