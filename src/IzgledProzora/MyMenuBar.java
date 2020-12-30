@@ -29,6 +29,8 @@ import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
+import controller.StudentController;
+import model.BazaStudent;
 import pomocneKlase.SimpleDialog;
 
 public class MyMenuBar extends JMenuBar {
@@ -99,6 +101,23 @@ public class MyMenuBar extends JMenuBar {
 		edit1.setMnemonic(KeyEvent.VK_E);
 		edit1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		edit1.setIcon(new ImageIcon("Slike/olovka.png"));
+		edit1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (TabPane.getInstance().getSelectedIndex() == 0) {
+					int red = StudentiJTable.getInstance().getSelectedRow();
+					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						StudentController.getInstance().izmeniStudenta(red);
+					} else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+				}
+
+			}
+		});
 
 		JMenuItem delete = new JMenuItem("Delete"); // brisanje postojeceg entiteta
 		delete.setMnemonic(KeyEvent.VK_D);

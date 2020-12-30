@@ -13,7 +13,7 @@ public class BazaStudent {
 		return instance;
 	}
 
-	private long generator;
+	private int generator;
 
 	private List<Student> studenti;
 	private List<String> kolone;
@@ -54,7 +54,7 @@ public class BazaStudent {
 		this.studenti = studenti;
 	}
 
-	private long generateIns() {
+	private int generateIns() {
 		return ++generator;
 	}
 
@@ -68,6 +68,10 @@ public class BazaStudent {
 
 	public Student getRow(int rowIndex) {
 		return this.studenti.get(rowIndex);
+	}
+
+	public int getBrojStudenata() {
+		return generator;
 	}
 
 	public String getValueAt(int row, int column) {
@@ -107,5 +111,24 @@ public class BazaStudent {
 		this.studenti.add(new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, email, brIndeksa,
 				godinaUpisa, trenutnaGodinaStudija, status, 0, null));
 		generateIns();
+	}
+
+	public void izmeniStudenta(String pocetniIndeks, String prezime, String ime, LocalDate datumRodjenja,
+			String adresaStanovanja, String kontaktTelefon, String email, String brIndeksa, int godinaUpisa,
+			int trenutnaGodinaStudija, char statusc) {
+		for (Student s : studenti) {
+			if (s.getBrIndeksa().equals(pocetniIndeks)) {
+				s.setIme(ime);
+				s.setPrezime(prezime);
+				s.setDatumRodjenja(datumRodjenja);
+				s.setAdresaStanovanja(adresaStanovanja);
+				s.setKontaktTelefon(kontaktTelefon);
+				s.setEmail(email);
+				s.setBrIndeksa(brIndeksa);
+				s.setGodinaUpisa(godinaUpisa);
+				s.setTrenutnaGodinaStudija(trenutnaGodinaStudija);
+				s.setStatusChar(statusc);
+			}
+		}
 	}
 }

@@ -1,8 +1,10 @@
 package controller;
 
 import IzgledProzora.GlavniProzor;
+import IzgledProzora.IzmenaStudentaDialog;
 import IzgledProzora.StudentiJTable;
 import model.BazaStudent;
+import model.Student;
 
 public class StudentController {
 
@@ -23,6 +25,18 @@ public class StudentController {
 		// BazaStudent.getInstance().dodajStudenta(prezime, ime, datumRodjenja,
 		// adresaStanovanja, kontaktTelefon, email, brIndeksa, godinaUpisa,
 		// trenutnaGodinaStudija, status, prosecnaOcena, polozeniPredmeti);;
+		// azuriranje prikaza
+		StudentiJTable.getInstance().refresTabelu();
+	}
+
+	public void izmeniStudenta(int rowSelectedIndex) {
+		if (rowSelectedIndex < 0) {
+			return;
+		}
+		// izmena modela
+		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex);
+		IzmenaStudentaDialog dialog = new IzmenaStudentaDialog(student);
+		dialog.setVisible(true);
 		// azuriranje prikaza
 		StudentiJTable.getInstance().refresTabelu();
 	}
