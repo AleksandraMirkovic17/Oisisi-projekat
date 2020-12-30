@@ -445,8 +445,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JPanel panel3 = new JPanel();
 
 		tabbedPane.addTab("Informacije", null, panel1, "Osnovne informacije o studentu");
-		tabbedPane.addTab("Polozeni", null, panel2, "Prikaz predmeta koje je student polozio");
-		tabbedPane.addTab("Nepolozeni", null, panel3, "Prikaz nepolozenih predmeta kod studenta");
+		tabbedPane.addTab("Polozeni", null, panel2, "Spisak predmeta koje je student polozio");
+		tabbedPane.addTab("Nepolozeni", null, panel3, "Spisak nepolozenih predmeta kod studenta");
 		add(tabbedPane, BorderLayout.CENTER);
 		pack();
 		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu

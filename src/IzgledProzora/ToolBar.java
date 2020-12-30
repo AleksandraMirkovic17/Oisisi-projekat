@@ -16,7 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import controller.PredmetController;
 import controller.StudentController;
+import model.BazaPredmet;
 import model.BazaStudent;
 
 public class ToolBar extends JToolBar  {
@@ -75,6 +77,15 @@ public class ToolBar extends JToolBar  {
 							StudentController.getInstance().izmeniStudenta(red);
 						} else {
 							JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
+									JOptionPane.WARNING_MESSAGE);
+						}
+					}
+					if (TabPane.getInstance().getSelectedIndex() == 2) {
+						int red = PredmetJTable.getInstance().getSelectedRow();
+						if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
+							PredmetController.getInstance().izmeniPredmet(red);
+						} else {
+							JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
 									JOptionPane.WARNING_MESSAGE);
 						}
 					}
