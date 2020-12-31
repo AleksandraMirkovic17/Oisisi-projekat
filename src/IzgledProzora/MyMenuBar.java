@@ -80,6 +80,7 @@ public class MyMenuBar extends JMenuBar {
 
 		JMenuItem close = new JMenuItem("Close"); // zatvaranje aplikacije
 		close.setMnemonic(KeyEvent.VK_C);
+		close.setIcon(new ImageIcon("Slike/iks.png"));
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); // CTRL+C sluzi za
 																							// prozora
 		close.addActionListener(new ActionListener() {
