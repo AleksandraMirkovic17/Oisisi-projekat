@@ -31,8 +31,10 @@ import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
 import controller.PredmetController;
+import controller.ProfesorController;
 import controller.StudentController;
 import model.BazaPredmet;
+import model.BazaProfesor;
 import model.BazaStudent;
 import pomocneKlase.SimpleDialog;
 
@@ -127,6 +129,20 @@ public class MyMenuBar extends JMenuBar {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
+				}
+				if(TabPane.getInstance().getSelectedIndex()==1)
+				{
+					int red=ProfesoriJTable.getInstance().getSelectedRow();
+					if(red>=0 && (red<BazaProfesor.getInstance().getbroj_profesora()))
+					{
+						ProfesorController.getInstance().izmeniProfesora(red);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+						
+					
 				}
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();

@@ -28,4 +28,9 @@ public class PredmetController {
 		 BazaPredmet.getInstance().izbrisiPredmet(p.getSifraPredmeta()); //saljemo sifru predmeta jer se oni po tome identifikuju, i u ovoj liniji vrsimo brisanje predmeta
 		 PredmetJTable.getInstance().refresTabelu();//ayuriranje tabele	
  }
+
+	public void izmeniPredmet(int red) {
+		// TODO Auto-generated method stub
+		
+	}
 }

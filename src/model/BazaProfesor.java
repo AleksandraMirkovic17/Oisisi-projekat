@@ -116,8 +116,28 @@ public class BazaProfesor {
 		incBroj_Profesora();
 	}
 
-	
-	  
+
+	public void IzmeniProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
+			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
+		
+		for(Profesor p: profesori)
+		{
+			if(p.getBrLicneKarte().equals(brLicneKarte))
+                {
+                	p.setIme(ime);
+                	p.setPrezime(prezime);
+                	p.setDatumRodjena(datumRodjena);
+                	p.setBrLicneKarte(brLicneKarte);
+                	p.setAdresaStanovanja(adresaStanovanja);
+                	p.setEmail(email);
+                	p.setAdresaKancelarije(adresaKancelarije);
+                	p.setBrLicneKarte(brLicneKarte);
+                	p.setTitula(titula);
+                	p.setZvanjeProfesora(zvanjeProfesora);
+	 
+               }
+		}
+	}
 }
 	  
 
