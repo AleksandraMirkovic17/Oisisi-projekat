@@ -1,8 +1,11 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 import IzgledProzora.GlavniProzor;
 import IzgledProzora.ProfesoriJTable;
 import model.BazaProfesor;
+import model.Profesor;
 
 public class ProfesorController {
 

@@ -16,14 +16,19 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import controller.PredmetController;
+import controller.ProfesorController;
 import controller.StudentController;
 import model.BazaStudent;
+import model.BazaPredmet;
+import model.BazaProfesor;
 
 public class ToolBar extends JToolBar  {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -491100101152257518L;
+	
 	private static ToolBar instance=null;	
 	public static ToolBar getInstance()
 	{
@@ -37,7 +42,7 @@ public class ToolBar extends JToolBar  {
 		{
 			super(SwingConstants.HORIZONTAL);
 			JButton btnNew = new JButton();
-			btnNew.setToolTipText("PLUS");
+			btnNew.setToolTipText("DODAJ");
 			btnNew.addActionListener(new ActionListener() { //dodali smo akciju koja ce da pozove diaolg dodavanje studenta, profesora..
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
@@ -69,7 +74,7 @@ public class ToolBar extends JToolBar  {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if (TabPane.getInstance().getSelectedIndex() == 0) {
+//					if (TabPane.getInstance().getSelectedIndex() == 0) {
 						int red = StudentiJTable.getInstance().getSelectedRow();
 						if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
 							StudentController.getInstance().izmeniStudenta(red);
@@ -80,7 +85,7 @@ public class ToolBar extends JToolBar  {
 					}
 
 				}
-			});
+			);
 			ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike/olovka.png").getImage());
 			btnIzmeni.setIcon(imageIcon1);
 			add(btnIzmeni);
@@ -88,6 +93,36 @@ public class ToolBar extends JToolBar  {
 			
 			JButton btnIzbrisi = new JButton();
 			btnIzbrisi.setToolTipText("IZBRISI");
+			btnIzbrisi.addActionListener(new ActionListener()
+					{
+
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							int red=PredmetJTable.getInstance().getSelectedRow(); //selektovali smo red u tabeli
+							//provera da li smo dobro selektovali red 
+							if(red>=0 && (red<BazaPredmet.getInstance().getBrojac()))
+							{
+								//REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
+								int code=JOptionPane.showConfirmDialog(null,"Da li ste sigurni da zelite da izbrisete predmet?","Brisanje predmeta",JOptionPane.YES_NO_OPTION);
+								if(code==JOptionPane.YES_OPTION)
+								{
+									PredmetController.getInstance().izbrisiPredmet(red);
+									JOptionPane.showMessageDialog(null, "Predmet je obrisan!");
+								}
+								if(code==JOptionPane.NO_OPTION)
+								{
+									JOptionPane.showMessageDialog(null, "Predmet nije obrisan!");
+								}
+									
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Niste selektovali red! Morate da selektujete red u tabeli Predmet!","Upozorenje",JOptionPane.ERROR_MESSAGE);
+							}
+						}
+				
+				
+					});
 			
 			ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike/kanta.png").getImage());
 			btnIzbrisi.setIcon(imageIcon2);

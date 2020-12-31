@@ -42,7 +42,7 @@ public class BazaPredmet {
 		brojac++;
 	}
 
-	public long getBrojac() {
+	public long getBrojac() { //vraca broj predmeta
 		return brojac;
 	}
 
@@ -111,6 +111,17 @@ public class BazaPredmet {
 
 		this.predmeti.add(new Predmet(sifra, naziv, espb, godina, semestar));
 		brojac++;
+	}
+	public void izbrisiPredmet(String sifraPredmeta) {
+		for(Predmet p : predmeti)
+		{
+			if(p.getSifraPredmeta()==sifraPredmeta)
+			{
+				predmeti.remove(p);
+				break;
+			}
+		}
+		
 	}
 
 

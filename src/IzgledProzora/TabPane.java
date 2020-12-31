@@ -39,7 +39,6 @@ public class TabPane extends JTabbedPane{
 public static int getPritisnutTab()
  {
 	return TabPane.getInstance().getSelectedIndex();
-	
  }
 }
 
