@@ -38,16 +38,21 @@ public class BazaProfesor {
 		this.profesori = new ArrayList<Profesor>(); //postavljamo da je prazna lista
 		//kreiramo novog profesora koja je stavljena u listu
 		profesori.add(new Profesor("Petar","Petrovic",LocalDate.of(1999, 5, 25),"+38169877633","Tolstojeva 10","petarpetrovic@gmail.com","Radnicka 17","199928277745","Prof. dr","Redovni profesor",null));
-		getBroj_Profesora(); //povecavamo broj profesora
+		incBroj_Profesora(); //povecavamo broj profesora
 		profesori.add(new Profesor("Nikola","Nikolic",LocalDate.of(1980, 4, 17),"+38169667633","Tolstojeva 1","nikolanikolic@gmail.com","Radnicka 17","1980777166111","MSc","Saradnik u nastavi",null));
-		getBroj_Profesora();
+		incBroj_Profesora();
 		
 		
 	}
-	public long getBroj_Profesora() {
+	public long incBroj_Profesora() { //kada pronadjemo nekog profesora treba da broj_profesora povecamo
 		return broj_profesora++;
 	}
-
+   public long getbroj_profesora() 
+   {
+	   return broj_profesora;
+	   
+   }
+   
 
 	public void setBroj_Profesora(long broj_profesora) {
 		this.broj_profesora = broj_profesora;
@@ -108,8 +113,10 @@ public class BazaProfesor {
 			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
 		
 		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,titula,zvanjeProfesora,null));
-		getBroj_Profesora();
+		incBroj_Profesora();
 	}
+
+	
 	  
 }
 	  

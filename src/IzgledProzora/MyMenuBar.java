@@ -122,6 +122,9 @@ public class MyMenuBar extends JMenuBar {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
+				
+				/*ovde ubaciti za izmenu predmeta*/
+				
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
@@ -139,6 +142,34 @@ public class MyMenuBar extends JMenuBar {
 		delete.setMnemonic(KeyEvent.VK_D);
 		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 		delete.setIcon(new ImageIcon("Slike/kanta.png"));
+		delete.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			int red=PredmetJTable.getInstance().getSelectedRow(); //selektovali smo red u tabeli
+			//provera da li smo dobro selektovali red 
+			if(red>=0 && (red<BazaPredmet.getInstance().getBrojac()))
+			{
+				//REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
+				int code=JOptionPane.showConfirmDialog(null,"Da li ste sigurni da zelite da izbrisete predmet?","Brisanje predmeta",JOptionPane.YES_NO_OPTION);
+				if(code==JOptionPane.YES_OPTION)
+				{
+					PredmetController.getInstance().izbrisiPredmet(red);
+					JOptionPane.showMessageDialog(null, "Predmet je obrisan!");
+				}
+				if(code==JOptionPane.NO_OPTION)
+				{
+					JOptionPane.showMessageDialog(null, "Predmet nije obrisan!");
+				}
+					
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Niste selektovali red! Morate da selektujete red u tabeli Predmet!","Upozorenje",JOptionPane.ERROR_MESSAGE);
+			}
+			
+		}
+	});
 
 		edit.add(edit1);
 		edit.addSeparator();
@@ -268,6 +299,7 @@ public class MyMenuBar extends JMenuBar {
 		add(file);
 		add(edit);
 		add(help);
-	}
+	
 
+ }
 }

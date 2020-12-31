@@ -42,7 +42,7 @@ public class BazaPredmet {
 		brojac++;
 	}
 
-	public int getBrojac() {
+	public long getBrojac() { //vraca broj predmeta
 		return brojac;
 	}
 
@@ -132,7 +132,19 @@ public class BazaPredmet {
 				p.setSemestar(semestar);
 			}
 		}
-	
 	}
+
+	public void izbrisiPredmet(String sifraPredmeta) {
+		for(Predmet p : predmeti)
+		{
+			if(p.getSifraPredmeta()==sifraPredmeta)
+			{
+				predmeti.remove(p);
+				break;
+			}
+		}
+		
+	}
+
 
 }
