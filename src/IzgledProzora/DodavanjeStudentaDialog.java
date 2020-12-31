@@ -419,6 +419,9 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		add(panBottom, BorderLayout.SOUTH);
 		setModal(true);
 		pack();
+		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu
+														   // setLocationRelativeTo(parent frame) posle pozivanja
+														   // metode pack
 
 	}
 

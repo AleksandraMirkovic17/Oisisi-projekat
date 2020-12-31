@@ -20,10 +20,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import controller.StudentController;
 import model.BazaStudent;
 import model.Student;
 import pomocneKlase.MyFocusListener;
@@ -42,13 +42,18 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 	public IzmenaStudentaDialog(Student student) {
 		super();
 		setTitle("Izmena studenta");
-		setSize(400, 400);
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
-
+		setModal(true);
 		this.student = student;
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setVisible(true);
 
+		// Prvi panel (panel1) omogucava izmenu osnovnih informacija o studentu
+
+		JPanel panel1 = new JPanel();
+		BoxLayout boxPanel1 = new BoxLayout(panel1, BoxLayout.Y_AXIS);
+		panel1.setLayout(boxPanel1);
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
@@ -410,7 +415,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		panCenter.add(panTrenutnaGodina);
 		panCenter.add(panFinans);
 		panCenter.add(Box.createVerticalStrut(25));
-		add(panCenter, BorderLayout.CENTER);
+		panel1.add(panCenter, BorderLayout.CENTER);
 
 		JPanel panBottom = new JPanel();
 		BoxLayout box = new BoxLayout(panBottom, BoxLayout.X_AXIS);
@@ -424,20 +429,31 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		btnCancel.setPreferredSize(new Dimension(150, 25));
 		btnCancel.addActionListener(this);
 
-		panBottom.add(Box.createGlue());
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(btnOk);
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(btnCancel);
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(Box.createVerticalStrut(40));
+		
+		panel1.add(panBottom, BorderLayout.SOUTH);
+		
+		// panel 2 - prikaz polozenih predmeta kod studenta
+		JPanel panel2 = new JPanel();
+		
+		// panel 3 - prikaz nepolozenih predmeta kod studenta
+		JPanel panel3 = new JPanel();
 
-		add(panBottom, BorderLayout.SOUTH);
-		setModal(true);
-		provera(); // proveravamo da bismo na pocetku imali sva polja zelena i dugme "IZMENI"
-					// upotrebljivo iako jos nista nismo kucali
+		tabbedPane.addTab("Informacije", null, panel1, "Osnovne informacije o studentu");
+		tabbedPane.addTab("Polozeni", null, panel2, "Spisak predmeta koje je student polozio");
+		tabbedPane.addTab("Nepolozeni", null, panel3, "Spisak nepolozenih predmeta kod studenta");
+		add(tabbedPane, BorderLayout.CENTER);
 		pack();
-
+		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu
+															// setLocationRelativeTo(parent frame) posle pozivanja
+															// metode pack
+		provera(); // proveravamo da bismo na pocetku imali sva polja zelena i dugme "IZMENI"
+				   // upotrebljivo iako jos nista nismo kucali
 	}
 
 	public String[] pokupiTekst() {
@@ -488,10 +504,10 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 				 */
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 				String pocetniIndeks = student.getBrIndeksa();
-				BazaStudent.getInstance().izmeniStudenta(pocetniIndeks, tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter),
-						tekst[3], tekst[4], tekst[5], tekst[6], Integer.parseInt(tekst[7]), Integer.parseInt(tekst[8]),
-						tekst[9].charAt(0));
-				//StudentiJTable.getInstance().refresTabelu();
+				BazaStudent.getInstance().izmeniStudenta(pocetniIndeks, tekst[1], tekst[0],
+						LocalDate.parse(tekst[2], formatter), tekst[3], tekst[4], tekst[5], tekst[6],
+						Integer.parseInt(tekst[7]), Integer.parseInt(tekst[8]), tekst[9].charAt(0));
+				// StudentiJTable.getInstance().refresTabelu();
 				setVisible(false);
 			}
 		}

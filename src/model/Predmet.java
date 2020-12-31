@@ -62,6 +62,22 @@ public class Predmet {
 		this.semestar = semestar;
 	}
 
+	public char getSemestarChar() {
+		if (this.semestar == Semestar.LETNJI) {
+			return 'L';
+		} else {
+			return 'Z';
+		}
+	}
+
+	public void setSemestarChar(char semestar) {
+		if (semestar == 'L') {
+			this.semestar = Semestar.LETNJI;
+		} else {
+			this.semestar = Semestar.ZIMSKI;
+		}
+	}
+
 	public int getGodinaStudija() {
 		return godinaStudija;
 	}
