@@ -1,3 +1,4 @@
+
 package IzgledProzora;
 
 import java.awt.event.ActionEvent;
@@ -30,7 +31,9 @@ import pomocneKlase.MyFocusListener;
 
 public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 
-	
+	/**
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
 	JTextField txtSifra, txtNaziv, txtGodina, txtEspb;
 	JComboBox<String> semestarCombo;
@@ -365,5 +368,4 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 	}
 
 }
-
-
+>>>>>>> IzmenaProfesora

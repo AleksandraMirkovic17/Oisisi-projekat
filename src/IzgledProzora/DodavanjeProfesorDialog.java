@@ -135,6 +135,7 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 	        txtDatumRodjenja=new JTextField();
 	        txtDatumRodjenja.setPreferredSize(dim);
 	        txtDatumRodjenja.setName("txtDatumRodjenja");
+	        txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
 			txtDatumRodjenja.addFocusListener(focusListener);
 			txtDatumRodjenja.addKeyListener(new KeyListener() {
 
