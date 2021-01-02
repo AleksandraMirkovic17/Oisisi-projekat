@@ -23,6 +23,25 @@ public class Student {
 	private ArrayList<Predmet> nepolozeniPredmeti;
 
 	// constructor using fields
+		public Student1(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
+				String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, statusStudenta status,
+				double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti,) {
+			super();
+			this.prezime = prezime;
+			this.ime = ime;
+			this.datumRodjenja = datumRodjenja;
+			this.adresaStanovanja = adresaStanovanja;
+			this.kontaktTelefon = kontaktTelefon;
+			this.email = email;
+			this.brIndeksa = brIndeksa;
+			this.godinaUpisa = godinaUpisa;
+			this.trenutnaGodinaStudija = trenutnaGodinaStudija;
+			this.status = status;
+			this.prosecnaOcena = prosecnaOcena;
+			this.polozeniPredmeti = polozeniPredmeti;
+		
+		}
+	// constructor using fields
 	public Student(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
 			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, statusStudenta status,
 			double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti) {
@@ -39,6 +58,7 @@ public class Student {
 		this.status = status;
 		this.prosecnaOcena = prosecnaOcena;
 		this.polozeniPredmeti = polozeniPredmeti;
+	
 	}
 
 	// constructor from superclass

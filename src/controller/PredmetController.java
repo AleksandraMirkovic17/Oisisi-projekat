@@ -43,8 +43,4 @@ public class PredmetController {
 		 PredmetJTable.getInstance().refresTabelu();//ayuriranje tabele	
  }
 
-	public void izmeniPredmet(int red) {
-		// TODO Auto-generated method stub
-		
-	}
 }

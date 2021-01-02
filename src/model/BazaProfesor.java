@@ -20,7 +20,7 @@ public class BazaProfesor {
 	private long  broj_profesora=0;
 	
 	private List<Profesor> profesori;//konkretni objekat
-	private List<String> kolone; //predtsvlja nazive kolone
+	private List<String> kolone; //predstavlja nazive kolone
 	
 	
 	private BazaProfesor()

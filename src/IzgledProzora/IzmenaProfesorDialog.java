@@ -135,7 +135,13 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
     
     JPanel panDatumRodjenja=new JPanel(new FlowLayout(FlowLayout.LEFT));
     JLabel lblDatumRodjenja=new JLabel("Datum rodjenja*:");
-    lblDatumRodjenja.setPreferredSize(dim);
+    
+    LocalDate dr = profesor.getDatumRodjena();
+	String formattedDate = dr.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	lblDatumRodjenja.setPreferredSize(dim);
+
+	txtDatumRodjenja = new JTextField(formattedDate);
+   
     txtDatumRodjenja=new JTextField(profesor.getDatumRodjena().toString());
     txtDatumRodjenja.setPreferredSize(dim);
     txtDatumRodjenja.setName("txtDatumRodjenja");
