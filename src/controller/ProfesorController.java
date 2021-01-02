@@ -2,14 +2,15 @@ package controller;
 
 import javax.swing.JOptionPane;
 
-import IzgledProzora.GlavniProzor;
-import IzgledProzora.ProfesoriJTable;
 import model.BazaProfesor;
+
 import model.Profesor;
+import view.GlavniProzor;
+import view.IzmenaProfesorDialog;
+import view.ProfesoriJTable;
 
 public class ProfesorController {
 
-	
 	private static ProfesorController instance = null;
 
 	public static ProfesorController getInstance() {
@@ -21,9 +22,18 @@ public class ProfesorController {
 
 	private ProfesorController() {
 	}
-	
+
 	public void dodajProfesora() {
-	
-     	ProfesoriJTable.getInstance().azurirajPrikaz();
+
+		ProfesoriJTable.getInstance().azurirajPrikaz();
+	}
+
+	public void izmeniProfesora(int red) {
+		// izmena modela
+		Profesor p = BazaProfesor.getInstance().getRow(red);
+		IzmenaProfesorDialog dialog = new IzmenaProfesorDialog(p);
+		dialog.setVisible(true);
+		// azuriranje prikaza
+		ProfesoriJTable.getInstance().azurirajPrikaz();
 	}
 }

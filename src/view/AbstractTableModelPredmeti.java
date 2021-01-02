@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 
 import javax.swing.table.AbstractTableModel;
@@ -41,3 +41,4 @@ public class AbstractTableModelPredmeti  extends AbstractTableModel {
 		
 
 }
+

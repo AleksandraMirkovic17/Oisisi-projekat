@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,8 +30,10 @@ import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
 import controller.PredmetController;
+import controller.ProfesorController;
 import controller.StudentController;
 import model.BazaPredmet;
+import model.BazaProfesor;
 import model.BazaStudent;
 import pomocneKlase.SimpleDialog;
 
@@ -80,9 +82,14 @@ public class MyMenuBar extends JMenuBar {
 
 		JMenuItem close = new JMenuItem("Close"); // zatvaranje aplikacije
 		close.setMnemonic(KeyEvent.VK_C);
+		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); // CTRL+C sluzi za
+																							// zatvaranje otvorenog
+																							// prozora
 		close.setIcon(new ImageIcon("Slike/iks.png"));
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); // CTRL+C sluzi za
+																							// zatvaranje otvorenog
 																							// prozora
+
 		close.addActionListener(new ActionListener() {
 
 			@Override
@@ -122,9 +129,20 @@ public class MyMenuBar extends JMenuBar {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				
-				/*ovde ubaciti za izmenu predmeta*/
-				
+				if(TabPane.getInstance().getSelectedIndex()==1)
+				{
+					int red=ProfesoriJTable.getInstance().getSelectedRow();
+					if(red>=0 && (red<BazaProfesor.getInstance().getbroj_profesora()))
+					{
+						ProfesorController.getInstance().izmeniProfesora(red);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+						
+					
+				}
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {

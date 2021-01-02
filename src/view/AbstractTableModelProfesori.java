@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 
 import javax.swing.table.AbstractTableModel;

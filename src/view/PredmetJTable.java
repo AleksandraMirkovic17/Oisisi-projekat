@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -7,27 +7,27 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class StudentiJTable extends JTable {
+public class PredmetJTable extends JTable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 199113098313326605L;
 
-	private static StudentiJTable instance = null;
+	private static PredmetJTable instance = null;
 
-	static public StudentiJTable getInstance() {
+	public static PredmetJTable getInstance() {
 		if (instance == null) {
-			instance = new StudentiJTable();
+			instance = new PredmetJTable();
 		}
 		return instance;
 	}
 
-	private StudentiJTable() {
+	private PredmetJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelStudenti());
+		this.setModel(new AbstractTableModelPredmeti());
 
 	}
 
@@ -44,8 +44,10 @@ public class StudentiJTable extends JTable {
 	}
 
 	public void refresTabelu() {
-		AbstractTableModelStudenti model = (AbstractTableModelStudenti) this.getModel();
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) this.getModel();
 		model.fireTableDataChanged();
 		validate();
 	}
+
 }
+

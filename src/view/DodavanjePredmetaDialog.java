@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,31 +25,25 @@ import javax.swing.WindowConstants;
 
 import controller.PredmetController;
 import model.BazaPredmet;
-import model.BazaStudent;
 import model.Predmet;
-import model.Student;
 import pomocneKlase.MyFocusListener;
 
-public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
+public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 
 	/**
 	* 
 	*/
 	private static final long serialVersionUID = 1L;
+	JTextField txtSifra, txtNaziv, txtGodina, txtEspb;
+	JComboBox<String> semestarCombo;
 
-	JTextField txtSifra, txtNaziv, txtEspb;
-	JComboBox<String> semestarCombo, godinaCombo;
-	Predmet predmet;
-
-	public IzmenaPredmetaDialog(Predmet predmet) {
+	DodavanjePredmetaDialog() {
 		super();
-		setTitle("Izmena predmeta");
+		setTitle("Dodavanje predmeta");
 		setSize(400, 400);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
-		setModal(true);
-
-		this.predmet = predmet;
 
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
@@ -67,7 +61,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		JLabel lblSifra = new JLabel("Sifra predmeta*:");
 		lblSifra.setPreferredSize(dim);
 
-		txtSifra = new JTextField(predmet.getSifraPredmeta());
+		txtSifra = new JTextField();
 		txtSifra.setPreferredSize(dim);
 		txtSifra.setName("txtSifra");
 		txtSifra.addFocusListener(focusListener);
@@ -103,7 +97,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		JLabel lblNaziv = new JLabel("Naziv*:");
 		lblNaziv.setPreferredSize(dim);
 
-		txtNaziv = new JTextField(predmet.getNazivPredmeta());
+		txtNaziv = new JTextField();
 		txtNaziv.setPreferredSize(dim);
 		txtNaziv.setName("txtNaziv");
 		txtNaziv.addFocusListener(focusListener);
@@ -139,10 +133,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		JLabel lblEspb = new JLabel("ESPB*:");
 		lblEspb.setPreferredSize(dim);
 
-		int brEspb = predmet.getEspb();
-		String espbs = "" + brEspb;
-
-		txtEspb = new JTextField(espbs);
+		txtEspb = new JTextField();
 		txtEspb.setPreferredSize(dim);
 		txtEspb.setName("txtEspb");
 		txtEspb.addFocusListener(focusListener);
@@ -179,14 +170,20 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		JLabel lblGodina = new JLabel("Godina*:");
 		lblGodina.setPreferredSize(dim);
 
-		String godina[] = { "1", "2", "3", "4", "5", "6" };
-		godinaCombo = new JComboBox<String>(godina);
-		godinaCombo.setPreferredSize(dim);
-		godinaCombo.setSelectedIndex(predmet.getGodinaStudija() - 1);
-		godinaCombo.addActionListener(new ActionListener() {
+		txtGodina = new JTextField();
+		txtGodina.setPreferredSize(dim);
+		txtGodina.setName("txtGodina");
+		txtGodina.addFocusListener(focusListener);
+		txtGodina.addKeyListener(new KeyListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
 				if (provera()) {
 					btnOk.setEnabled(true);
@@ -194,22 +191,24 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 					btnOk.setEnabled(false);
 				}
 			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
 		});
+
 		panGodina.add(lblGodina);
-		panGodina.add(godinaCombo);
+		panGodina.add(txtGodina);
 
 		// Semetar
 		JPanel panSemestar = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblSemestar = new JLabel("Semestar*:");
-		lblSemestar.setPreferredSize(dim);
 		String semestar[] = { "ZIMSKI", "LETNJI" };
 		semestarCombo = new JComboBox<String>(semestar);
+		lblSemestar.setPreferredSize(dim);
 		semestarCombo.setPreferredSize(dim);
-		if (predmet.getSemestarChar() == 'L') {
-			semestarCombo.setSelectedIndex(1);
-		} else {
-			semestarCombo.setSelectedIndex(0);
-		}
 		semestarCombo.addActionListener(new ActionListener() {
 
 			@Override
@@ -226,9 +225,9 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		panCenter.add(panSifra);
 		panCenter.add(panNaziv);
-		panCenter.add(panEspb);
 		panCenter.add(panGodina);
 		panCenter.add(panSemestar);
+		panCenter.add(panEspb);
 		panCenter.add(Box.createVerticalStrut(25));
 		add(panCenter, BorderLayout.CENTER);
 
@@ -238,7 +237,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		btnOk.setPreferredSize(new Dimension(150, 25));
 		btnOk.addActionListener(this);
-		btnOk.setEnabled(true);
+		btnOk.setEnabled(false);
 
 		btnCancel.setPreferredSize(new Dimension(150, 25));
 		btnCancel.addActionListener(this);
@@ -252,12 +251,11 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		panBottom.add(Box.createVerticalStrut(40));
 
 		add(panBottom, BorderLayout.SOUTH);
+		setModal(true);
 		pack();
 		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu
 															// setLocationRelativeTo(parent frame) posle pozivanja
 															// metode pack
-		provera(); // pozivamo proveru pre ikakvog unosa kako bismo mogli da izmenimo na vec
-					// unesene parametre sto je validno
 
 	}
 
@@ -268,7 +266,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		}
 		tekst[0] = txtSifra.getText().toString();
 		tekst[1] = txtNaziv.getText().toString();
-		tekst[2] = godinaCombo.getSelectedItem().toString();
+		tekst[2] = txtGodina.getText().toString();
 		tekst[3] = txtEspb.getText().toString();
 		tekst[4] = semestarCombo.getSelectedItem().toString();
 		return tekst;
@@ -279,8 +277,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String tekst[] = pokupiTekst();
-		boolean izmeni = true; // flag koji nam pokazuje da li je dozvoljeno da izmenimo predmet sa unetim
-								// parametrima
+		boolean dodaj = true; // flag koji nam pokazuje da li je dozvoljeno dodati predmet sa tim parametrima
 
 		// metoda getActionCommand(), vraca string koji je ispisan na kliknutom
 		// JButton-u
@@ -288,22 +285,20 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 			dispose();
 		} else {
 			if (BazaPredmet.getInstance().getPredmeti().size() == 0) {
-				izmeni = true;
+				dodaj = true;
 			} else {
-				if (!predmet.getSifraPredmeta().equals(tekst[0])) { // samo ako smo menjali sifruproveravamo da li neki
-																	// od predmeta ima tu sifru
-					for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
-						if (p.getSifraPredmeta().equals(tekst[0])) {
-							izmeni = false;
-							JOptionPane.showMessageDialog(null, "Predmet sa unetom sifrom vec postoji!", "Upozorenje",
-									JOptionPane.WARNING_MESSAGE);
-						}
+				for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
+					if (p.getSifraPredmeta().equals(tekst[0])) {
+						dodaj = false;
+						JOptionPane.showMessageDialog(null, "Predmet sa unetom sifrom vec postoji!", "Upozorenje",
+								JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
-			if (izmeni) {
-				BazaPredmet.getInstance().izmeniPredmet(predmet.getSifraPredmeta(), tekst[0], tekst[1],
-						Integer.parseInt(tekst[2]), Integer.parseInt(tekst[3]), tekst[4].charAt(0));
+			if (dodaj) {
+				BazaPredmet.getInstance().dodajPredmet(tekst[0], tekst[1], Integer.parseInt(tekst[2]),
+						Integer.parseInt(tekst[3]), tekst[4].charAt(0));
+				PredmetController.getInstance().dodajPredmet();
 				setVisible(false);
 			}
 		}
@@ -341,6 +336,19 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		} else {
 			ok = false;
 		}
+		if (tekst[2].length() != 0) {
+			ok1 = true;
+			if (!Pattern.matches("[0-9]{1,2}", tekst[2])) {
+				txtGodina.setBackground(incorrect);
+				txtGodina.setForeground(Color.black);
+				ok1 = false;
+				ok = false;
+			}
+			if (ok1)
+				txtGodina.setBackground(correct);
+		} else {
+			ok = false;
+		}
 		if (tekst[3].length() != 0) {
 			ok1 = true;
 			if (!Pattern.matches("[0-9]{1,2}", tekst[3])) {
@@ -359,3 +367,4 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 	}
 
 }
+

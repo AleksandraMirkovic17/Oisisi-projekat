@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -76,12 +76,23 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						StudentController.getInstance().izmeniStudenta(red);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				/*ovde izmena predmeta*/
+				//izmena profesora
+				if (TabPane.getInstance().getSelectedIndex() == 1) {
+					int red = ProfesoriJTable.getInstance().getSelectedRow();
+					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
+						ProfesorController.getInstance().izmeniProfesora(red);
+					} else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+				}
+				/*izmena predmeta*/
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {

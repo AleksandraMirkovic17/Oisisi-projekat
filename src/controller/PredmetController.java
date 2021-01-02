@@ -1,10 +1,10 @@
 package controller;
 
-import IzgledProzora.IzmenaPredmetaDialog;
-import IzgledProzora.PredmetJTable;
-import IzgledProzora.ProfesoriJTable;
 import model.BazaPredmet;
 import model.Predmet;
+import view.IzmenaPredmetaDialog;
+import view.PredmetJTable;
+import view.ProfesoriJTable;
 
 public class PredmetController {
 

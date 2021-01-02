@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 eclipse.preferences.version=1
 encoding//src/IzgledProzora/DodavanjeStudentaDialog.java=UTF-8
+=======
+eclipse.preferences.version=1
+encoding//src/view/DodavanjeStudentaDialog.java=UTF-8
+>>>>>>> a233bc8 (#student izmena konstruktora)

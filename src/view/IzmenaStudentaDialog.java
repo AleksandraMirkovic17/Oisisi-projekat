@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -440,7 +440,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		
 		// panel 2 - prikaz polozenih predmeta kod studenta
 		JPanel panel2 = new JPanel();
-		
+
+		 
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
 		JPanel panel3 = new JPanel();
 
@@ -630,3 +631,4 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 	}
 
 }
+

@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -49,3 +49,4 @@ public class ProfesoriJTable extends  JTable {
 	}
 
 }
+
