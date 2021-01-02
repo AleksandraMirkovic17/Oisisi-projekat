@@ -1,10 +1,10 @@
 package controller;
 
-import IzgledProzora.IzmenaPredmetaDialog;
-import IzgledProzora.PredmetJTable;
-import IzgledProzora.ProfesoriJTable;
 import model.BazaPredmet;
 import model.Predmet;
+import view.IzmenaPredmetaDialog;
+import view.PredmetJTable;
+import view.ProfesoriJTable;
 
 public class PredmetController {
 
@@ -43,8 +43,4 @@ public class PredmetController {
 		 PredmetJTable.getInstance().refresTabelu();//ayuriranje tabele	
  }
 
-	public void izmeniPredmet(int red) {
-		// TODO Auto-generated method stub
-		
-	}
 }

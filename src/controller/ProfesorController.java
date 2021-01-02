@@ -2,13 +2,12 @@ package controller;
 
 import javax.swing.JOptionPane;
 
-import IzgledProzora.GlavniProzor;
-import IzgledProzora.IzmenaProfesorDialog;
-import IzgledProzora.ProfesoriJTable;
-
 import model.BazaProfesor;
 
 import model.Profesor;
+import view.GlavniProzor;
+import view.IzmenaProfesorDialog;
+import view.ProfesoriJTable;
 
 
 public class ProfesorController {

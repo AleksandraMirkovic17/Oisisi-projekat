@@ -1,5 +1,5 @@
 
-package IzgledProzora;
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -368,4 +368,4 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 	}
 
 }
->>>>>>> IzmenaProfesora
+

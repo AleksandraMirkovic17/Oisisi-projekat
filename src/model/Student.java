@@ -25,7 +25,7 @@ public class Student {
 	// constructor using fields
 	public Student(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
 			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, statusStudenta status,
-			double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti) {
+			double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti, ArrayList<Predmet> nepolozeniPredmeti) {
 		super();
 		this.prezime = prezime;
 		this.ime = ime;
@@ -39,6 +39,7 @@ public class Student {
 		this.status = status;
 		this.prosecnaOcena = prosecnaOcena;
 		this.polozeniPredmeti = polozeniPredmeti;
+		this.nepolozeniPredmeti = nepolozeniPredmeti;
 	}
 
 	// constructor from superclass

@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -76,6 +76,7 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						StudentController.getInstance().izmeniStudenta(red);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
