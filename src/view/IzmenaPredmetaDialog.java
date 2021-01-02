@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/view/IzmenaPredmetaDialog.java
 package view;
 
 import java.awt.event.ActionEvent;
