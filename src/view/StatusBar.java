@@ -66,3 +66,4 @@ public class StatusBar extends JPanel implements Runnable {
 	}
 
 }
+

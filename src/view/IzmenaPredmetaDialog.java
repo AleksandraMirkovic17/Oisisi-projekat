@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/view/IzmenaPredmetaDialog.java
 package view;
 
 import java.awt.event.ActionEvent;
@@ -359,4 +360,3 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 	}
 
 }
-

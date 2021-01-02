@@ -631,4 +631,3 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 	}
 
 }
-

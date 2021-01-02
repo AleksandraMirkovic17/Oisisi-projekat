@@ -666,4 +666,3 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 	}
 
 }
-

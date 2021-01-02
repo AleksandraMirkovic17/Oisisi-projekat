@@ -37,3 +37,4 @@ public class ProfesorController {
 		ProfesoriJTable.getInstance().azurirajPrikaz();
 	}
 }
+

@@ -76,4 +76,3 @@ public class GlavniProzor extends JFrame {
 	}
 	
 }
-

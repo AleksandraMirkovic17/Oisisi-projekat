@@ -50,4 +50,3 @@ public class PredmetJTable extends JTable {
 	}
 
 }
-
