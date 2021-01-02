@@ -17,6 +17,7 @@ public class BazaStudent {
 
 	private List<Student> studenti;
 	private List<String> kolone;
+	
 
 	private BazaStudent() {
 		generator = 0;
@@ -35,6 +36,8 @@ public class BazaStudent {
 
 	private void initStudent() {
 		this.studenti = new ArrayList<Student>();
+		Predmet p1=new Predmet("E213","Verovatnoca","")
+		
 		studenti.add(new Student("Markovic", "Marko", LocalDate.of(1999, 5, 25), "Kireska 5", "9231234",
 				"marko@uns.ac.rs", "ra-12-2018", 2018, 3, statusStudenta.B, 0.0, null));
 		generateIns();
@@ -109,7 +112,7 @@ public class BazaStudent {
 			status = statusStudenta.B;
 
 		this.studenti.add(new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, email, brIndeksa,
-				godinaUpisa, trenutnaGodinaStudija, status, 0, null));
+				godinaUpisa, trenutnaGodinaStudija, status, 0, null,null));
 		generateIns();
 	}
 

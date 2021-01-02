@@ -1,6 +1,6 @@
 
 
-package IzgledProzora;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -323,3 +323,4 @@ public class MyMenuBar extends JMenuBar {
 
  }
 }
+

@@ -1,4 +1,4 @@
-package IzgledProzora;
+package view;
 
 import java.awt.Component;
 import java.awt.Image;

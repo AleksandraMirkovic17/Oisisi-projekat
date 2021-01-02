@@ -1,9 +1,9 @@
 package controller;
 
-import IzgledProzora.IzmenaStudentaDialog;
-import IzgledProzora.StudentiJTable;
 import model.BazaStudent;
 import model.Student;
+import view.IzmenaStudentaDialog;
+import view.StudentiJTable;
 
 public class StudentController {
 

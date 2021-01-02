@@ -1,9 +1,9 @@
 package gui;
 
-import java.util.*; 
+import java.util.*;
 
-import IzgledProzora.GlavniProzor;
-import IzgledProzora.ToolBar;
+import view.GlavniProzor;
+import view.ToolBar;
 
 public class main  {
 
