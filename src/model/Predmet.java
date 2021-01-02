@@ -20,15 +20,38 @@ public class Predmet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+    
+	public Predmet(String sifraPredmeta, String nazivPredmeta, int espb,int godinaStudija, Semestar semestar) {
+		super();
+		this.sifraPredmeta = sifraPredmeta;
+		this.nazivPredmeta = nazivPredmeta;
+		this.semestar = semestar;
+		this.godinaStudija = godinaStudija;
+		this.espb = espb;
+	}
 
-	public Predmet(String s, String s1, int br, int god, Semestar sem) {
+	public Predmet(String sifraPredmeta, String nazivPredmeta, Semestar semestar, int godinaStudija,
+			List<Profesor> profesori, int espb) {
+		super();
+		this.sifraPredmeta = sifraPredmeta;
+		this.nazivPredmeta = nazivPredmeta;
+		this.semestar = semestar;
+		this.godinaStudija = godinaStudija;
+		this.profesori = profesori;
+		this.espb = espb;
+	}
 
-		this.sifraPredmeta = s;
-		this.nazivPredmeta = s1;
-		this.espb = br;
-		this.godinaStudija = god;
-		this.semestar = sem;
-
+	public Predmet(String sifraPredmeta, String nazivPredmeta, Semestar semestar, int godinaStudija,
+			List<Profesor> profesori, int espb, List<Student> poloziliPredmet, List<Student> nisuPoloziliPredmet) {
+		super();
+		this.sifraPredmeta = sifraPredmeta;
+		this.nazivPredmeta = nazivPredmeta;
+		this.semestar = semestar;
+		this.godinaStudija = godinaStudija;
+		this.profesori = profesori;
+		this.espb = espb;
+		this.poloziliPredmet = poloziliPredmet;
+		this.nisuPoloziliPredmet = nisuPoloziliPredmet;
 	}
 
 	@Override

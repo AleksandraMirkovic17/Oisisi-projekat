@@ -61,6 +61,9 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		JButton btnOk = new JButton("IZMENI");
 		JButton btnCancel = new JButton("ODUSTANI");
+		JButton btnDodaj = new JButton("Dodaj");
+		JButton btnObrisi = new JButton("Obriši");
+		JButton btnPolaganje=new JButton("Polaganje");
 
 		// dimenzije labela i tekstualnih komponenti
 		Dimension dim = new Dimension(150, 20);
@@ -420,6 +423,10 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JPanel panBottom = new JPanel();
 		BoxLayout box = new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
+		
+		JPanel panBottom1= new JPanel();
+		BoxLayout box1 = new BoxLayout(panBottom1, BoxLayout.X_AXIS);
+		panBottom1.setLayout(box1);
 
 		btnOk.setPreferredSize(new Dimension(150, 25));
 		btnOk.addActionListener(this);
@@ -428,6 +435,15 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		btnCancel.setPreferredSize(new Dimension(150, 25));
 		btnCancel.addActionListener(this);
+		
+		btnDodaj.setPreferredSize(new Dimension(150, 25));
+		btnDodaj.addActionListener(this);
+		btnObrisi.setPreferredSize(new Dimension(150, 25));
+		btnObrisi.addActionListener(this);
+		btnPolaganje.setPreferredSize(new Dimension(150, 25));
+		btnPolaganje.addActionListener(this);
+		
+		
 
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(btnOk);
@@ -436,14 +452,28 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(Box.createVerticalStrut(40));
 		
+		panBottom1.add(Box.createHorizontalStrut(10));
+		panBottom1.add(btnDodaj);
+		panBottom1.add(Box.createHorizontalStrut(10));
+		panBottom1.add(btnObrisi);
+		panBottom1.add(Box.createHorizontalStrut(10));
+		panBottom1.add(btnPolaganje);
+		
+		
 		panel1.add(panBottom, BorderLayout.SOUTH);
+		
 		
 		// panel 2 - prikaz polozenih predmeta kod studenta
 		JPanel panel2 = new JPanel();
 
-		 
+		 NepolozeniTablePanel nepolozeni =new NepolozeniTablePanel();
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
 		JPanel panel3 = new JPanel();
+		BoxLayout boxPanel3 = new BoxLayout(panel3, BoxLayout.Y_AXIS);
+		panel3.setLayout(boxPanel3);
+		panel3.add(panBottom1,BorderLayout.NORTH);
+		panel3.add(nepolozeni);
+		
 
 		tabbedPane.addTab("Informacije", null, panel1, "Osnovne informacije o studentu");
 		tabbedPane.addTab("Polozeni", null, panel2, "Spisak predmeta koje je student polozio");
