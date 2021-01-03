@@ -41,8 +41,12 @@ public class BazaStudent {
 		Predmet p2=new Predmet("E12RR3","Analiza Matematicka",Semestar.LETNJI,1,new ArrayList<Profesor>(),9);
 		NepolozeniPredmeti.add(p2);
 		
+		ArrayList<Ocena> polozeniP = new ArrayList<Ocena>();
+		Ocena o1 = new Ocena(null, p1, 9, LocalDate.of(2018, 5, 31));
+		polozeniP.add(o1);
+		
 		studenti.add(new Student("Markovic", "Marko", LocalDate.of(1999, 5, 25), "Kireska 5", "9231234",
-				"marko@uns.ac.rs", "ra-12-2018", 2018, 3, statusStudenta.B, 0.0, new ArrayList<Ocena>(),
+				"marko@uns.ac.rs", "ra-12-2018", 2018, 3, statusStudenta.B, 0.0, polozeniP,
 				NepolozeniPredmeti));
 		generateIns();
 		studenti.add(new Student("Ivanovic", "Ana", LocalDate.of(1998, 12, 7), "Uskocka 35", "923788234",

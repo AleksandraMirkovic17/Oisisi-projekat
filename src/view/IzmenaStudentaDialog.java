@@ -63,7 +63,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JButton btnCancel = new JButton("ODUSTANI");
 		JButton btnDodaj = new JButton("Dodaj");
 		JButton btnObrisi = new JButton("Obriši");
-		JButton btnPolaganje=new JButton("Polaganje");
+		JButton btnPolaganje = new JButton("Polaganje");
 
 		// dimenzije labela i tekstualnih komponenti
 		Dimension dim = new Dimension(150, 20);
@@ -423,8 +423,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JPanel panBottom = new JPanel();
 		BoxLayout box = new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
-		
-		JPanel panBottom1= new JPanel();
+
+		JPanel panBottom1 = new JPanel();
 		BoxLayout box1 = new BoxLayout(panBottom1, BoxLayout.X_AXIS);
 		panBottom1.setLayout(box1);
 
@@ -435,15 +435,13 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		btnCancel.setPreferredSize(new Dimension(150, 25));
 		btnCancel.addActionListener(this);
-		
+
 		btnDodaj.setPreferredSize(new Dimension(150, 25));
 		btnDodaj.addActionListener(this);
 		btnObrisi.setPreferredSize(new Dimension(150, 25));
 		btnObrisi.addActionListener(this);
 		btnPolaganje.setPreferredSize(new Dimension(150, 25));
 		btnPolaganje.addActionListener(this);
-		
-		
 
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(btnOk);
@@ -451,29 +449,50 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		panBottom.add(btnCancel);
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(Box.createVerticalStrut(40));
-		
+
 		panBottom1.add(Box.createHorizontalStrut(10));
 		panBottom1.add(btnDodaj);
 		panBottom1.add(Box.createHorizontalStrut(10));
 		panBottom1.add(btnObrisi);
 		panBottom1.add(Box.createHorizontalStrut(10));
 		panBottom1.add(btnPolaganje);
-		
-		
-		panel1.add(panBottom, BorderLayout.SOUTH);
-		
-		
-		// panel 2 - prikaz polozenih predmeta kod studenta
-		JPanel panel2 = new JPanel();
 
-		 NepolozeniTablePanel nepolozeni =new NepolozeniTablePanel();
+		panel1.add(panBottom, BorderLayout.SOUTH);
+
+		// panel 2 - prikaz polozenih predmeta kod studenta
+		PolozeniTablePanel polozeni = new PolozeniTablePanel();
+		JPanel panel2 = new JPanel();
+		BoxLayout boxPanel2 = new BoxLayout(panel2, BoxLayout.Y_AXIS);
+		panel2.setLayout(boxPanel2);
+
+		JPanel panelBtn = new JPanel();
+		JButton btnPonisti = new JButton("Ponisti ocenu");
+		panelBtn.add(btnPonisti);
+
+		JPanel info = new JPanel();
+		BoxLayout boxPaneInfo = new BoxLayout(info, BoxLayout.Y_AXIS);
+		info.setLayout(boxPaneInfo);
+
+		double prosecnaO = student.getProsecnaOcena();
+		String s = new String("Prosecna ocena: " + String.valueOf(prosecnaO));
+		JLabel prosecnaOcena = new JLabel(s);
+		String s1 = new String("Ukupno ESPB: " + String.valueOf(student.getUkupnoEspb()));
+		JLabel ukupnoEspb = new JLabel(s1);
+
+		info.add(prosecnaOcena);
+		info.add(ukupnoEspb);
+
+		panel2.add(panelBtn, BorderLayout.NORTH);
+		panel2.add(polozeni);
+		panel2.add(info, BorderLayout.SOUTH);
+
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
+		NepolozeniTablePanel nepolozeni = new NepolozeniTablePanel();
 		JPanel panel3 = new JPanel();
 		BoxLayout boxPanel3 = new BoxLayout(panel3, BoxLayout.Y_AXIS);
 		panel3.setLayout(boxPanel3);
-		panel3.add(panBottom1,BorderLayout.NORTH);
+		panel3.add(panBottom1, BorderLayout.NORTH);
 		panel3.add(nepolozeni);
-		
 
 		tabbedPane.addTab("Informacije", null, panel1, "Osnovne informacije o studentu");
 		tabbedPane.addTab("Polozeni", null, panel2, "Spisak predmeta koje je student polozio");
@@ -484,7 +503,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 															// setLocationRelativeTo(parent frame) posle pozivanja
 															// metode pack
 		provera(); // proveravamo da bismo na pocetku imali sva polja zelena i dugme "IZMENI"
-				   // upotrebljivo iako jos nista nismo kucali
+					// upotrebljivo iako jos nista nismo kucali
 	}
 
 	public String[] pokupiTekst() {

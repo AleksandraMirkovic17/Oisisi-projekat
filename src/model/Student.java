@@ -37,9 +37,9 @@ public class Student {
 		this.godinaUpisa = godinaUpisa;
 		this.trenutnaGodinaStudija = trenutnaGodinaStudija;
 		this.status = status;
-		this.prosecnaOcena = prosecnaOcena;
 		this.polozeniPredmeti = polozeniPredmeti;
 		this.nepolozeniPredmeti = nepolozeniPredmeti;
+		this.prosecnaOcena = getProsecnaOcena();
 	}
 
 	// constructor from superclass
@@ -156,7 +156,26 @@ public class Student {
 	}
 
 	public double getProsecnaOcena() {
-		return prosecnaOcena;
+		double po = 0.0;
+		double ukupno = 0.0;
+		if (polozeniPredmeti.size() > 0) {
+			for (int i = 0; i < polozeniPredmeti.size(); i++) {
+				ukupno += polozeniPredmeti.get(i).getBrojcanaVrednost();
+			}
+			po = ukupno / (Double.parseDouble(String.valueOf(polozeniPredmeti.size())));
+		}
+		return po;
+
+	}
+	
+	public int getUkupnoEspb() {
+		int espb=0;
+		if(polozeniPredmeti.size()>0) {
+			for (int i = 0; i < polozeniPredmeti.size(); i++) {
+				espb += polozeniPredmeti.get(i).getPredmet().getEspb();
+			}
+		}
+		return espb;
 	}
 
 	public void setProsecnaOcena(double prosecnaOcena) {
