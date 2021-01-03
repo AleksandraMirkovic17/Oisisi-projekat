@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import view.StudentiJTable;
+
 public class BazaPredmet {
 
 	// singlton
@@ -41,6 +43,8 @@ public class BazaPredmet {
 		predmeti.add(new Predmet("EE123", "Verovatnoca", 9, 6, s));
 		brojac++;
 	}
+	
+
 
 	public long getBrojac() { //vraca broj predmeta
 		return brojac;

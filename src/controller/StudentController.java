@@ -1,5 +1,6 @@
 package controller;
 
+import model.BazaNepolozeni;
 import model.BazaStudent;
 import model.Student;
 import view.IzmenaStudentaDialog;
@@ -33,7 +34,10 @@ public class StudentController {
 			return;
 		}
 		// izmena modela
-		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex);
+		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex); //
+		
+		
+		
 		IzmenaStudentaDialog dialog = new IzmenaStudentaDialog(student);
 		dialog.setVisible(true);
 		// azuriranje prikaza

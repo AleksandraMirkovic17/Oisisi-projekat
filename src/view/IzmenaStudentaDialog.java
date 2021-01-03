@@ -24,7 +24,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import controller.PredmetController;
+import controller.StudentController;
+import model.BazaNepolozeni;
+import model.BazaPredmet;
 import model.BazaStudent;
+import model.Ocena;
+import model.Predmet;
 import model.Student;
 import pomocneKlase.MyFocusListener;
 
@@ -38,6 +44,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtIndeks, txtGodinaUpisa;
 	JComboBox<String> trenutnaGodinaCombo, finansCombo;
 	Student student;
+	
+	
 
 	public IzmenaStudentaDialog(Student student) {
 		super();
@@ -441,7 +449,28 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		btnObrisi.setPreferredSize(new Dimension(150, 25));
 		btnObrisi.addActionListener(this);
 		btnPolaganje.setPreferredSize(new Dimension(150, 25));
-		btnPolaganje.addActionListener(this);
+		btnPolaganje.addActionListener(new ActionListener()
+				{
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						int red=NepolozeniJTable.getInstance().getSelectedRow();
+						Predmet p=BazaNepolozeni.getInstance().getRow(red);
+						if (red >= 0 && (red < BazaNepolozeni.getInstance().getInc())) {
+							Ocena o=new Ocena(p,student);
+							UnosOcene dialog = new UnosOcene(p,o);
+							dialog.setVisible(true);
+						   } 
+						else {
+							JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
+									JOptionPane.WARNING_MESSAGE);
+						}
+					  }
+					
+						
+					}
+			
+				);
 
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(btnOk);
@@ -487,6 +516,12 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		panel2.add(info, BorderLayout.SOUTH);
 
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
+		
+		BazaNepolozeni b=new BazaNepolozeni(student);
+	
+		
+	
+		
 		NepolozeniTablePanel nepolozeni = new NepolozeniTablePanel();
 		JPanel panel3 = new JPanel();
 		BoxLayout boxPanel3 = new BoxLayout(panel3, BoxLayout.Y_AXIS);

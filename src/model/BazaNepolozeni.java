@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.table.TableModel;
+
 import view.StudentiJTable;
+import view.ToolBar;
 
 public class BazaNepolozeni {
 
@@ -12,47 +15,47 @@ public class BazaNepolozeni {
 			// singlton
 			// sablon koji nam omogucava da imamo jednu instancu necega, mi zelimo da imamo
 			// jednu instancu predmeta, jer ne zelimo da neko drugi sa vise strana to menja
-			private static BazaNepolozeni instance = null;
-
-			public static BazaNepolozeni getInstance() {
-				if (instance == null)
-					instance = new BazaNepolozeni();
-				return instance;
-
-			}
+		
 
 			private int inc = 0;
 
 			private List<Predmet> nepolozeniPredmeti;
 			private List<String> kolone;
-
-			private BazaNepolozeni() {
-
+			
+			public BazaNepolozeni(Student p) {
+                
+				Student s= new Student(p);
+	
+				
 				this.kolone = new ArrayList<String>();
-				initPredmet();
+				initnepolozeni(s);
 				this.kolone.add("SIFRA PREDMETA");
 				this.kolone.add("NAZIV");
 				this.kolone.add("ESPB");
 				this.kolone.add("GODINA IZVODJENJA");
 				this.kolone.add("SEMESTAR IZVODJENJA");
+				
+
 			}
-
-			private void initPredmet() {
-
+			private void initnepolozeni(Student d) {
+				
 				this.nepolozeniPredmeti = new ArrayList<Predmet>();
-				int red = StudentiJTable.getInstance().getSelectedRow();
-				Student s=BazaStudent.getInstance().getRow(red);
-				nepolozeniPredmeti=s.getNepolozeniPredmeti();
+				nepolozeniPredmeti=d.getNepolozeniPredmeti();
+				
 				for(Predmet p : nepolozeniPredmeti)
 				{
 				     inc++;
 				}
+				
 			}
-
+            
 			public long getInc() { //vraca broj predmeta
 				return inc;
 			}
-
+            public String getIndex(String s)
+            {
+               return s;
+            }
 			public void setInc(int inc) {
 				this.inc = inc;
 			}
@@ -77,10 +80,7 @@ public class BazaNepolozeni {
 				this.kolone = kolone;
 			}
 
-			public static void setInstance(BazaNepolozeni instance) {
-				BazaNepolozeni.instance = instance;
-			}
-
+		
 			public String getColumnName(int index) {
 				return this.kolone.get(index);
 			}
@@ -110,4 +110,27 @@ public class BazaNepolozeni {
 					return null;
 				}
          }
+
+
+			private static BazaNepolozeni instance = null;
+
+			public static BazaNepolozeni getInstance() {
+				 
+					Student st = new Student(BazaStudent.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow()));
+					Student st1 = new Student(st);
+					instance = new BazaNepolozeni(st);
+				
+				     return instance;
+			}
+			public void izbrisiPredmet(String sifraPredmeta) {
+				for(Predmet p : nepolozeniPredmeti)
+				{
+					if(p.getSifraPredmeta()==sifraPredmeta)
+					{
+						nepolozeniPredmeti.remove(p);
+						break;
+					}
+				}
+			}
+		
    }

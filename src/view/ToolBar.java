@@ -20,6 +20,8 @@ import controller.PredmetController;
 import controller.ProfesorController;
 import controller.StudentController;
 import model.BazaStudent;
+import model.Student;
+import model.BazaNepolozeni;
 import model.BazaPredmet;
 import model.BazaProfesor;
 
@@ -76,7 +78,14 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						
+						Student student = BazaStudent.getInstance().getRow(red); //
+						//BazaNepolozeni.getInstance().setS(student);
+						
+						
 						StudentController.getInstance().izmeniStudenta(red);
+						
+						System.out.println("Ovde sam!!!!!!!");
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);

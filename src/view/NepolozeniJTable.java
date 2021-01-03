@@ -13,7 +13,7 @@
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = 199113098313326605L;
+		
 
 		private static NepolozeniJTable instance = null;
 
@@ -42,5 +42,10 @@
 				c.setBackground(Color.WHITE);
 			}
 			return c;
+		}
+		public void azurirajPrikaz() {
+			AbstractTableModelNepolozeni model = (AbstractTableModelNepolozeni) this.getModel(); 
+			model.fireTableDataChanged(); //obavestavamo da je doslo do promene podatak i da model treba da se azurira
+			validate(); //ugradjena metoda
 		}
 }

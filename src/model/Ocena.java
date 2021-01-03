@@ -7,6 +7,21 @@ public class Ocena {
 	private Predmet predmet;
 	private int brojcanaVrednost;
 	private LocalDate datumPolaganja;
+    
+	
+	
+	
+	
+	
+	
+
+	public Ocena(Predmet predmet,Student student) {
+		super();
+		this.student = student;
+		this.predmet = predmet;
+	}
+
+
 
 	// constructor using fields
 	public Ocena(Student student, Predmet predmet, int brojcanaVrednost, LocalDate datumPolaganja) {
@@ -17,7 +32,7 @@ public class Ocena {
 			// greska kasnije ispisati
 		} else
 			this.brojcanaVrednost = brojcanaVrednost;
-		this.datumPolaganja = datumPolaganja;
+		     this.datumPolaganja = datumPolaganja;
 	}
 
 	public Student getStudent() {

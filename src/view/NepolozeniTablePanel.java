@@ -5,13 +5,16 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import model.Student;
+
 public class NepolozeniTablePanel extends JPanel {
-	private static final long serialVersionUID = 3934304876755044503L;
+	
 	private NepolozeniJTable nepolozeni;
 	public NepolozeniTablePanel()
 	{
 		setLayout(new BorderLayout());
 		prikazNepolozenihPredmeta();
+		
 	}
 	
 	private void prikazNepolozenihPredmeta()

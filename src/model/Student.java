@@ -41,8 +41,7 @@ public class Student {
 		this.nepolozeniPredmeti = nepolozeniPredmeti;
 		this.prosecnaOcena = getProsecnaOcena();
 	}
-
-	// constructor from superclass
+		// constructor from superclass
 	public Student() {
 		super();
 		this.prezime = new String("Prezime");
@@ -55,8 +54,24 @@ public class Student {
 		this.status = statusStudenta.B;
 		this.prosecnaOcena = 6.00;
 		this.polozeniPredmeti = new ArrayList<Ocena>();
+		this.nepolozeniPredmeti = new ArrayList<Predmet>();
 
 	}
+	public Student(Student s) {
+		super();
+		this.prezime = s.getPrezime();
+		this.ime = s.getIme();
+		this.datumRodjenja = s.getDatumRodjenja();
+		this.adresaStanovanja = s.getAdresaStanovanja();
+		this.brIndeksa = s.getBrIndeksa();
+		this.godinaUpisa = s.getGodinaUpisa();
+		this.trenutnaGodinaStudija = s.getTrenutnaGodinaStudija();
+		this.status = s.getStatus();
+		this.polozeniPredmeti = s.getPolozeniPredmeti();
+		this.nepolozeniPredmeti = s.getNepolozeniPredmeti();
+		this.prosecnaOcena = s.getProsecnaOcena();
+	}
+	
 
 	// getters and setters
 	public String getPrezime() {
@@ -190,14 +205,17 @@ public class Student {
 		this.polozeniPredmeti = polozeniPredmeti;
 	}
 
+	
+	
+
 	@Override
 	public String toString() {
 		return "Student [prezime=" + prezime + ", ime=" + ime + ", datumRodjenja=" + datumRodjenja
 				+ ", adresaStanovanja=" + adresaStanovanja + ", kontaktTelefon=" + kontaktTelefon + ", email=" + email
 				+ ", brIndeksa=" + brIndeksa + ", godinaUpisa=" + godinaUpisa + ", trenutnaGodinaStudija="
-				+ trenutnaGodinaStudija + ", status=" + status + ", prosecnaOcena=" + prosecnaOcena + "]";
+				+ trenutnaGodinaStudija + ", status=" + status + ", prosecnaOcena=" + prosecnaOcena
+				+ ", polozeniPredmeti=" + polozeniPredmeti + ", nepolozeniPredmeti=" + nepolozeniPredmeti + "]";
 	}
-
 	public ArrayList<Predmet> getNepolozeniPredmeti() {
 		return nepolozeniPredmeti;
 	}

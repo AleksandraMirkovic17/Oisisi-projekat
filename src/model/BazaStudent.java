@@ -21,9 +21,10 @@ public class BazaStudent {
 	private BazaStudent() {
 		generator = 0;
 
-		initStudent();
+		
 
 		this.kolone = new ArrayList<String>();
+		initStudent();
 		this.kolone.add("INDEKS");
 		this.kolone.add("IME");
 		this.kolone.add("PREZIME");

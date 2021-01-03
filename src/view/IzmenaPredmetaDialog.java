@@ -183,6 +183,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		godinaCombo = new JComboBox<String>(godina);
 		godinaCombo.setPreferredSize(dim);
 		godinaCombo.setSelectedIndex(predmet.getGodinaStudija() - 1);
+		System.out.println(predmet.getGodinaStudija());
 		godinaCombo.addActionListener(new ActionListener() {
 
 			@Override

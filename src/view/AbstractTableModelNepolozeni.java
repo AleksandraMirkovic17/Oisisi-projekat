@@ -2,6 +2,7 @@ package view;
 import javax.swing.table.AbstractTableModel;
 
 import model.BazaNepolozeni;
+import model.Student;
 
 
 
@@ -11,10 +12,11 @@ public class AbstractTableModelNepolozeni  extends AbstractTableModel {
 	   {
 		   
 	   }
-
+   
 		@Override
 		public int getColumnCount() {
 			// TODO Auto-generated method stub
+			
 			return BazaNepolozeni.getInstance().getColumnCount();
 		}
 
