@@ -39,4 +39,14 @@ public class StudentController {
 		// azuriranje prikaza
 		StudentiJTable.getInstance().refresTabelu();
 	}
+
+	public void izbrisiStudenta(int rowSelectedIndex) {
+		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex);
+		for (int i = 0; i < BazaStudent.getInstance().getStudenti().size(); i++) {
+			if (BazaStudent.getInstance().getStudenti().get(i).getBrIndeksa().equals(student.getBrIndeksa())) {
+				BazaStudent.getInstance().getStudenti().remove(i);
+			}
+		}
+		StudentiJTable.getInstance().refresTabelu();
+	}
 }

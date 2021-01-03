@@ -82,7 +82,7 @@ public class ToolBar extends JToolBar {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				//izmena profesora
+				// izmena profesora
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
@@ -92,7 +92,7 @@ public class ToolBar extends JToolBar {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				/*izmena predmeta*/
+				/* izmena predmeta */
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
@@ -117,24 +117,66 @@ public class ToolBar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int red = PredmetJTable.getInstance().getSelectedRow(); // selektovali smo red u tabeli
-				// provera da li smo dobro selektovali red
-				if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
-					// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
-					int code = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da izbrisete predmet?",
-							"Brisanje predmeta", JOptionPane.YES_NO_OPTION);
-					if (code == JOptionPane.YES_OPTION) {
-						PredmetController.getInstance().izbrisiPredmet(red);
-						JOptionPane.showMessageDialog(null, "Predmet je obrisan!");
+				// u slucaju da smo na tabu studenti
+				if (TabPane.getInstance().getSelectedIndex() == 0) {
+					int red = StudentiJTable.getInstance().getSelectedRow();
+					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						String ispis = "Da li ste sigurni da zelide da izbrisete studenta "
+								+ BazaStudent.getInstance().getRow(red).getBrIndeksa() + " "
+								+ BazaStudent.getInstance().getRow(red).getIme() + " "
+								+ BazaStudent.getInstance().getRow(red).getPrezime() + "?";
+						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
+								JOptionPane.YES_NO_OPTION);
+						if (code == JOptionPane.YES_OPTION) {
+							StudentController.getInstance().izbrisiStudenta(red);
+							;
+							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Student je obrisan!");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali studenta za brisanje!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
 					}
-					if (code == JOptionPane.NO_OPTION) {
-						JOptionPane.showMessageDialog(null, "Predmet nije obrisan!");
+				}
+				// u slucaju da smo na tabu profesori
+				if (TabPane.getInstance().getSelectedIndex() == 1) {
+					int red = ProfesoriJTable.getInstance().getSelectedRow();
+					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
+						String ispis = "Da li ste sigurni da zelide da izbrisete profesora "
+								+ BazaProfesor.getInstance().getRow(red).getTitula() + " "
+								+ BazaProfesor.getInstance().getRow(red).getIme() + " "
+								+ BazaProfesor.getInstance().getRow(red).getPrezime() + "?";
+						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
+								JOptionPane.YES_NO_OPTION);
+						if (code == JOptionPane.YES_OPTION) {
+							ProfesorController.getInstance().izbrisiProfesora(red);
+							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Profesor je obrisan!");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali profesora za brisanje!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
 					}
+				}
+				if (TabPane.getInstance().getSelectedIndex() == 2) {
+					int red = PredmetJTable.getInstance().getSelectedRow(); // selektovali smo red u tabeli
+					// provera da li smo dobro selektovali red
+					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
+						// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
+						int code = JOptionPane.showConfirmDialog(null,
+								"Da li ste sigurni da zelite da izbrisete predmet?", "Brisanje predmeta",
+								JOptionPane.YES_NO_OPTION);
+						if (code == JOptionPane.YES_OPTION) {
+							PredmetController.getInstance().izbrisiPredmet(red);
+							JOptionPane.showMessageDialog(null, "Predmet je obrisan!");
+						}
+						if (code == JOptionPane.NO_OPTION) {
+							JOptionPane.showMessageDialog(null, "Predmet nije obrisan!");
+						}
 
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"Niste selektovali red! Morate da selektujete red u tabeli Predmet!", "Upozorenje",
-							JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Niste selektovali red! Morate da selektujete red u tabeli Predmet!", "Upozorenje",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 

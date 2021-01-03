@@ -36,5 +36,15 @@ public class ProfesorController {
 		// azuriranje prikaza
 		ProfesoriJTable.getInstance().azurirajPrikaz();
 	}
+	
+	public void izbrisiProfesora (int red) {
+		Profesor profesor = BazaProfesor.getInstance().getRow(red);
+		for(int i=0; i<BazaProfesor.getInstance().getProfesori().size(); i++) {
+			if(BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte().equals(profesor.getBrLicneKarte())) {
+				BazaProfesor.getInstance().getProfesori().remove(i);
+			}
+		}
+		ProfesoriJTable.getInstance().azurirajPrikaz();
+	}
 }
 
