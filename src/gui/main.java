@@ -9,7 +9,7 @@ public class main  {
 
 	public static void main(String[] args)
 	{
-		GlavniProzor glavni= GlavniProzor.getInstance(); //vraca nesto sto ce biti jdinstveno za klasu 
+		GlavniProzor glavni= GlavniProzor.getInstance(); //vraca nesto sto ce biti jedinstveno za klasu 
 		glavni.setVisible(true);
 
 	}

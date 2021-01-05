@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class PredmetiTablePanel extends JPanel {
 
@@ -20,6 +22,10 @@ public class PredmetiTablePanel extends JPanel {
 
 	private void prikazPredmeta() {
 		predmetiTable = PredmetJTable.getInstance();
+		
+
+		TableRowSorter<TableModel> sortiranje = new TableRowSorter<TableModel>(predmetiTable.getModel());
+		predmetiTable.setRowSorter(sortiranje);
 		JScrollPane scrollPane = new JScrollPane(predmetiTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}
