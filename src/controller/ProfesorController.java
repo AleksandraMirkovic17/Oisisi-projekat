@@ -37,6 +37,7 @@ public class ProfesorController {
 		ProfesoriJTable.getInstance().azurirajPrikaz();
 	}
 	
+	
 	public void izbrisiProfesora (int red) {
 		Profesor profesor = BazaProfesor.getInstance().getRow(red);
 		for(int i=0; i<BazaProfesor.getInstance().getProfesori().size(); i++) {

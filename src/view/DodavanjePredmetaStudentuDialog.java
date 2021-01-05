@@ -132,9 +132,12 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 					for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
 						if (p.getSifraPredmeta().equals(sifraPredmeta)) {
 							StudentController.getInstance().dodajPredmetStudentu(student, p);
+							
 						}
+						
 					}
 				}
+				
 				setVisible(false);
 			}
 		});

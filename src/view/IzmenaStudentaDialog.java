@@ -603,7 +603,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
 
-		BazaNepolozeni b = new BazaNepolozeni(student);
+		
 
 		NepolozeniTablePanel nepolozeni = new NepolozeniTablePanel();
 		JPanel panel3 = new JPanel();

@@ -58,7 +58,7 @@ public class StudentController {
 	
 	public void dodajPredmetStudentu(Student student, Predmet predmet) {
 		student.getNepolozeniPredmeti().add(predmet);
-		//NepolozeniJTable.getInstance().azurirajPrikaz();
+		NepolozeniJTable.getInstance().azurirajPrikaz();
 		StudentiJTable.getInstance().refresTabelu();
 	}
 	
@@ -73,4 +73,5 @@ public class StudentController {
 		StudentiJTable.getInstance().refresTabelu();
 		//NepolozeniJTable.getInstance().azurirajPrikaz();
 	}
+	
 }

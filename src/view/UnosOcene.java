@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -45,7 +47,6 @@ public class UnosOcene extends JDialog implements ActionListener{
 		setSize(400, 400);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
-		setVisible(true);
 		setModal(true);
 
 		this.predmet = predmet;
@@ -131,11 +132,11 @@ public class UnosOcene extends JDialog implements ActionListener{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				/*if (/*provera()1) {
+				if (provera()) {
 					btnOk.setEnabled(true);
 				} else {
 					btnOk.setEnabled(false);
-				}*/
+				}
 			}
 
 			@Override
@@ -168,20 +169,26 @@ public class UnosOcene extends JDialog implements ActionListener{
 					public void actionPerformed(ActionEvent arg0) {
 						String tekst[] = pokupiTekst();
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-						int ocene =(int)ocena.getSelectedItem();
-						o.setBrojcanaVrednost(ocene);
-						BazaPolozeni.getInstance().dodajPredmet(o.getStudent(), o.getPredmet(), o.getBrojcanaVrednost(), LocalDate.parse(tekst[3], formatter));
-						BazaNepolozeni.getInstance().izbrisiPredmet(predmet.getSifraPredmeta());
 						
-						//
+						String ocene =(String) ocena.getSelectedItem();
+						int ocena = Integer.parseInt(ocene);
+						o.setBrojcanaVrednost(ocena);
+						
+						
+						BazaPolozeni.getInstance().dodajPredmet(o.getStudent(), o.getPredmet(), o.getBrojcanaVrednost(), LocalDate.parse(tekst[3], formatter));
+						 PolozeniJTable.getInstance().azurirajPrikaz();
+						BazaNepolozeni.getInstance().izbrisiPredmet(predmet.getSifraPredmeta(),o.getStudent());
+						
+						
 				
-						// StudentiJTable.getInstance().refresTabelu();
+					     NepolozeniJTable.getInstance().azurirajPrikaz();
+					     PolozeniJTable.getInstance().azurirajPrikaz();
 						setVisible(false);
 						
 					}
 			
 				});
-		btnOk.setEnabled(true);
+		btnOk.setEnabled(false);
 
 		btnCancel.setPreferredSize(new Dimension(150, 25));
 		btnCancel.addActionListener(new ActionListener()
@@ -222,6 +229,28 @@ public class UnosOcene extends JDialog implements ActionListener{
 
 		return tekst;
 
+	}
+	protected boolean provera() {
+		String tekst[] = pokupiTekst();
+		Color correct = new Color(208, 240, 192);
+		Color incorrect = new Color(255, 132, 132);
+		boolean ok = true;
+		boolean ok1 = true;
+		if (tekst[3].length() != 0) {
+			ok1 = true;
+			if (!Pattern.matches("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.][0-9]{4}", tekst[3])) {
+				txtDatum.setBackground(incorrect);
+				txtDatum.setForeground(Color.black);
+				ok1 = false;
+				ok = false;
+			}
+			if (ok1)
+				txtDatum.setBackground(correct);
+		} else {
+			ok = false;
+		}
+
+		return ok;
 	}
 
 	@Override

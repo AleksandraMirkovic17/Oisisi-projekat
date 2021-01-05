@@ -16,19 +16,24 @@ public class BazaNepolozeni {
 			// sablon koji nam omogucava da imamo jednu instancu necega, mi zelimo da imamo
 			// jednu instancu predmeta, jer ne zelimo da neko drugi sa vise strana to menja
 		
+	private static BazaNepolozeni instance = null;
 
+	public static BazaNepolozeni getInstance() {
+			
+			instance = new BazaNepolozeni();
+		     return instance;
+	      }
+	
 			private int inc = 0;
-
 			private List<Predmet> nepolozeniPredmeti;
 			private List<String> kolone;
-			
-			public BazaNepolozeni(Student p) {
+			public BazaNepolozeni() {
                 
-				Student s= new Student(p);
+				
 	
 				
 				this.kolone = new ArrayList<String>();
-				initnepolozeni(s);
+				initnepolozeni();
 				this.kolone.add("SIFRA PREDMETA");
 				this.kolone.add("NAZIV");
 				this.kolone.add("ESPB");
@@ -37,8 +42,10 @@ public class BazaNepolozeni {
 				
 
 			}
-			private void initnepolozeni(Student d) {
-				
+			private void initnepolozeni() {
+				this.nepolozeniPredmeti = new ArrayList<Predmet>();
+				int red = StudentiJTable.getInstance().getSelectedRow();
+				Student d = BazaStudent.getInstance().getRow(red);
 				this.nepolozeniPredmeti = new ArrayList<Predmet>();
 				nepolozeniPredmeti=d.getNepolozeniPredmeti();
 				
@@ -79,8 +86,11 @@ public class BazaNepolozeni {
 			public void setKolone(List<String> kolone) {
 				this.kolone = kolone;
 			}
-
+      
 		
+			public static void setInstance(BazaNepolozeni instance) {
+				BazaNepolozeni.instance = instance;
+			}
 			public String getColumnName(int index) {
 				return this.kolone.get(index);
 			}
@@ -110,27 +120,19 @@ public class BazaNepolozeni {
 					return null;
 				}
          }
-
-
-			private static BazaNepolozeni instance = null;
-
-			public static BazaNepolozeni getInstance() {
-				 
-					Student st = new Student(BazaStudent.getInstance().getRow(StudentiJTable.getInstance().getSelectedRow()));
-					Student st1 = new Student(st);
-					instance = new BazaNepolozeni(st);
+			public void izbrisiPredmet(String sifraPredmeta,Student d) {
 				
-				     return instance;
-			}
-			public void izbrisiPredmet(String sifraPredmeta) {
+				nepolozeniPredmeti=d.getNepolozeniPredmeti();
 				for(Predmet p : nepolozeniPredmeti)
 				{
 					if(p.getSifraPredmeta()==sifraPredmeta)
 					{
+						
 						nepolozeniPredmeti.remove(p);
 						break;
 					}
 				}
+				
 			}
-		
-   }
+				
+	}

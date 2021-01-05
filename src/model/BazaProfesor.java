@@ -138,4 +138,16 @@ public class BazaProfesor {
                }
 		}
 	}
+	
+	public void izbrisiPredmet(String sifra)
+	{
+		for(Profesor p : profesori)
+		{
+			for(Predmet pp : p.getPredmeti()) {
+				
+				if(pp.getSifraPredmeta()==sifra)
+					p.getPredmeti().remove(pp);
+			}
+		}
+	}
 }

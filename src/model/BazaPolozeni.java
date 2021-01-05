@@ -102,6 +102,7 @@ public class BazaPolozeni {
 	}
 
 	public void dodajPredmet(Student s, Predmet p, int ocena, LocalDate datum) {
+
 		this.polozeniPredmeti.add(new Ocena(s, p, ocena, datum));
 		inc++;
 

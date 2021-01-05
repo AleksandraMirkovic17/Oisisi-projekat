@@ -10,17 +10,12 @@
 
 	public class NepolozeniJTable extends JTable {
 
-		/**
-		 * 
-		 */
-		
-
 		private static NepolozeniJTable instance = null;
 
 		public static NepolozeniJTable getInstance() {
-			if (instance == null) {
+			 if(instance==null)
 				instance = new NepolozeniJTable();
-			}
+			
 			return instance;
 		}
 
