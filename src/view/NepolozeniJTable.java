@@ -48,4 +48,5 @@
 			model.fireTableDataChanged(); //obavestavamo da je doslo do promene podatak i da model treba da se azurira
 			validate(); //ugradjena metoda
 		}
+		
 }

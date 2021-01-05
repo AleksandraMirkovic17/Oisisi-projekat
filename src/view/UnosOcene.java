@@ -131,11 +131,11 @@ public class UnosOcene extends JDialog implements ActionListener{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				if (provera()) {
+				/*if (/*provera()1) {
 					btnOk.setEnabled(true);
 				} else {
 					btnOk.setEnabled(false);
-				}
+				}*/
 			}
 
 			@Override

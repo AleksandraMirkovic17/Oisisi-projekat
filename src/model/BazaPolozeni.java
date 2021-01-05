@@ -11,8 +11,7 @@ public class BazaPolozeni {
 	private static BazaPolozeni instance = null;
 
 	public static BazaPolozeni getInstance() {
-		if (instance == null)
-			instance = new BazaPolozeni();
+		instance = new BazaPolozeni();
 		return instance;
 
 	}
@@ -101,8 +100,9 @@ public class BazaPolozeni {
 			return null;
 		}
 	}
+
 	public void dodajPredmet(Student s, Predmet p, int ocena, LocalDate datum) {
-		this.polozeniPredmeti.add(new Ocena(s,p,ocena,datum));
+		this.polozeniPredmeti.add(new Ocena(s, p, ocena, datum));
 		inc++;
 
 	}

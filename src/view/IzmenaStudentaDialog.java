@@ -45,7 +45,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 	JComboBox<String> trenutnaGodinaCombo, finansCombo;
 	Student student;
 	
-	
+	public IzmenaStudentaDialog instanceIzmenaStudenta;
 
 	public IzmenaStudentaDialog(Student student) {
 		super();
@@ -54,6 +54,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		setResizable(false);
 		setModal(true);
 		this.student = student;
+		this.instanceIzmenaStudenta = this;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setVisible(true);
 
@@ -445,7 +446,15 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		btnCancel.addActionListener(this);
 
 		btnDodaj.setPreferredSize(new Dimension(150, 25));
-		btnDodaj.addActionListener(this);
+		btnDodaj.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DodavanjePredmetaStudentuDialog dialog = new DodavanjePredmetaStudentuDialog(student, instanceIzmenaStudenta );
+				dialog.setVisible(true);
+			}
+		});
 		btnObrisi.setPreferredSize(new Dimension(150, 25));
 		btnObrisi.addActionListener(this);
 		btnPolaganje.setPreferredSize(new Dimension(150, 25));
@@ -493,11 +502,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JPanel panel2 = new JPanel();
 		BoxLayout boxPanel2 = new BoxLayout(panel2, BoxLayout.Y_AXIS);
 		panel2.setLayout(boxPanel2);
-
-		JPanel panelBtn = new JPanel();
-		JButton btnPonisti = new JButton("Ponisti ocenu");
-		panelBtn.add(btnPonisti);
-
+		
 		JPanel info = new JPanel();
 		BoxLayout boxPaneInfo = new BoxLayout(info, BoxLayout.Y_AXIS);
 		info.setLayout(boxPaneInfo);
@@ -508,12 +513,24 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		String s1 = new String("Ukupno ESPB: " + String.valueOf(student.getUkupnoEspb()));
 		JLabel ukupnoEspb = new JLabel(s1);
 
+		JPanel panelBtn = new JPanel();
+		BoxLayout boxPanel21 = new BoxLayout(panelBtn, BoxLayout.X_AXIS);
+		panelBtn.setLayout(boxPanel21);
+		JButton btnPonisti = new JButton("Ponisti ocenu");
+		panelBtn.add(btnPonisti);
+		panelBtn.add(Box.createVerticalStrut(20));
+
 		info.add(prosecnaOcena);
 		info.add(ukupnoEspb);
-
+		
+		panel2.add(Box.createVerticalStrut(10));
+		panel2.add(Box.createHorizontalStrut(5));
 		panel2.add(panelBtn, BorderLayout.NORTH);
+		panel2.add(Box.createVerticalStrut(10));
 		panel2.add(polozeni);
-		panel2.add(info, BorderLayout.SOUTH);
+		System.out.println("Sa ");
+		panel2.add(Box.createHorizontalBox());
+		panel2.add(info, BorderLayout.PAGE_END);
 
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
 		

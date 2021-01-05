@@ -3,7 +3,9 @@ package controller;
 import model.BazaNepolozeni;
 import model.BazaStudent;
 import model.Student;
+import model.Predmet;
 import view.IzmenaStudentaDialog;
+import view.NepolozeniJTable;
 import view.StudentiJTable;
 
 public class StudentController {
@@ -52,5 +54,12 @@ public class StudentController {
 			}
 		}
 		StudentiJTable.getInstance().refresTabelu();
+	}
+	
+	public void dodajPredmetStudentu(Student student, Predmet predmet) {
+		student.getNepolozeniPredmeti().add(predmet);
+		//NepolozeniJTable.getInstance().azurirajPrikaz();
+		StudentiJTable.getInstance().refresTabelu();
+
 	}
 }

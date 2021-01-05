@@ -40,7 +40,8 @@ public class BazaPredmet {
 
 		this.predmeti = new ArrayList<Predmet>();
 		Semestar s = Semestar.LETNJI;
-		predmeti.add(new Predmet("EE123", "Verovatnoca", 9, 6, s));
+		predmeti.add(new Predmet("EE123", "Verovatnoca", 9, 2, s));
+		predmeti.add(new Predmet("EE124",  "Analiza 1", 9, 1, Semestar.ZIMSKI));
 		brojac++;
 	}
 	

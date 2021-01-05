@@ -41,7 +41,6 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 		super();
 		setTitle("Dodavanje predmeta");
 		setSize(400, 400);
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
 
