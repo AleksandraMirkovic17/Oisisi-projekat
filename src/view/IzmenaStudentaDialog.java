@@ -33,6 +33,7 @@ import model.Ocena;
 import model.Predmet;
 import model.Student;
 import pomocneKlase.MyFocusListener;
+import pomocneKlase.SimpleDialog;
 
 public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
@@ -468,7 +469,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 					int code = JOptionPane.showOptionDialog(instanceIzmenaStudenta,
 							"Da li ste sigurni da zelite da uklonite predmet?", "Uklanjanje predmeta",
-							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+							JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 					if (code == JOptionPane.YES_OPTION) {
 						StudentController.getInstance().ukloniPredmetStudentu(student, red);
 						JOptionPane.showMessageDialog(instanceIzmenaStudenta, "Predmet je obrisan!");
@@ -539,6 +540,53 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		BoxLayout boxPanel21 = new BoxLayout(panelBtn, BoxLayout.X_AXIS);
 		panelBtn.setLayout(boxPanel21);
 		JButton btnPonisti = new JButton("Ponisti ocenu");
+		btnPonisti.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JDialog dialog = new JDialog();
+				dialog.setModal(true);
+				dialog.setSize(300, 250);
+				dialog.setResizable(true);
+				dialog.setTitle("Ponistavanje ocene");
+				
+				JPanel dialogPanel1=new JPanel();
+				BoxLayout boxDialogPanel1 = new BoxLayout(dialogPanel1, BoxLayout.Y_AXIS);
+				dialogPanel1.setLayout(boxDialogPanel1);
+				
+				JPanel dialogPanel2 = new JPanel();
+				JLabel dialogLabel2 = new JLabel("Da li ste sigurni da zelite da ponistite ocenu?");
+				dialogPanel2.add(dialogLabel2);
+				
+				JPanel dialogPanel3 = new JPanel();
+				BoxLayout boxDialogPanel3 = new BoxLayout(dialogPanel3, BoxLayout.X_AXIS);
+				dialogPanel3.setLayout(boxDialogPanel3);
+				
+				JButton da = new JButton("Da");
+				JButton ne = new JButton("Ne");
+				
+				dialogPanel3.add(Box.createVerticalStrut(5));
+				dialogPanel3.add(da);
+				dialogPanel3.add(Box.createHorizontalStrut(10));
+				dialogPanel3.add(ne);
+				dialogPanel3.add(Box.createHorizontalStrut(5));
+
+
+				dialogPanel1.add(dialogLabel2);
+				dialogPanel1.add(Box.createVerticalStrut(20));
+				dialogPanel1.add(dialogPanel3);
+				dialogPanel1.add(Box.createVerticalStrut(20));
+				
+				dialog.add(dialogPanel1);
+				
+				dialog.pack();
+				dialog.setLocationRelativeTo(instanceIzmenaStudenta);
+				dialog.setVisible(true);
+
+				
+			}
+		});
 		panelBtn.add(btnPonisti);
 		panelBtn.add(Box.createVerticalStrut(20));
 
@@ -550,7 +598,6 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		panel2.add(panelBtn, BorderLayout.NORTH);
 		panel2.add(Box.createVerticalStrut(10));
 		panel2.add(polozeni);
-		System.out.println("Sa ");
 		panel2.add(Box.createHorizontalBox());
 		panel2.add(info, BorderLayout.PAGE_END);
 
@@ -570,6 +617,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		tabbedPane.addTab("Nepolozeni", null, panel3, "Spisak nepolozenih predmeta kod studenta");
 
 		add(tabbedPane, BorderLayout.CENTER);
+		
 		pack();
 		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu
 															// setLocationRelativeTo(parent frame) posle pozivanja
