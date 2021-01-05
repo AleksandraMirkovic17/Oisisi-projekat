@@ -60,6 +60,17 @@ public class StudentController {
 		student.getNepolozeniPredmeti().add(predmet);
 		//NepolozeniJTable.getInstance().azurirajPrikaz();
 		StudentiJTable.getInstance().refresTabelu();
-
+	}
+	
+	public void ukloniPredmetStudentu(Student student, int rowSlectedIndexNepolozeni) {
+		Predmet predmet = BazaNepolozeni.getInstance().getRow(rowSlectedIndexNepolozeni);
+		for(int i=0; i<student.getNepolozeniPredmeti().size(); i++) {
+			if(student.getNepolozeniPredmeti().get(i).getSifraPredmeta().equals(predmet.getSifraPredmeta())) {
+				student.getNepolozeniPredmeti().remove(i);
+				break;
+			}
+		}
+		StudentiJTable.getInstance().refresTabelu();
+		//NepolozeniJTable.getInstance().azurirajPrikaz();
 	}
 }
