@@ -46,7 +46,7 @@ public class BazaNepolozeni {
 				this.nepolozeniPredmeti = new ArrayList<Predmet>();
 				int red = StudentiJTable.getInstance().getSelectedRow();
 				Student d = BazaStudent.getInstance().getRow(red);
-				this.nepolozeniPredmeti = new ArrayList<Predmet>();
+			
 				nepolozeniPredmeti=d.getNepolozeniPredmeti();
 				
 				for(Predmet p : nepolozeniPredmeti)

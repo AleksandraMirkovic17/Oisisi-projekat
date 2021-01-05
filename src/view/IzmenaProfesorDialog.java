@@ -57,6 +57,8 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 
 		JButton btnOk = new JButton("IZMENI");
 		JButton btnCancel = new JButton("ODUSTANI");
+		JButton btnDodaj = new JButton("Dodaj predmet");
+		JButton btnUkloni = new JButton("Ukloni predmet");
 
 		// dimenzije labela i tekstualnih komponenti
 		Dimension dim = new Dimension(150, 20);
@@ -133,17 +135,16 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
     panPrezime.add(txtPrezime);
     //datum rodjenja
     
-    JPanel panDatumRodjenja=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblDatumRodjenja=new JLabel("Datum rodjenja*:");
+    JPanel panDatumRodjenja = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	JLabel lblDatumRodjenja = new JLabel("Datum rodjenja*:");
     LocalDate dr = profesor.getDatumRodjena();
 	String formattedDate = dr.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	lblDatumRodjenja.setPreferredSize(dim);
 
 	txtDatumRodjenja = new JTextField(formattedDate);
-    txtDatumRodjenja=new JTextField(profesor.getDatumRodjena().toString());
-    txtDatumRodjenja.setPreferredSize(dim);
-    txtDatumRodjenja.setName("txtDatumRodjenja");
-    txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
+	txtDatumRodjenja.setPreferredSize(dim);
+	txtDatumRodjenja.setName("txtDatumRodjenja");
+	txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
 	txtDatumRodjenja.addFocusListener(focusListener);
 	txtDatumRodjenja.addKeyListener(new KeyListener() {
 
@@ -457,8 +458,29 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	
 	panel1.add(panBottom, BorderLayout.SOUTH);
 	
+	btnDodaj.setPreferredSize(new Dimension(150,25));
+	btnDodaj.addActionListener(this);
+	btnUkloni.setPreferredSize(new Dimension(150,25));
+	btnUkloni.addActionListener(this);
+	
+	JPanel panBottom1=new JPanel();
+	BoxLayout box1=new BoxLayout(panBottom1, BoxLayout.X_AXIS);
+	panBottom1.setLayout(box1);
+	panBottom1.add(Box.createHorizontalStrut(10));
+	panBottom1.add(btnDodaj);
+	panBottom1.add(Box.createHorizontalStrut(10));
+	panBottom1.add(btnUkloni);
+	panBottom1.add(Box.createHorizontalStrut(10));
+	panBottom1.add(Box.createVerticalStrut(40));
 	
 	JPanel panel2=new JPanel();
+	ProfPredmetTablePane predaje = new ProfPredmetTablePane();
+	BoxLayout boxPanel3 = new BoxLayout(panel2, BoxLayout.Y_AXIS);
+	panel2.setLayout(boxPanel3);
+	
+	panel2.add(panBottom1,BorderLayout.NORTH);
+	panel2.add(predaje);
+	
 
 	
 	tabbedPane.addTab("Informacije", null,panel1,"Osnovne informacije o profesoru");
