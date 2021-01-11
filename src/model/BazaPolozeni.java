@@ -108,4 +108,8 @@ public class BazaPolozeni {
 
 	}
 
+	public void izbrisiOcenu(int row) {
+		this.polozeniPredmeti.remove(row);
+	}
+
 }

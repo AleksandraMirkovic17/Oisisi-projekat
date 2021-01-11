@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.ListModel;
 
 import controller.StudentController;
+import model.BazaNepolozeni;
+import model.BazaPolozeni;
 import model.BazaPredmet;
 import model.Ocena;
 import model.Predmet;
@@ -131,8 +133,8 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 					String sifraPredmeta = splited[0].trim();
 					for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
 						if (p.getSifraPredmeta().equals(sifraPredmeta)) {
-							StudentController.getInstance().dodajPredmetStudentu(student, p);
-							
+							BazaNepolozeni.getInstance().dodajPredmet(p);
+							NepolozeniJTable.getInstance().azurirajPrikaz();
 						}
 						
 					}

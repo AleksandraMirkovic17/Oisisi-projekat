@@ -134,5 +134,8 @@ public class BazaNepolozeni {
 				}
 				
 			}
-				
+			
+			public void dodajPredmet(Predmet p) {
+				this.nepolozeniPredmeti.add(p);
+			}
 	}

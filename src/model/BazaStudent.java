@@ -148,4 +148,10 @@ public class BazaStudent {
 			}
 		}
 	}
+
+	public void setBrojStudenata(int size) {
+		// TODO Auto-generated method stub
+		generator = size;
+		
+	}
 }

@@ -27,6 +27,7 @@ import javax.swing.WindowConstants;
 import controller.PredmetController;
 import controller.StudentController;
 import model.BazaNepolozeni;
+import model.BazaPolozeni;
 import model.BazaPredmet;
 import model.BazaStudent;
 import model.Ocena;
@@ -46,7 +47,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 	JComboBox<String> trenutnaGodinaCombo, finansCombo;
 	Student student;
 
-	public IzmenaStudentaDialog instanceIzmenaStudenta;
+	public static IzmenaStudentaDialog instanceIzmenaStudenta;
+	JButton btnPonisti;
 
 	public IzmenaStudentaDialog(Student student) {
 		super();
@@ -55,7 +57,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		setResizable(false);
 		setModal(true);
 		this.student = student;
-		this.instanceIzmenaStudenta = this;
+		IzmenaStudentaDialog.instanceIzmenaStudenta = this;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setVisible(true);
 
@@ -468,16 +470,17 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 					Object[] options = { "Da", "Ne" };
 
 					int code = JOptionPane.showOptionDialog(instanceIzmenaStudenta,
-							"Da li ste sigurni da zelite da uklonite predmet?", "Uklanjanje predmeta",
+							"Da li ste sigurni da želite da uklonite predmet?", "Uklanjanje predmeta",
 							JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 					if (code == JOptionPane.YES_OPTION) {
-						StudentController.getInstance().ukloniPredmetStudentu(student, red);
+						BazaNepolozeni.getInstance().getNepolozeniPredmeti().remove(red);
+						NepolozeniJTable.getInstance().azurirajPrikaz();
 						JOptionPane.showMessageDialog(instanceIzmenaStudenta, "Predmet je obrisan!");
 					}
 
 				} else {
 					JOptionPane.showMessageDialog(instanceIzmenaStudenta,
-							"Niste selektovali predmet koji zelite da uklonite studentu!", "Upozorenje",
+							"Niste selektovali predmet koji želite da uklonite studentu!", "Upozorenje",
 							JOptionPane.WARNING_MESSAGE);
 				}
 
@@ -539,52 +542,26 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JPanel panelBtn = new JPanel();
 		BoxLayout boxPanel21 = new BoxLayout(panelBtn, BoxLayout.X_AXIS);
 		panelBtn.setLayout(boxPanel21);
-		JButton btnPonisti = new JButton("Ponisti ocenu");
+		btnPonisti = new JButton("Poništi ocenu");
+
+		if (student.getPolozeniPredmeti().size() == 0) {
+			btnPonisti.setEnabled(false); // dugme za ponistavanje ocene u slucaju da student nema polozenih predmeta je
+											// false
+		}
+
 		btnPonisti.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JDialog dialog = new JDialog();
-				dialog.setModal(true);
-				dialog.setSize(300, 250);
-				dialog.setResizable(true);
-				dialog.setTitle("Ponistavanje ocene");
-				
-				JPanel dialogPanel1=new JPanel();
-				BoxLayout boxDialogPanel1 = new BoxLayout(dialogPanel1, BoxLayout.Y_AXIS);
-				dialogPanel1.setLayout(boxDialogPanel1);
-				
-				JPanel dialogPanel2 = new JPanel();
-				JLabel dialogLabel2 = new JLabel("Da li ste sigurni da zelite da ponistite ocenu?");
-				dialogPanel2.add(dialogLabel2);
-				
-				JPanel dialogPanel3 = new JPanel();
-				BoxLayout boxDialogPanel3 = new BoxLayout(dialogPanel3, BoxLayout.X_AXIS);
-				dialogPanel3.setLayout(boxDialogPanel3);
-				
-				JButton da = new JButton("Da");
-				JButton ne = new JButton("Ne");
-				
-				dialogPanel3.add(Box.createVerticalStrut(5));
-				dialogPanel3.add(da);
-				dialogPanel3.add(Box.createHorizontalStrut(10));
-				dialogPanel3.add(ne);
-				dialogPanel3.add(Box.createHorizontalStrut(5));
-
-
-				dialogPanel1.add(dialogLabel2);
-				dialogPanel1.add(Box.createVerticalStrut(20));
-				dialogPanel1.add(dialogPanel3);
-				dialogPanel1.add(Box.createVerticalStrut(20));
-				
-				dialog.add(dialogPanel1);
-				
-				dialog.pack();
-				dialog.setLocationRelativeTo(instanceIzmenaStudenta);
-				dialog.setVisible(true);
-
-				
+				int red = PolozeniJTable.getInstance().getSelectedRow();
+				if (red >= 0 && (red < BazaPolozeni.getInstance().getInc())) {
+					Ocena o = BazaPolozeni.getInstance().getRow(red);
+					PonistavanjeOcene po = new PonistavanjeOcene(o, red);
+				} else {
+					JOptionPane.showMessageDialog(null, "Niste selektovali ocenu za poništavanje!", "Upozorenje!",
+							JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		panelBtn.add(btnPonisti);
@@ -603,8 +580,6 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		// panel 3 - prikaz nepolozenih predmeta kod studenta
 
-		
-
 		NepolozeniTablePanel nepolozeni = new NepolozeniTablePanel();
 		JPanel panel3 = new JPanel();
 		BoxLayout boxPanel3 = new BoxLayout(panel3, BoxLayout.Y_AXIS);
@@ -617,7 +592,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		tabbedPane.addTab("Nepolozeni", null, panel3, "Spisak nepolozenih predmeta kod studenta");
 
 		add(tabbedPane, BorderLayout.CENTER);
-		
+
 		pack();
 		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu
 															// setLocationRelativeTo(parent frame) posle pozivanja
@@ -797,6 +772,15 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		}
 
 		return ok;
+	}
+
+	public static IzmenaStudentaDialog getInstance() {
+		return instanceIzmenaStudenta;
+
+	}
+
+	public void setBtnPonistiEnabled(boolean b) {
+		this.btnPonisti.setEnabled(b);
 	}
 
 }
