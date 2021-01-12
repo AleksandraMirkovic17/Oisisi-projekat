@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -35,9 +36,11 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 	/**
 	* 
 	*/
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L
+			;
+	public static IzmenaPredmetaDialog instanceIzmenaPredmeta;
 
-	JTextField txtSifra, txtNaziv, txtEspb;
+	JTextField txtSifra, txtNaziv, txtEspb, txtProfesor;
 	JComboBox<String> semestarCombo, godinaCombo;
 	Predmet predmet;
 
@@ -48,6 +51,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
 		setModal(true);
+		instanceIzmenaPredmeta=this;
 
 		this.predmet = predmet;
 
@@ -97,6 +101,42 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		panSifra.add(lblSifra);
 		panSifra.add(txtSifra);
+
+		// profesor
+		JPanel panProfesor = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblProfesor = new JLabel("Profesor*");
+		lblProfesor.setPreferredSize(dim);
+		txtProfesor = new JTextField();
+		txtProfesor.setPreferredSize(new Dimension(100, 20));
+		txtProfesor.setEditable(false);
+		
+		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
+			System.out.println(predmet.getProfesori().size());
+			txtProfesor.setText(predmet.getProfesori().get((predmet.getProfesori().size() - 1)).getIme() + " "
+					+ predmet.getProfesori().get((predmet.getProfesori().size() - 1)).getPrezime());
+		}
+
+		panProfesor.add(lblProfesor);
+		panProfesor.add(txtProfesor);
+		
+		JButton plus = new JButton();
+		plus.setText("+");
+		plus.setToolTipText("Dodaj profesora na predmet");
+		plus.setPreferredSize(new Dimension(20,20));
+		if((predmet.getProfesori()!=null) && (predmet.getProfesori().size()!=0)) {
+			plus.setEnabled(false);
+		}
+		plus.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DodavanjeProfesoraPredmetu dialog = new DodavanjeProfesoraPredmetu(predmet, instanceIzmenaPredmeta);
+				dialog.setVisible(true);
+			}
+		});
+
+		panProfesor.add(plus);
 
 		// naziv
 		JPanel panNaziv = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -199,7 +239,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		panGodina.add(lblGodina);
 		panGodina.add(godinaCombo);
 
-		// Semetar
+		// Semestar
 		JPanel panSemestar = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblSemestar = new JLabel("Semestar*:");
 		lblSemestar.setPreferredSize(dim);
@@ -227,9 +267,11 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		panCenter.add(panSifra);
 		panCenter.add(panNaziv);
-		panCenter.add(panEspb);
 		panCenter.add(panGodina);
 		panCenter.add(panSemestar);
+		panCenter.add(panEspb);
+		panCenter.add(panProfesor);
+
 		panCenter.add(Box.createVerticalStrut(25));
 		add(panCenter, BorderLayout.CENTER);
 

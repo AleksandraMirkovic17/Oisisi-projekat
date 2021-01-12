@@ -25,6 +25,7 @@ public class StudentTablePanel extends JPanel {
 		studentiTable = StudentiJTable.getInstance();
 		TableRowSorter<TableModel> sortiranje = new TableRowSorter<TableModel>(studentiTable.getModel());
 		studentiTable.setRowSorter(sortiranje);
+		 
 		JScrollPane scrollPane = new JScrollPane(studentiTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}
