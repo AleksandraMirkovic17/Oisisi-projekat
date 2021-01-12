@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ enum statusStudenta {
 	B, S
 };
 
-public class Student {
+public class Student implements Serializable{
 	private String prezime;
 	private String ime;
 	private LocalDate datumRodjenja;

@@ -32,6 +32,7 @@ import javax.swing.WindowConstants;
 import controller.PredmetController;
 import controller.ProfesorController;
 import controller.StudentController;
+import model.BazaPodataka;
 import model.BazaPredmet;
 import model.BazaProfesor;
 import model.BazaStudent;
@@ -54,7 +55,10 @@ public class MyMenuBar extends JMenuBar {
 
 	public MyMenuBar() {
 		JMenu file = new JMenu("File");
-
+        BazaPodataka bp = new BazaPodataka();
+        
+        bp.citanje();
+      
 		JMenuItem myNew = new JMenuItem("New"); // dodavanje novog entiteta u sistem
 		// postavljanje akcelaratora /*REFERENCIRAN KOD
 		// https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html#mnemonic*/
@@ -95,6 +99,12 @@ public class MyMenuBar extends JMenuBar {
 						JOptionPane.YES_NO_OPTION);
 
 				if (odabir == JOptionPane.YES_OPTION) {
+					try {
+						bp.cuvanje();
+
+					} catch (Exception t) {
+
+					}
 					System.exit(0);
 				}
 			}

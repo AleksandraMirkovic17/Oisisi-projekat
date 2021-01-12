@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
 
-public class Profesor {
+public class Profesor implements Serializable{
 	public String ime;
 	private String prezime;
 	private LocalDate datumRodjena;
