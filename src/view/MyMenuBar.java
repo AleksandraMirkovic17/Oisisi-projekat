@@ -137,7 +137,7 @@ public class MyMenuBar extends JMenuBar {
 				}
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
-					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
+					if (red >= 0 && (red <= BazaPredmet.getInstance().getPredmeti().size())) {
 						PredmetController.getInstance().izmeniPredmet(red);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
@@ -168,7 +168,6 @@ public class MyMenuBar extends JMenuBar {
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
 							StudentController.getInstance().izbrisiStudenta(red);
-							;
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Student je obrisan!");
 						}
 					} else {

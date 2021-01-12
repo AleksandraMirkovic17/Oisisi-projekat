@@ -24,7 +24,9 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import controller.ProfesorController;
+import model.BazaNepolozeni;
 import model.BazaProfesor;
+import model.BazaProfesorPredajePredmet;
 import model.Profesor;
 import pomocneKlase.MyFocusListener;
 
@@ -36,6 +38,9 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte,txtTitula,txtZvanje;
 	Profesor profesor;
+	
+	public static IzmenaProfesorDialog instanceIzmenaProfesor;
+
 	public IzmenaProfesorDialog(Profesor profesor)
 	{
 		super();
@@ -461,7 +466,32 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	btnDodaj.setPreferredSize(new Dimension(150,25));
 	btnDodaj.addActionListener(this);
 	btnUkloni.setPreferredSize(new Dimension(150,25));
-	btnUkloni.addActionListener(this);
+	btnUkloni.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			int red = ProfesorPredmetJTabel.getInstance().getSelectedRow(); // selektovali smo red u tabeli
+			if (red != -1) {
+				Object[] options = { "Da", "Ne" };
+
+				int code = JOptionPane.showOptionDialog(instanceIzmenaProfesor,
+						"Da li ste sigurni?", "Ukloni predmet",
+						JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				if (code == JOptionPane.YES_OPTION) {
+					BazaProfesorPredajePredmet.getInstance().getPredmeti().remove(red);
+					ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+					JOptionPane.showMessageDialog(instanceIzmenaProfesor, "Predmet je obrisan!");
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(instanceIzmenaProfesor,
+						"Niste selektovali predmet koji želite da uklonite profesoru!", "Upozorenje",
+						JOptionPane.WARNING_MESSAGE);
+			}
+
+		}
+	});
 	
 	JPanel panBottom1=new JPanel();
 	BoxLayout box1=new BoxLayout(panBottom1, BoxLayout.X_AXIS);

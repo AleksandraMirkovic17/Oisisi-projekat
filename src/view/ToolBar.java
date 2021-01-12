@@ -85,7 +85,6 @@ public class ToolBar extends JToolBar {
 						
 						StudentController.getInstance().izmeniStudenta(red);
 						
-						System.out.println("Ovde sam!!!!!!!");
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
@@ -104,7 +103,7 @@ public class ToolBar extends JToolBar {
 				/* izmena predmeta */
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
-					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
+					if (red >= 0 && (red < BazaPredmet.getInstance().getPredmeti().size())) {
 						PredmetController.getInstance().izmeniPredmet(red);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
