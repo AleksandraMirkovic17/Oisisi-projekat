@@ -9,21 +9,24 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class BazaPodataka {
 	List<Student> studenti;
 	List<Profesor> profesori;
 	List<Predmet> predmeti;
 	
+
 	public BazaPodataka() {
 		studenti = BazaStudent.getInstance().getStudenti();
 		profesori = BazaProfesor.getInstance().getProfesori();
 	    predmeti = BazaPredmet.getInstance().getPredmeti();
 	}
-	
+	@SuppressWarnings({ "unchecked", "static-access" })
 	public void citanje() {
 		ObjectInputStream o = null;
 		try {
-			o = new ObjectInputStream(new BufferedInputStream(new FileInputStream("podaci.raw")));
+			o = new ObjectInputStream(new BufferedInputStream(new FileInputStream("podaci1.raw")));
 			BazaStudent.getInstance().setStudenti((List<Student>)o.readObject());
 			BazaProfesor.getInstance().setProfesori((List<Profesor>)o.readObject());
 			BazaPredmet.getInstance().setPredmet((List<Predmet>)o.readObject());
@@ -41,6 +44,25 @@ public class BazaPodataka {
 			}catch (Exception e) {
 				// TODO: handle exception
 			}	
+		}
+	}
+	public void cuvanje() {
+		ObjectOutputStream os = null;
+		try {
+			
+			os = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("podaci1.raw")));
+			os.writeObject(studenti);
+			os.writeObject(profesori);
+			os.writeObject(predmeti);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			try {
+				os.close();
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 	}
 	

@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.*;
 
 enum Semestar {
 	LETNJI, ZIMSKI
 };
 
-public class Predmet {
+public class Predmet implements Serializable{
 	private String sifraPredmeta;
 	private String nazivPredmeta;
 	public Semestar semestar;
