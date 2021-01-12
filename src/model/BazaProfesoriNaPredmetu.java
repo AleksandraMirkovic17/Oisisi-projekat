@@ -77,6 +77,18 @@ public class BazaProfesoriNaPredmetu {
 	public void dodajProfesora(Profesor p) {
 		this.profesori.add(p);
 		brojac++;
+	}
 
+	public String getColumnName(int index) {
+		return this.kolone.get(index);
+	}
+
+	public Profesor getRow(int row) {
+		return this.profesori.get(row);
+	}
+
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 2;
 	}
 }
