@@ -39,8 +39,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 	/**
 	* 
 	*/
-	private static final long serialVersionUID = 1L
-			;
+	private static final long serialVersionUID = 1L;
 	public static IzmenaPredmetaDialog instanceIzmenaPredmeta;
 
 	JTextField txtSifra, txtNaziv, txtEspb, txtProfesor;
@@ -54,7 +53,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
 		setModal(true);
-		instanceIzmenaPredmeta=this;
+		instanceIzmenaPredmeta = this;
 
 		this.predmet = predmet;
 
@@ -112,30 +111,35 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		txtProfesor = new JTextField();
 		txtProfesor.setPreferredSize(new Dimension(100, 20));
 		txtProfesor.setEditable(false);
-		
+
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
-			System.out.println("Broj prof"+predmet.getProfesori().size());
+			System.out.println("Broj prof" + predmet.getProfesori().size());
 			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
-			txtProfesor.setText(profa.getIme()+" "+profa.getPrezime());
+			txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
 		}
 
 		panProfesor.add(lblProfesor);
 		panProfesor.add(txtProfesor);
-		
+
 		JButton plus = new JButton();
 		plus.setText("+");
+		plus.setIcon(new ImageIcon("Slike//plus.png"));
 		plus.setToolTipText("Dodaj profesora na predmet");
-		plus.setPreferredSize(new Dimension(20,20));
-		if((predmet.getProfesori()!=null) && (predmet.getProfesori().size()!=0)) {
+		plus.setPreferredSize(new Dimension(20, 20));
+		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 			plus.setEnabled(false);
 		}
 		plus.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				DodavanjeProfesoraPredmetu dialog = new DodavanjeProfesoraPredmetu(predmet, instanceIzmenaPredmeta);
 				dialog.setVisible(true);
+				if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
+					Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+					txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
+				}
 			}
 		});
 
