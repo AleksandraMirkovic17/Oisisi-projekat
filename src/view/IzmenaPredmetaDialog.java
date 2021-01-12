@@ -26,8 +26,11 @@ import javax.swing.WindowConstants;
 
 import controller.PredmetController;
 import model.BazaPredmet;
+import model.BazaProfesorPredajePredmet;
+import model.BazaProfesoriNaPredmetu;
 import model.BazaStudent;
 import model.Predmet;
+import model.Profesor;
 import model.Student;
 import pomocneKlase.MyFocusListener;
 
@@ -111,9 +114,9 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		txtProfesor.setEditable(false);
 		
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
-			System.out.println(predmet.getProfesori().size());
-			txtProfesor.setText(predmet.getProfesori().get((predmet.getProfesori().size() - 1)).getIme() + " "
-					+ predmet.getProfesori().get((predmet.getProfesori().size() - 1)).getPrezime());
+			System.out.println("Broj prof"+predmet.getProfesori().size());
+			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+			txtProfesor.setText(profa.getIme()+" "+profa.getPrezime());
 		}
 
 		panProfesor.add(lblProfesor);
