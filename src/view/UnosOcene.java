@@ -183,6 +183,7 @@ public class UnosOcene extends JDialog implements ActionListener{
 				
 					     NepolozeniJTable.getInstance().azurirajPrikaz();
 					     PolozeniJTable.getInstance().azurirajPrikaz();
+					     IzmenaStudentaDialog.instanceIzmenaStudenta.setBtnPonistiEnabled(true);
 						setVisible(false);
 						
 					}

@@ -40,14 +40,14 @@ public class StudentTablePanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				StudentiJTable tabela = (StudentiJTable) e.getComponent();
-				setSelektovan_red(tabela.convertRowIndexToModel(tabela.getSelectedRow()));
+				setSelektovanRed(tabela.convertRowIndexToModel(tabela.getSelectedRow()));
 
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				StudentiJTable tabela = (StudentiJTable) e.getComponent();
-				setSelektovan_red(tabela.convertRowIndexToModel(tabela.getSelectedRow()));
+				setSelektovanRed(tabela.convertRowIndexToModel(tabela.getSelectedRow()));
 			}
 
 			@Override
@@ -67,7 +67,7 @@ public class StudentTablePanel extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 	}
 	
-	public static void setSelektovan_red(int selected) {
+	public static void setSelektovanRed(int selected) {
 		selektovanRed = selected;
 	}
 

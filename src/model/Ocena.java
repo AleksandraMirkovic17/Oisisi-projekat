@@ -3,26 +3,17 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Ocena implements Serializable{
+public class Ocena implements Serializable {
 	private Student student;
 	private Predmet predmet;
 	private int brojcanaVrednost;
 	private LocalDate datumPolaganja;
-    
-	
-	
-	
-	
-	
-	
 
-	public Ocena(Predmet predmet,Student student) {
+	public Ocena(Predmet predmet, Student student) {
 		super();
 		this.student = student;
 		this.predmet = predmet;
 	}
-
-
 
 	// constructor using fields
 	public Ocena(Student student, Predmet predmet, int brojcanaVrednost, LocalDate datumPolaganja) {
@@ -30,10 +21,10 @@ public class Ocena implements Serializable{
 		this.student = student;
 		this.predmet = predmet;
 		if (brojcanaVrednost < 6 || brojcanaVrednost > 10) {
-			// greska kasnije ispisati
+			brojcanaVrednost = 6;
 		} else
 			this.brojcanaVrednost = brojcanaVrednost;
-		     this.datumPolaganja = datumPolaganja;
+		this.datumPolaganja = datumPolaganja;
 	}
 
 	public Student getStudent() {

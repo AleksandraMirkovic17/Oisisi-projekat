@@ -16,6 +16,15 @@ public class BazaPodataka {
 	List<Profesor> profesori;
 	List<Predmet> predmeti;
 	
+	private static BazaPodataka instance = null;
+
+	public static BazaPodataka getInstance() {
+		if(instance == null) {
+			return new BazaPodataka();
+		}
+		else return instance;
+	}
+	
 
 	public BazaPodataka() {
 		studenti = BazaStudent.getInstance().getStudenti();
@@ -33,7 +42,7 @@ public class BazaPodataka {
 
 			BazaStudent.getInstance().setBrojStudenata(BazaStudent.getInstance().getStudenti().size());
 			BazaProfesor.getInstance().setBroj_Profesora(BazaProfesor.getInstance().getProfesori().size());
-			//BazaPredmet.getInstance().se DODATI
+			BazaPredmet.getInstance().setBrojac(BazaPredmet.getInstance().getPredmeti().size());
 			
 		}
 		catch (Exception e) {
@@ -49,6 +58,9 @@ public class BazaPodataka {
 	public void cuvanje() {
 		ObjectOutputStream os = null;
 		try {
+			studenti = BazaStudent.getInstance().getStudenti();
+			profesori = BazaProfesor.getInstance().getProfesori();
+		    predmeti = BazaPredmet.getInstance().getPredmeti();
 			
 			os = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("podaci1.raw")));
 			os.writeObject(studenti);

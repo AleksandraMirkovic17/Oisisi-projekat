@@ -42,6 +42,17 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	public static IzmenaPredmetaDialog instanceIzmenaPredmeta;
 
+	public JTextField getTxtProfesor() {
+		return txtProfesor;
+	}
+
+	public void setTxtProfesor() {
+		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
+			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+			txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
+		}
+	}
+
 	JTextField txtSifra, txtNaziv, txtEspb, txtProfesor;
 	JComboBox<String> semestarCombo, godinaCombo;
 	Predmet predmet;
@@ -123,7 +134,9 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		JButton plus = new JButton();
 		plus.setText("+");
-		plus.setIcon(new ImageIcon("Slike//plus.png"));
+		ImageIcon ii = new ImageIcon("Slike//plus.png");
+
+		// plus.setIcon();
 		plus.setToolTipText("Dodaj profesora na predmet");
 		plus.setPreferredSize(new Dimension(20, 20));
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {

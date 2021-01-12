@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import model.BazaNepolozeni;
 import model.BazaPolozeni;
+import model.BazaPredmet;
 import model.Ocena;
 
 public class PonistavanjeOcene extends JDialog {
@@ -44,10 +45,26 @@ public class PonistavanjeOcene extends JDialog {
 				// TODO Auto-generated method stub
 				BazaNepolozeni.getInstance().dodajPredmet(o.getPredmet());
 				NepolozeniJTable.getInstance().azurirajPrikaz();
-				
+
+
+
 				BazaPolozeni.getInstance().izbrisiOcenu(row);
 				PolozeniJTable.getInstance().azurirajPrikaz();
 				
+				/*for (int i1 = 0; i1 < BazaPredmet.getInstance().getPredmeti().size(); i1++) {
+					for (int i2 = 0; i2 < BazaPredmet.getInstance().getPredmeti().get(i1).getPoloziliPredmet()
+							.size(); i2++) {
+						if ((BazaPredmet.getInstance().getPredmeti().get(i1).getSifraPredmeta()
+								.equals(o.getPredmet().getSifraPredmeta()))
+								&& (BazaPredmet.getInstance().getPredmeti().get(i1).getPoloziliPredmet().get(i2)
+										.getBrIndeksa().equals(o.getStudent().getBrIndeksa()))) {
+							BazaPredmet.getInstance().getPredmeti().get(i1).getPoloziliPredmet().remove(i2);
+						}
+					}
+				}*/
+
+				IzmenaStudentaDialog.instanceIzmenaStudenta.setBtnPonistiAkoNemaPolozenih();
+
 				dispose();
 			}
 		});

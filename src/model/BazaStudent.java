@@ -36,31 +36,6 @@ public class BazaStudent {
 
 	private void initStudent() {
 		this.studenti = new ArrayList<Student>();
-		ArrayList<Predmet> NepolozeniPredmeti=new ArrayList<Predmet>();
-		Predmet p1=new Predmet("EE123","Verovatnoca",Semestar.LETNJI,3,new ArrayList<Profesor>(),9);
-		NepolozeniPredmeti.add(p1);
-		Predmet p2=new Predmet("E12RR3","Analiza Matematicka",Semestar.LETNJI,1,new ArrayList<Profesor>(),9);
-		NepolozeniPredmeti.add(p2);
-		
-		ArrayList<Ocena> polozeniP = new ArrayList<Ocena>();
-		ArrayList<Ocena> polozeniP1 = new ArrayList<Ocena>();
-		Ocena o1 = new Ocena(null, p1, 9, LocalDate.of(2018, 5, 31));
-		Ocena o2 = new Ocena(null, p1, 6, LocalDate.of(2019, 5, 7));
-		polozeniP.add(o1);
-		polozeniP1.add(o2);
-		
-		studenti.add(new Student("Markovic", "Marko", LocalDate.of(1999, 5, 25), "Kireska 5", "9231234",
-				"marko@uns.ac.rs", "ra-12-2018", 2018, 3, statusStudenta.B, 0.0, polozeniP,
-				NepolozeniPredmeti));
-		generateIns();
-		studenti.add(new Student("Ivanovic", "Ana", LocalDate.of(1998, 12, 7), "Uskocka 35", "923788234",
-				"ana@uns.ac.rs", "ra-14-2018", 2018, 3, statusStudenta.S, 0.0, polozeniP1,
-				new ArrayList<Predmet>()));
-		generateIns();
-		studenti.add(new Student("Jovanov", "Dunja", LocalDate.of(1996, 7, 14), "Dusanova 13", "065432",
-				"dunjajo@uns.ac.rs", "sw-123-2017", 2017, 4, statusStudenta.S, 0.0, new ArrayList<Ocena>(),
-				new ArrayList<Predmet>()));
-		generateIns();
 	}
 
 	public List<Student> getStudenti() {
@@ -104,10 +79,10 @@ public class BazaStudent {
 			return Integer.toString(student.getTrenutnaGodinaStudija());
 		case 4:
 			String status = new String();
-			if (student.getStatus() == statusStudenta.B)
-				status = "BUDZETSKI";
+			if (student.getStatus() == StatusStudenta.B)
+				status = "BUDŽETSKI";
 			else
-				status = "SAMOFINANSIRAJUCI";
+				status = "SAMOFINANSIRAJUĆI";
 			return status;
 		case 5:
 			return Double.toString(student.getProsecnaOcena());
@@ -119,11 +94,11 @@ public class BazaStudent {
 	public void dodajStudenta(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja,
 			String kontaktTelefon, String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija,
 			char statusc) {
-		statusStudenta status;
+		StatusStudenta status;
 		if (statusc == 'S')
-			status = statusStudenta.S;
+			status = StatusStudenta.S;
 		else
-			status = statusStudenta.B;
+			status = StatusStudenta.B;
 
 		this.studenti.add(new Student(prezime, ime, datumRodjenja, adresaStanovanja, kontaktTelefon, email, brIndeksa,
 				godinaUpisa, trenutnaGodinaStudija, status, 0, new ArrayList<Ocena>(), new ArrayList<Predmet>()));

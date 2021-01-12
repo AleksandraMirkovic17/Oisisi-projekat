@@ -106,8 +106,7 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 					for(Profesor pf : BazaProfesor.getInstance().getProfesori()) {
 						if(pf.getBrLicneKarte().equals(dodajProf.getBrLicneKarte())) {
 							BazaProfesoriNaPredmetu.getInstance().dodajProfesora(pf);
-							ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();;
-							
+							ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
 						}
 					}
 					setVisible(false);

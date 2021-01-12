@@ -14,10 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -55,17 +54,17 @@ public class MyMenuBar extends JMenuBar {
 
 	public MyMenuBar() {
 		JMenu file = new JMenu("File");
-        BazaPodataka bp = new BazaPodataka();
-        
-        bp.citanje();
-      
+		BazaPodataka bp = new BazaPodataka();
+
+		bp.citanje();
+
 		JMenuItem myNew = new JMenuItem("New"); // dodavanje novog entiteta u sistem
 		// postavljanje akcelaratora /*REFERENCIRAN KOD
 		// https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html#mnemonic*/
 		myNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK)); // CTRL+N sluzi za dodavanje
 																							// novog entiteta
 		myNew.setMnemonic(KeyEvent.VK_N);
-		myNew.setIcon(new ImageIcon("Slike/plus.png"));
+		myNew.setIcon(new ImageIcon("Slike" + File.separator + "plus.png"));
 		myNew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -89,13 +88,13 @@ public class MyMenuBar extends JMenuBar {
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK)); // CTRL+C sluzi za
 																							// zatvaranje otvorenog
 																							// prozora
-		close.setIcon(new ImageIcon("Slike/iks.png"));
+		close.setIcon(new ImageIcon("Slike" + File.separator + "iks.png"));
 		close.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int odabir = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(),
-						"Da li ste sigurni da zelite da zatvorite aplikaciju?", "Zatvaranje aplikacije",
+						"Da li ste sigurni da želite da zatvorite aplikaciju?", "Zatvaranje aplikacije",
 						JOptionPane.YES_NO_OPTION);
 
 				if (odabir == JOptionPane.YES_OPTION) {
@@ -120,7 +119,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem edit1 = new JMenuItem("Edit"); // izmena postojeceg entiteta
 		edit1.setMnemonic(KeyEvent.VK_E);
 		edit1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
-		edit1.setIcon(new ImageIcon("Slike/olovka.png"));
+		edit1.setIcon(new ImageIcon("Slike" + File.separator + "olovka.png"));
 		edit1.addActionListener(new ActionListener() {
 
 			@Override
@@ -161,7 +160,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem delete = new JMenuItem("Delete"); // brisanje postojeceg entiteta
 		delete.setMnemonic(KeyEvent.VK_D);
 		delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-		delete.setIcon(new ImageIcon("Slike/kanta.png"));
+		delete.setIcon(new ImageIcon("Slike" + File.separator + "kanta.png"));
 		delete.addActionListener(new ActionListener() {
 
 			@Override
@@ -170,7 +169,7 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						String ispis = "Da li ste sigurni da zelide da izbrisete studenta "
+						String ispis = "Da li ste sigurni da zelide da izbrišete studenta "
 								+ BazaStudent.getInstance().getRow(red).getBrIndeksa() + " "
 								+ BazaStudent.getInstance().getRow(red).getIme() + " "
 								+ BazaStudent.getInstance().getRow(red).getPrezime() + "?";
@@ -185,16 +184,16 @@ public class MyMenuBar extends JMenuBar {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				//u slucaju da smo na tabu profesori
+				// u slucaju da smo na tabu profesori
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-						String ispis = "Da li ste sigurni da zelide da izbrisete profesora "
+						String ispis = "Da li ste sigurni da želite da izbrišete profesora "
 								+ BazaProfesor.getInstance().getRow(red).getTitula() + " "
 								+ BazaProfesor.getInstance().getRow(red).getIme() + " "
 								+ BazaProfesor.getInstance().getRow(red).getPrezime() + "?";
-						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
-								JOptionPane.YES_NO_OPTION);
+						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis,
+								"Brisanje profesora", JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
 							ProfesorController.getInstance().izbrisiProfesora(red);
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Profesor je obrisan!");
@@ -210,7 +209,7 @@ public class MyMenuBar extends JMenuBar {
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
 						// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
 						int code = JOptionPane.showConfirmDialog(null,
-								"Da li ste sigurni da zelite da izbrisete predmet?", "Brisanje predmeta",
+								"Da li ste sigurni da želite da izbrisete predmet?", "Brisanje predmeta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
 							PredmetController.getInstance().izbrisiPredmet(red);
@@ -247,9 +246,9 @@ public class MyMenuBar extends JMenuBar {
 				// TODO Auto-generated method stub
 				JTextArea helpTekst = new JTextArea("\t\t Detaljan opis o nacinu koriscenja aplikacije \t\t\n\n"
 						+ "STUDENTI\n"
-						+ "1. Dodavanje novog entiteta je moguce preko precice na tastauri Ctrl+N, preko dugmeta + na Tool bar-u ili File -> New"
+						+ "1. Dodavanje novog entiteta je moguće preko prečice na tastauri Ctrl+N, preko dugmeta + na Tool bar-u ili File -> New"
 						+ "\n\nPROFESORI\n"
-						+ "1. Dodavanje novog entiteta je moguce preko precice na tastauri Ctrl+N, preko dugmeta + na Tool bar-u ili File -> New\"\r\n"
+						+ "1. Dodavanje novog entiteta je moguće preko precice na tastauri Ctrl+N, preko dugmeta + na Tool bar-u ili File -> New\"\r\n"
 						+ "", 20, 60);
 				Font f = new Font("Arial", Font.BOLD, 14);
 				helpTekst.setFont(f);
@@ -265,16 +264,17 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem aboutApp = new JMenuItem("About app");
 		aboutApp.setMnemonic(KeyEvent.VK_A);
 		aboutApp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-		aboutApp.setIcon(new ImageIcon("Slike/app.png"));
+		aboutApp.setIcon(new ImageIcon("Slike" + File.separator + "app.png"));
 		aboutApp.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// Simple dialog - kod preuzet
-				SimpleDialog sd = new SimpleDialog(parent, "App info", true); // parent je frame u kome radimo
+				SimpleDialog sd = new SimpleDialog(parent, "Informacije o aplikaciji", true); // parent je frame u kome
+																								// radimo
 				sd.setBackground(new Color(216, 191, 216));
-				Label lapp = new Label("Aplikacija Studentska sluzba, verzija 1.0");
+				Label lapp = new Label("Aplikacija Studentska služba, verzija 3.0");
 				Font f = new Font("Arial", Font.ITALIC, 12);
 				lapp.setFont(f);
 				sd.add(lapp, BorderLayout.NORTH);
@@ -288,7 +288,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem aboutStudent1 = new JMenuItem("About Student1");
 		aboutStudent1.setMnemonic(KeyEvent.VK_1);
 		aboutStudent1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.CTRL_MASK));
-		aboutStudent1.setIcon(new ImageIcon("Slike/User.png"));
+		aboutStudent1.setIcon(new ImageIcon("Slike" + File.separator + "User.png"));
 		aboutStudent1.addActionListener(new ActionListener() {
 
 			@Override
@@ -302,9 +302,9 @@ public class MyMenuBar extends JMenuBar {
 				ls1.setAlignment(WIDTH);
 				ls1.setBackground(new Color(216, 191, 216));
 
-				JLabel ls1info = new JLabel("<html>Rodjena 25.6.1999. godine u Subotici. "
-						+ "Student trece godine Fakulteta tehnickih nauka u Novom Sadu, "
-						+ "na smeru Racunarstvo i automatika.</html>");
+				JLabel ls1info = new JLabel("<html>Rođena 25.6.1999. godine u Subotici. "
+						+ "Student treće godine Fakulteta tehničkih nauka u Novom Sadu, "
+						+ "na smeru Računarstvo i automatika.</html>");
 				ls1info.setBackground(new Color(255, 204, 255));
 
 				sd.add(ls1, BorderLayout.NORTH);
@@ -317,7 +317,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem aboutStudent2 = new JMenuItem("About Student2");
 		aboutStudent2.setMnemonic(KeyEvent.VK_2);
 		aboutStudent2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.CTRL_MASK));
-		aboutStudent2.setIcon(new ImageIcon("Slike/User.png"));
+		aboutStudent2.setIcon(new ImageIcon("Slike" + File.separator + "User.png"));
 		aboutStudent2.addActionListener(new ActionListener() {
 
 			@Override
@@ -332,9 +332,9 @@ public class MyMenuBar extends JMenuBar {
 
 				// Koriscenjem JLabel i dodavanjem tagova <html> tekst se prelama kada je to
 				// potrebno
-				JLabel ls2info = new JLabel("<html>Rodjena 17.6.1999. godine u Novom Sadu. "
-						+ "Student trece godine Fakulteta tehnickih nauka u Novom Sadu, "
-						+ "na smeru Racunarstvo i automatika.</html>");
+				JLabel ls2info = new JLabel("<html>Rođena 17.6.1999. godine u Novom Sadu. "
+						+ "Student treće godine Fakulteta tehničkih nauka u Novom Sadu, "
+						+ "na smeru Računarstvo i automatika.</html>");
 				ls2info.setBackground(new Color(255, 204, 255));
 
 				sd.add(ls2, BorderLayout.NORTH);
@@ -348,7 +348,7 @@ public class MyMenuBar extends JMenuBar {
 		about.add(aboutStudent1);
 		about.add(aboutStudent2);
 		about.setMnemonic(KeyEvent.VK_A);
-		about.setIcon(new ImageIcon("Slike/about.png"));
+		about.setIcon(new ImageIcon("Slike" + File.separator + "about.png"));
 
 		help.add(help1);
 		help.add(about);

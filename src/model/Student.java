@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-enum statusStudenta {
+enum StatusStudenta {
 	B, S
 };
 
@@ -18,14 +18,14 @@ public class Student implements Serializable{
 	private String brIndeksa;
 	private int godinaUpisa;
 	private int trenutnaGodinaStudija;
-	private statusStudenta status;
+	private StatusStudenta status;
 	private double prosecnaOcena;
 	private ArrayList<Ocena> polozeniPredmeti;
 	private ArrayList<Predmet> nepolozeniPredmeti;
 
 	// constructor using fields
 	public Student(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
-			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, statusStudenta status,
+			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, StatusStudenta status,
 			double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti, ArrayList<Predmet> nepolozeniPredmeti) {
 		super();
 		this.prezime = prezime;
@@ -52,8 +52,8 @@ public class Student implements Serializable{
 		this.brIndeksa = "Broj indeksa nije unet";
 		this.godinaUpisa = 0;
 		this.trenutnaGodinaStudija = 0;
-		this.status = statusStudenta.B;
-		this.prosecnaOcena = 6.00;
+		this.status = StatusStudenta.B;
+		this.prosecnaOcena = 0.00;
 		this.polozeniPredmeti = new ArrayList<Ocena>();
 		this.nepolozeniPredmeti = new ArrayList<Predmet>();
 
@@ -147,16 +147,16 @@ public class Student implements Serializable{
 		this.trenutnaGodinaStudija = trenutnaGodinaStudija;
 	}
 
-	public statusStudenta getStatus() {
+	public StatusStudenta getStatus() {
 		return status;
 	}
 
-	public void setStatus(statusStudenta status) {
+	public void setStatus(StatusStudenta status) {
 		this.status = status;
 	}
 
 	public char getStatusChar() {
-		if (this.status == statusStudenta.B) {
+		if (this.status == StatusStudenta.B) {
 			return 'B';
 		} else {
 			return 'S';
@@ -165,9 +165,9 @@ public class Student implements Serializable{
 
 	public void setStatusChar(char s) {
 		if (s == 'B') {
-			this.status = statusStudenta.B;
+			this.status = StatusStudenta.B;
 		} else {
-			this.status = statusStudenta.S;
+			this.status = StatusStudenta.S;
 		}
 	}
 
@@ -206,9 +206,14 @@ public class Student implements Serializable{
 		this.polozeniPredmeti = polozeniPredmeti;
 	}
 
-	
-	
+	public ArrayList<Predmet> getNepolozeniPredmeti() {
+		return nepolozeniPredmeti;
+	}
 
+	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
+		this.nepolozeniPredmeti = nepolozeniPredmeti;
+	}
+	
 	@Override
 	public String toString() {
 		return "Student [prezime=" + prezime + ", ime=" + ime + ", datumRodjenja=" + datumRodjenja
@@ -217,12 +222,6 @@ public class Student implements Serializable{
 				+ trenutnaGodinaStudija + ", status=" + status + ", prosecnaOcena=" + prosecnaOcena
 				+ ", polozeniPredmeti=" + polozeniPredmeti + ", nepolozeniPredmeti=" + nepolozeniPredmeti + "]";
 	}
-	public ArrayList<Predmet> getNepolozeniPredmeti() {
-		return nepolozeniPredmeti;
-	}
 
-	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
-		this.nepolozeniPredmeti = nepolozeniPredmeti;
-	}
 
 }

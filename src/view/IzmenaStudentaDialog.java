@@ -45,6 +45,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtIndeks, txtGodinaUpisa;
 	JComboBox<String> trenutnaGodinaCombo, finansCombo;
+	JLabel prosecnaOcena;
 	Student student;
 
 	public static IzmenaStudentaDialog instanceIzmenaStudenta;
@@ -74,7 +75,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		JButton btnOk = new JButton("IZMENI");
 		JButton btnCancel = new JButton("ODUSTANI");
 		JButton btnDodaj = new JButton("Dodaj");
-		JButton btnObrisi = new JButton("Obri�i");
+		JButton btnObrisi = new JButton("Obriši");
 		JButton btnPolaganje = new JButton("Polaganje");
 
 		// dimenzije labela i tekstualnih komponenti
@@ -154,7 +155,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		// datum rodjenja
 		JPanel panDatumRodjenja = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDatumRodjenja = new JLabel("Datum rodjenja*:");
+		JLabel lblDatumRodjenja = new JLabel("Datum rođenja*:");
 		/*
 		 * REFERENCIRAN KOD ZA FORMATIRANJE DATUMA RODJENJA:
 		 * https://howtodoinjava.com/java/date-time/localdate-format-example
@@ -406,8 +407,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 		// Nacin finansiranja
 		JPanel panFinans = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblFinans = new JLabel("Nacin finansiranja*:");
-		String finansiranje[] = { "Budzet", "Samofinansiranje" };
+		JLabel lblFinans = new JLabel("Način finansiranja*:");
+		String finansiranje[] = { "Budžet", "Samofinansiranje" };
 		finansCombo = new JComboBox<String>(finansiranje);
 		lblFinans.setPreferredSize(dim);
 		finansCombo.setPreferredSize(dim);
@@ -470,17 +471,24 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 					Object[] options = { "Da", "Ne" };
 
 					int code = JOptionPane.showOptionDialog(instanceIzmenaStudenta,
-							"Da li ste sigurni da �elite da uklonite predmet?", "Uklanjanje predmeta",
+							"Da li ste sigurni da želite da uklonite predmet?", "Uklanjanje predmeta",
 							JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 					if (code == JOptionPane.YES_OPTION) {
+						Predmet prr = BazaNepolozeni.getInstance().getNepolozeniPredmeti().get(red);
 						BazaNepolozeni.getInstance().getNepolozeniPredmeti().remove(red);
 						NepolozeniJTable.getInstance().azurirajPrikaz();
 						JOptionPane.showMessageDialog(instanceIzmenaStudenta, "Predmet je obrisan!");
+						for (int i = 0; i < prr.getNisuPoloziliPredmet().size(); i++) {
+							if(prr.getNisuPoloziliPredmet().get(i).getBrIndeksa().equals(student.getBrIndeksa())) {
+								prr.getPoloziliPredmet().remove(i);
+							}
+						}
+
 					}
 
 				} else {
 					JOptionPane.showMessageDialog(instanceIzmenaStudenta,
-							"Niste selektovali predmet koji �elite da uklonite studentu!", "Upozorenje",
+							"Niste selektovali predmet koji želite da uklonite studentu!", "Upozorenje",
 							JOptionPane.WARNING_MESSAGE);
 				}
 
@@ -534,15 +542,15 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		info.setLayout(boxPaneInfo);
 
 		double prosecnaO = student.getProsecnaOcena();
-		String s = new String("Prosecna ocena: " + String.valueOf(prosecnaO));
-		JLabel prosecnaOcena = new JLabel(s);
+		String s = new String("Prosečna ocena: " + String.valueOf(prosecnaO));
+		prosecnaOcena = new JLabel(s);
 		String s1 = new String("Ukupno ESPB: " + String.valueOf(student.getUkupnoEspb()));
 		JLabel ukupnoEspb = new JLabel(s1);
 
 		JPanel panelBtn = new JPanel();
 		BoxLayout boxPanel21 = new BoxLayout(panelBtn, BoxLayout.X_AXIS);
 		panelBtn.setLayout(boxPanel21);
-		btnPonisti = new JButton("Poni�ti ocenu");
+		btnPonisti = new JButton("Poništi ocenu");
 
 		if (student.getPolozeniPredmeti().size() == 0) {
 			btnPonisti.setEnabled(false); // dugme za ponistavanje ocene u slucaju da student nema polozenih predmeta je
@@ -559,8 +567,14 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 					Ocena o = BazaPolozeni.getInstance().getRow(red);
 					PonistavanjeOcene po = new PonistavanjeOcene(o, red);
 				} else {
-					JOptionPane.showMessageDialog(null, "Niste selektovali ocenu za poni�tavanje!", "Upozorenje!",
-							JOptionPane.WARNING_MESSAGE);
+					if (student.getPolozeniPredmeti().size() == 0) {
+						JOptionPane.showMessageDialog(null, "Student nema položenih predmeta!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+						btnPonisti.setEnabled(false);
+					} else {
+						JOptionPane.showMessageDialog(null, "Niste selektovali ocenu za poništavanje!", "Upozorenje!",
+								JOptionPane.WARNING_MESSAGE);
+					}
 				}
 			}
 		});
@@ -588,8 +602,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		panel3.add(nepolozeni);
 
 		tabbedPane.addTab("Informacije", null, panel1, "Osnovne informacije o studentu");
-		tabbedPane.addTab("Polozeni", null, panel2, "Spisak predmeta koje je student polozio");
-		tabbedPane.addTab("Nepolozeni", null, panel3, "Spisak nepolozenih predmeta kod studenta");
+		tabbedPane.addTab("Položeni", null, panel2, "Spisak predmeta koje je student položio");
+		tabbedPane.addTab("Nepoloženi", null, panel3, "Spisak nepoloženih predmeta kod studenta");
 
 		add(tabbedPane, BorderLayout.CENTER);
 
@@ -637,7 +651,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 				for (Student s : BazaStudent.getInstance().getStudenti()) {
 					if (s.getBrIndeksa().equals(tekst[6])) {
 						izmeni = false;
-						JOptionPane.showMessageDialog(null, "Student sa unetim brojem indeksa vec postoji!",
+						JOptionPane.showMessageDialog(null, "Student sa unetim brojem indeksa već postoji!",
 								"Upozorenje", JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -666,7 +680,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		boolean ok = true;
 		boolean ok1 = true;
 		if (tekst[0].length() != 0) {
-			if (!Pattern.matches("[a-zA-Z ]*", tekst[0])) {
+			if (!Pattern.matches("[a-žA-Ž ]*", tekst[0])) {
 				txtIme.setBackground(incorrect);
 				txtIme.setForeground(Color.black);
 				ok1 = false;
@@ -679,7 +693,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		}
 		if (tekst[1].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z ]*", tekst[1])) {
+			if (!Pattern.matches("[a-žA-Ž ]*", tekst[1])) {
 				txtPrezime.setBackground(incorrect);
 				txtPrezime.setForeground(Color.black);
 				ok1 = false;
@@ -705,7 +719,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		}
 		if (tekst[3].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[3])) {
+			if (!Pattern.matches("[a-ŽA-Ž 0-9,]*", tekst[3])) {
 				txtAdresa.setBackground(incorrect);
 				txtAdresa.setForeground(Color.black);
 				ok1 = false;
@@ -781,6 +795,20 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 	public void setBtnPonistiEnabled(boolean b) {
 		this.btnPonisti.setEnabled(b);
+	}
+
+	public void setBtnPonistiAkoNemaPolozenih() {
+		if (student.getPolozeniPredmeti().size() == 0) {
+			btnPonisti.setEnabled(false);
+		} else {
+			btnPonisti.setEnabled(true);
+		}
+	}
+
+	public void izmenaProsecneOcene() {
+		double prosecnaO = student.getProsecnaOcena();
+		String s = new String("Prosečna ocena: " + String.valueOf(prosecnaO));
+		prosecnaOcena.setText(s);
 	}
 
 }

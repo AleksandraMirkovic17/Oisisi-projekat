@@ -13,7 +13,6 @@ public class BazaPolozeni {
 	public static BazaPolozeni getInstance() {
 		instance = new BazaPolozeni();
 		return instance;
-
 	}
 
 	private int inc = 0;

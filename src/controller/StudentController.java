@@ -36,10 +36,7 @@ public class StudentController {
 			return;
 		}
 		// izmena modela
-		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex); //
-		
-		
-		
+		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex); 
 		IzmenaStudentaDialog dialog = new IzmenaStudentaDialog(student);
 		dialog.setVisible(true);
 		// azuriranje prikaza

@@ -1,7 +1,9 @@
-<<<<<<< HEAD
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=a233bc8 (\#student izmena konstruktora)
 eclipse.preferences.version=1
 encoding//src/IzgledProzora/DodavanjeStudentaDialog.java=UTF-8
-=======
-eclipse.preferences.version=1
+encoding//src/model/BazaStudent.java=UTF-8
 encoding//src/view/DodavanjeStudentaDialog.java=UTF-8
->>>>>>> a233bc8 (#student izmena konstruktora)
+encoding//src/view/IzmenaStudentaDialog.java=UTF-8
+encoding//src/view/MyMenuBar.java=UTF-8

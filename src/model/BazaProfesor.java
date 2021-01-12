@@ -37,7 +37,7 @@ public class BazaProfesor {
 	private void initProfesor() {
 		this.profesori = new ArrayList<Profesor>(); //postavljamo da je prazna lista
 		//kreiramo novog profesora koja je stavljena u listu
-		ArrayList<Predmet> predajePredmet=new ArrayList<Predmet>();
+		/*ArrayList<Predmet> predajePredmet=new ArrayList<Predmet>();
 		Predmet p1=new Predmet("EE123","Verovatnoca",Semestar.LETNJI,3,new ArrayList<Profesor>(),9);
 		Predmet p2=new Predmet("E12RR3","Analiza Matematicka",Semestar.LETNJI,1,new ArrayList<Profesor>(),9);
 		predajePredmet.add(p1);
@@ -45,7 +45,7 @@ public class BazaProfesor {
 		profesori.add(new Profesor("Petar","Petrovic",LocalDate.of(1999, 5, 25),"069877633","Tolstojeva 10","petarpetrovic@gmail.com","Radnicka 17","199928277745","Prof. dr","Redovni profesor",predajePredmet));
 		incBroj_Profesora(); //povecavamo broj profesora
 		profesori.add(new Profesor("Nikola","Nikolic",LocalDate.of(1980, 4, 17),"069667633","Tolstojeva 1","nikolanikolic@gmail.com","Radnicka 17","1980777166111","MSc","Saradnik u nastavi",new ArrayList<Predmet>()));
-		incBroj_Profesora();
+		incBroj_Profesora();*/
 		
 		
 	}
@@ -117,10 +117,8 @@ public class BazaProfesor {
 	public void dodajProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
 			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
 		
-		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,titula,zvanjeProfesora,null));
-		incBroj_Profesora();
+		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,titula,zvanjeProfesora,new ArrayList<Predmet>()));
 	}
-
 
 	public void IzmeniProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
 			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
