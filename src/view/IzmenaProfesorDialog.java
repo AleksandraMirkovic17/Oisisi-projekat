@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,7 +37,8 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte,txtTitula,txtZvanje;
+	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte;
+	JComboBox<String> titulaCombo,zvanjeCombo;
 	Profesor profesor;
 	
 	public static IzmenaProfesorDialog instanceIzmenaProfesor;
@@ -354,14 +356,20 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
     
     
     //Titula
-    JPanel panTitula=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblTitula=new JLabel("Titula*:");
-    lblTitula.setPreferredSize(dim);
-    txtTitula=new JTextField(profesor.getTitula());
-    txtTitula.setPreferredSize(dim);
-    txtTitula.setName("txtTitula");
-    txtTitula.addFocusListener(focusListener);
-    txtTitula.addKeyListener(new KeyListener() {
+    JPanel panTitula = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	JLabel lblTitula = new JLabel("Titula*:");
+	String titule[] = { "Profesor doktor", "Doktor" };
+	titulaCombo = new JComboBox<String>(titule);
+	lblTitula.setPreferredSize(dim);
+	titulaCombo.setPreferredSize(dim);
+	if (profesor.getTitulaString() == "PROF_DR") {
+		titulaCombo.setSelectedIndex(0);
+	} else {
+		titulaCombo.setSelectedIndex(1);
+	}
+	panTitula.add(lblTitula);
+	panTitula.add(titulaCombo);
+    titulaCombo.addKeyListener(new KeyListener() {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
@@ -386,17 +394,27 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		}
 	});
     panTitula.add(lblTitula);
-    panTitula.add(txtTitula);
+    panTitula.add(titulaCombo);
     
     //Zvanje
-    JPanel panZvanje=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblZvanje=new JLabel("Zvanje*:");
-    lblZvanje.setPreferredSize(dim);
-    txtZvanje=new JTextField(profesor.getZvanjeProfesora());
-    txtZvanje.setPreferredSize(dim);
-    txtZvanje.setName("txtZvanje");
-    txtZvanje.addFocusListener(focusListener);
-    txtZvanje.addKeyListener(new KeyListener() {
+    JPanel panZvanje = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	JLabel lblZvanje = new JLabel("Zvanje*:");
+	String zvanje[] = { "REDOVNI_PROFESOR", "VANREDNI_PROFESOR","DOCENT"};
+	zvanjeCombo = new JComboBox<String>(zvanje);
+	lblZvanje.setPreferredSize(dim);
+	zvanjeCombo.setPreferredSize(dim);
+	if (profesor.getZvanjeString() == "PROF_DR") {
+		zvanjeCombo.setSelectedIndex(0);
+	} else if(profesor.getZvanjeString()=="VANREDNI_PROFESOR"){
+		zvanjeCombo.setSelectedIndex(1);
+	}
+	else
+	{
+		zvanjeCombo.setSelectedIndex(2);
+	}
+	panZvanje.add(lblZvanje);
+	panZvanje.add(zvanjeCombo);   
+	zvanjeCombo.addKeyListener(new KeyListener() {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
@@ -421,7 +439,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		}
 	});
     panZvanje.add(lblZvanje);
-    panZvanje.add(txtZvanje);
+    panZvanje.add(zvanjeCombo);
     
 
     panCenter.add(panIme);
@@ -534,8 +552,8 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		tekst[5] = txtEmail.getText().toString();
 		tekst[6] = txtKancelarija.getText().toString();
 		tekst[7]= txtBrLicneKarte.getText().toString();
-		tekst[8] = txtTitula.getText().toString();
-		tekst[9] = txtZvanje.getText().toString();
+		tekst[8] = titulaCombo.getSelectedItem().toString();
+		tekst[9] = zvanjeCombo.getSelectedItem().toString();
 		
 		
 		return tekst;
@@ -663,7 +681,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		}
 		if (tekst[6].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[3])) {
+			if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[6])) {
 				txtKancelarija.setBackground(incorrect);
 				txtKancelarija.setForeground(Color.black);
 				ok1 = false;
@@ -689,9 +707,9 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 			ok = false;
 		}
 		
-		if (tekst[7].length() != 0) {
+		if (tekst[8].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[0-9]{9}", tekst[7])) {
+			if (!Pattern.matches("[0-9]{9}", tekst[8])) {
 				txtBrLicneKarte.setBackground(incorrect);
 				txtBrLicneKarte.setForeground(Color.black);
 				ok1 = false;
@@ -702,33 +720,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		} else {
 			ok = false;
 		}
-		if (tekst[8].length() != 0) {
-			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z0-9_ .]*", tekst[7])) {
-				txtTitula.setBackground(incorrect);
-				txtTitula.setForeground(Color.black);
-				ok1 = false;
-				ok = false;
-			}
-			if (ok1)
-				txtTitula.setBackground(correct);
-		} else {
-			ok = false;
-		}			 
-		if (tekst[9].length() != 0) {
-			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z0-9_ .]*", tekst[7])) {
-				txtZvanje.setBackground(incorrect);
-				txtZvanje.setForeground(Color.black);
-				ok1 = false;
-				ok = false;
-			}
-			if (ok1)
-				txtZvanje.setBackground(correct);
-		} else {
-			ok = false;
-		
-		}
+
 		return ok;
   }
 }

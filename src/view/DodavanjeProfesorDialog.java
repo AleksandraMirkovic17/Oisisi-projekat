@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,7 +33,8 @@ import pomocneKlase.MyFocusListener;
 public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 
 	private static final long serialVersionUID = 1874286516455478054L;
-	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte,txtTitula,txtZvanje;
+	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte;
+	JComboBox<String> titulaCombo,zvanjeCombo;
 	
 	
 	DodavanjeProfesorDialog() {
@@ -340,74 +342,25 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 	        
 	        
 	        //Titula
-	        JPanel panTitula=new JPanel(new FlowLayout(FlowLayout.LEFT));
-	        JLabel lblTitula=new JLabel("Titula*:");
-	        lblTitula.setPreferredSize(dim);
-	        txtTitula=new JTextField();
-	        txtTitula.setPreferredSize(dim);
-	        txtTitula.setName("txtTitula");
-	        txtTitula.addFocusListener(focusListener);
-	        txtTitula.addKeyListener(new KeyListener() {
-
-				@Override
-				public void keyTyped(KeyEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void keyReleased(KeyEvent e) {
-					// TODO Auto-generated method stub
-					if (provera()) {
-						btnOk.setEnabled(true);
-					} else {
-						btnOk.setEnabled(false);
-					}
-				}
-
-				@Override
-				public void keyPressed(KeyEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
+	        JPanel panTitula = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    	JLabel lblTitula = new JLabel("Titula*:");
+	    	String titule[] = { "Profesor doktor", "Doktor" };
+	    	titulaCombo = new JComboBox<String>(titule);
+	    	lblTitula.setPreferredSize(dim);
+	    	titulaCombo.setPreferredSize(dim);
+	     
 	        panTitula.add(lblTitula);
-	        panTitula.add(txtTitula);
+	        panTitula.add(titulaCombo);
 	        
 	        //Zvanje
-	        JPanel panZvanje=new JPanel(new FlowLayout(FlowLayout.LEFT));
-	        JLabel lblZvanje=new JLabel("Zvanje*:");
-	        lblZvanje.setPreferredSize(dim);
-	        txtZvanje=new JTextField();
-	        txtZvanje.setPreferredSize(dim);
-	        txtZvanje.setName("txtZvanje");
-	        txtZvanje.addFocusListener(focusListener);
-	        txtZvanje.addKeyListener(new KeyListener() {
-
-				@Override
-				public void keyTyped(KeyEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void keyReleased(KeyEvent e) {
-					// TODO Auto-generated method stub
-					if (provera()) {
-						btnOk.setEnabled(true);
-					} else {
-						btnOk.setEnabled(false);
-					}
-				}
-
-				@Override
-				public void keyPressed(KeyEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
+	        JPanel panZvanje = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    	JLabel lblZvanje = new JLabel("Zvanje*:");
+	    	String zvanje[] = { "REDOVNI_PROFESOR", "VANREDNI_PROFESOR","DOCENT"};
+	    	zvanjeCombo = new JComboBox<String>(zvanje);
+	    	lblZvanje.setPreferredSize(dim);
+	    	zvanjeCombo.setPreferredSize(dim);
 	        panZvanje.add(lblZvanje);
-	        panZvanje.add(txtZvanje);
+	        panZvanje.add(zvanjeCombo);
           
 
 
@@ -465,8 +418,8 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 			tekst[5] = txtEmail.getText().toString();
 			tekst[6] = txtKancelarija.getText().toString();
 			tekst[7]= txtBrLicneKarte.getText().toString();
-			tekst[8] = txtTitula.getText().toString();
-			tekst[9] = txtZvanje.getText().toString();
+			tekst[8] = titulaCombo.getSelectedItem().toString();
+			tekst[9] = zvanjeCombo.getSelectedItem().toString();
 			
 			
 			return tekst;
@@ -595,7 +548,7 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 			}
 			if (tekst[6].length() != 0) {
 				ok1 = true;
-				if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[3])) {
+				if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[6])) {
 					txtKancelarija.setBackground(incorrect);
 					txtKancelarija.setForeground(Color.black);
 					ok1 = false;
@@ -619,47 +572,6 @@ public class DodavanjeProfesorDialog extends JDialog implements ActionListener {
 					txtBrLicneKarte.setBackground(correct);
 			} else {
 				ok = false;
-			}
-			
-			if (tekst[7].length() != 0) {
-				ok1 = true;
-				if (!Pattern.matches("[0-9]{9}", tekst[7])) {
-					txtBrLicneKarte.setBackground(incorrect);
-					txtBrLicneKarte.setForeground(Color.black);
-					ok1 = false;
-					ok = false;
-				}
-				if (ok1)
-					txtBrLicneKarte.setBackground(correct);
-			} else {
-				ok = false;
-			}
-			if (tekst[8].length() != 0) {
-				ok1 = true;
-				if (!Pattern.matches("[a-zA-Z0-9_ .]*", tekst[7])) {
-					txtTitula.setBackground(incorrect);
-					txtTitula.setForeground(Color.black);
-					ok1 = false;
-					ok = false;
-				}
-				if (ok1)
-					txtTitula.setBackground(correct);
-			} else {
-				ok = false;
-			}			 
-			if (tekst[9].length() != 0) {
-				ok1 = true;
-				if (!Pattern.matches("[a-zA-Z0-9_ .]*", tekst[7])) {
-					txtZvanje.setBackground(incorrect);
-					txtZvanje.setForeground(Color.black);
-					ok1 = false;
-					ok = false;
-				}
-				if (ok1)
-					txtZvanje.setBackground(correct);
-			} else {
-				ok = false;
-			
 			}
 			return ok;
 		

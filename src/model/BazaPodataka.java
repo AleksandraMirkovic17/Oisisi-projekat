@@ -24,8 +24,6 @@ public class BazaPodataka {
 		}
 		else return instance;
 	}
-	
-
 	public BazaPodataka() {
 		studenti = BazaStudent.getInstance().getStudenti();
 		profesori = BazaProfesor.getInstance().getProfesori();

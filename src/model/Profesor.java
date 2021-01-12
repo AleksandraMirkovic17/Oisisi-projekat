@@ -3,7 +3,13 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
+enum Titula {
+	PROF_DR, DR
+};
 
+enum Zvanje {
+	REDOVNI_PROFESOR, VANREDNI_PROFESOR,DOCENT
+};
 
 public class Profesor implements Serializable{
 	public String ime;
@@ -14,8 +20,8 @@ public class Profesor implements Serializable{
 	private String email;
 	private String adresaKancelarije;
 	private String brLicneKarte;
-	private String titula;
-	private String zvanjeProfesora;
+	private Titula titula;
+	private Zvanje zvanjeProfesora;
 	private List <Predmet> predmeti;
 	public String getIme() {
 		return ime;
@@ -27,7 +33,7 @@ public class Profesor implements Serializable{
 		return prezime;
 	}
 	public Profesor(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
-			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora,ArrayList<Predmet> predmeti) {
+			String email, String adresaKancelarije, String brLicneKarte, Titula titula, Zvanje zvanjeProfesora,ArrayList<Predmet> predmeti) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
@@ -91,16 +97,17 @@ public class Profesor implements Serializable{
 	public void setBrLicneKarte(String brLicneKarte) {
 		this.brLicneKarte = brLicneKarte;
 	}
-	public String getTitula() {
+	
+	public Titula getTitula() {
 		return titula;
 	}
-	public void setTitula(String titula) {
+	public void setTitula(Titula titula) {
 		this.titula = titula;
 	}
-	public String getZvanjeProfesora() {
+	public Zvanje getZvanjeProfesora() {
 		return zvanjeProfesora;
 	}
-	public void setZvanjeProfesora(String zvanjeProfesora) {
+	public void setZvanjeProfesora(Zvanje zvanjeProfesora) {
 		this.zvanjeProfesora = zvanjeProfesora;
 	}
 	public List<Predmet> getPredmeti() {
@@ -108,5 +115,42 @@ public class Profesor implements Serializable{
 	}
 	public void setPredmeti(List<Predmet> predmeti) {
 		this.predmeti = predmeti;
+	}
+	public String getTitulaString() {
+		if (this.titula == Titula.PROF_DR) {
+			return "PROF_DR";
+		} else {
+			return "DR";
+		}
+	}
+
+	public void setTitulaString(String s) {
+		if (s == "PROF_DR") {
+			this.titula = Titula.PROF_DR;
+		} else {
+			this.titula = Titula.DR;
+		}
+	}
+	public String getZvanjeString() {
+		if (this.zvanjeProfesora == Zvanje.DOCENT) {
+			return "DOCENT";
+		} else if(this.zvanjeProfesora == Zvanje.REDOVNI_PROFESOR) {
+			return "REDOVNI_PROFESOR";
+		}
+			else
+				return "VANREDNI_PROFESOR";
+		}
+
+	public void setZvanjeString(String s) {
+		if (s == "REDOVNI_PROFESOR") {
+			this.zvanjeProfesora = Zvanje.REDOVNI_PROFESOR;
+		} else if(s=="VANREDNI_PROFESOR"){
+			this.zvanjeProfesora = Zvanje.VANREDNI_PROFESOR;
+		}
+		else
+		{
+			this.zvanjeProfesora=Zvanje.DOCENT;
+		}
+			
 	}
 }

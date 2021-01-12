@@ -107,17 +107,45 @@ public class BazaProfesor {
 			case 1:
 				return profesori.getPrezime();
 			case 2:
-				return profesori.getTitula();
+				String titula = new String();
+				if (profesori.getTitula() == Titula.DR)
+					titula = "DR";
+				else
+					titula="PROF_DR";
+				return titula;
 			case 3:
-				return profesori.getZvanjeProfesora();
+				String zvanje = new String();
+			if (profesori.getZvanjeProfesora() == Zvanje.DOCENT)
+				zvanje = "DOCENT";
+			else if(profesori.getZvanjeProfesora() == Zvanje.REDOVNI_PROFESOR)
+				zvanje="REDOVNI_PROFESOR";
+			else
+				zvanje="VANREDNI_PROFESOR";
+			return zvanje;
 			default:
 				return null;
 			}
 		}
 	public void dodajProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
 			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
+		Titula t;
+		if (titula == "PROF_DR") {
+			t = Titula.PROF_DR;
+		} else {
+			t = Titula.DR;
+		}
 		
-		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,titula,zvanjeProfesora,new ArrayList<Predmet>()));
+		Zvanje z;
+		if (zvanjeProfesora == "REDOVNI_PROFESOR") {
+			z = Zvanje.REDOVNI_PROFESOR;
+		} else if(zvanjeProfesora=="VANREDNI_PROFESOR"){
+			z = Zvanje.VANREDNI_PROFESOR;
+		}
+		else
+		{
+			z=Zvanje.DOCENT;
+		}
+		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,t,z,new ArrayList<Predmet>()));
 	}
 
 	public void IzmeniProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
@@ -135,8 +163,8 @@ public class BazaProfesor {
                 	p.setEmail(email);
                 	p.setAdresaKancelarije(adresaKancelarije);
                 	p.setBrLicneKarte(brLicneKarte);
-                	p.setTitula(titula);
-                	p.setZvanjeProfesora(zvanjeProfesora);
+                	p.setTitulaString(titula);
+                	p.setZvanjeString(zvanjeProfesora);
 	 
                }
 		}
