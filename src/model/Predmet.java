@@ -7,6 +7,7 @@ enum Semestar {
 	LETNJI, ZIMSKI
 };
 
+@SuppressWarnings("serial")
 public class Predmet implements Serializable{
 	private String sifraPredmeta;
 	private String nazivPredmeta;
