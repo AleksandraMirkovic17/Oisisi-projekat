@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,12 +17,16 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controller.StudentController;
 import model.BazaNepolozeni;
 import model.BazaPolozeni;
 import model.BazaPredmet;
 import model.BazaProfesor;
+import model.BazaProfesorPredajePredmet;
+import model.BazaProfesoriNaPredmetu;
 import model.Ocena;
 import model.Predmet;
 import model.Profesor;
@@ -55,25 +60,25 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 		JPanel nemaNistaZaDodati = new JPanel();
 		JLabel nemaPredmeta = new JLabel("Nema profesora koji se mogu dodati na ovaj predmet!");
 		nemaNistaZaDodati.add(nemaPredmeta);
-
-		List list = new List();
+		Vector<Profesor> profesori = new Vector<Profesor>();
 		int brojMogucihProfZaDodavanje = 0;
 
-		for(Profesor pf : BazaProfesor.getInstance().getProfesori()) {
+		for (Profesor pf : BazaProfesor.getInstance().getProfesori()) {
 			boolean moze = true;
-			if((p.getProfesori()!=null)&&(p.getProfesori().size()!=0)) {
-			for(Profesor pf1 : p.getProfesori()) {
-				if(pf1.getBrLicneKarte().equals(pf.getBrLicneKarte())) {
-					moze=false;
+			if ((p.getProfesori() != null) && (p.getProfesori().size() != 0)) {
+				for (Profesor pf1 : p.getProfesori()) {
+					if (pf1.getBrLicneKarte().equals(pf.getBrLicneKarte())) {
+						moze = false;
+					}
 				}
-			}}
-		
-			String dodaj = pf.getIme() +" "+pf.getPrezime();
-			list.add(dodaj);
-			
+			}
+			profesori.add(pf);
 			brojMogucihProfZaDodavanje++;
-		
+
 		}
+
+		final JList<Profesor> list = new JList<Profesor>(profesori);
+
 		if (brojMogucihProfZaDodavanje > 0) {
 			panCenter.add(list);
 		} else {
@@ -81,17 +86,12 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 		}
 
 		JButton btnOk = new JButton("POTVRDI");
-		list.addItemListener(new ItemListener() {
+		list.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
-			public void itemStateChanged(ItemEvent e) {
+			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				repaint();
-				if (list.getSelectedItem()!=null) {
-					btnOk.setEnabled(true);
-				} else {
-					btnOk.setEnabled(false);
-				}
+				btnOk.setEnabled(true);
 			}
 		});
 
@@ -101,29 +101,23 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String dodatiProfesora = list.getSelectedItem();
-				if (dodatiProfesora!=null) {
-					JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
-							JOptionPane.WARNING_MESSAGE);
+				Profesor dodajProf = list.getSelectedValue();
+				if (dodajProf != null) {
+					for(Profesor pf : BazaProfesor.getInstance().getProfesori()) {
+						if(pf.getBrLicneKarte().equals(dodajProf.getBrLicneKarte())) {
+							BazaProfesoriNaPredmetu.getInstance().dodajProfesora(pf);
+							ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
+							
+						}
+					}
+					setVisible(false);
 				}
 			}
 		});
 		JButton btnCancel = new JButton("ODUSTANI");
 
 		btnOk.setPreferredSize(new Dimension(100, 25));
-		btnOk.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String dodatiProfesora = list.getSelectedItem();
-				for(Profesor p : BazaProfesor.getInstance().getProfesori()) {
-					//if(p.getBrLicneKarte()==dodati.)
-				}
-				
-				setVisible(false);
-			}
-		});
 
 		btnCancel.setPreferredSize(new Dimension(100, 25));
 		btnCancel.addActionListener(new ActionListener() {
@@ -157,12 +151,12 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 		add(panWest, BorderLayout.WEST);
 		add(panEast, BorderLayout.EAST);
 		add(panTop, BorderLayout.BEFORE_FIRST_LINE);
-		
+
 	}
 
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
 	}
-	
+
 }
