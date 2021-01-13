@@ -134,16 +134,15 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 				for (int i = 0; i < list.getSelectedItems().length; i++) {
 					String[] splited = dodatiPredmete[i].split("-");
 					String sifraPredmeta = splited[0].trim();
-					for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
-						if (p.getSifraPredmeta().equals(sifraPredmeta)) {
-							BazaProfesorPredajePredmet.getInstance().dodajPredmet(p);
-							ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+					for(int j=0;j<BazaPredmet.getInstance().getPredmeti().size();j++)
+					         if(BazaPredmet.getInstance().getPredmeti().get(j).equals(sifraPredmeta)) {
+						      	BazaProfesorPredajePredmet.getInstance().dodajPredmet(BazaPredmet.getInstance().getPredmeti().get(j));
+							    ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
 							            //dodajemo i tom predmetu na spisak studenta
 						}
 						
 					}
 					
-				}
 				setVisible(false);
 	              
 			}
