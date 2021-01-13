@@ -31,6 +31,7 @@ import model.BazaProfesorPredajePredmet;
 import model.Profesor;
 import pomocneKlase.MyFocusListener;
 
+
 public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 
 	/**
@@ -54,6 +55,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		IzmenaProfesorDialog.instanceIzmenaProfesor = this;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setVisible(true);
+		
 		
 		JPanel panel1 = new JPanel();
 		BoxLayout boxPanel1 = new BoxLayout(panel1, BoxLayout.Y_AXIS);
