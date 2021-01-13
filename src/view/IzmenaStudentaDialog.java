@@ -760,7 +760,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		if (tekst[6].length() != 0) {
 			ok1 = true;
 			if (!Pattern.matches("[a-z]{2,3}-[0-9]{1,3}-[0-9]{4}", tekst[6])
-					&& !Pattern.matches("[a-zA-z0-9 ]*", tekst[6])) {
+					&& !Pattern.matches("[a-zA-z0-9 ]*", tekst[6]) && !Pattern.matches("[A-Z]{2,3} [0-9]{1,3}/[0-9]{4}" , tekst[6])) {
 				txtIndeks.setBackground(incorrect);
 				txtIndeks.setForeground(Color.black);
 				ok1 = false;

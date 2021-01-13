@@ -244,12 +244,45 @@ public class MyMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JTextArea helpTekst = new JTextArea("\t\t Detaljan opis o nacinu koriscenja aplikacije \t\t\n\n"
-						+ "STUDENTI\n"
-						+ "1. Dodavanje novog entiteta je moguće preko prečice na tastauri Ctrl+N, preko dugmeta + na Tool bar-u ili File -> New"
-						+ "\n\nPROFESORI\n"
-						+ "1. Dodavanje novog entiteta je moguće preko precice na tastauri Ctrl+N, preko dugmeta + na Tool bar-u ili File -> New\"\r\n"
-						+ "", 20, 60);
+				JTextArea helpTekst = new JTextArea("\t\t Detaljan opis o načnu korišćenja aplikacije \t\t\n\n"
+						+ "\t\t NAČIN KORIŠĆENJA APLIKACIJE \n\nTABELA STUDENATA\n\n"
+						+ "1.	Dodavanje studenta je moguće pomoću dugmeta na tool baru ili preko File -> New.\n\r\n"
+						+ "2.	Izmena studenta moguća je iz pomoću dugmeta na tool baru ili preko Edit-> Edit. \n\r\n"
+						+ "3.	Brisanje studenta moguće je pomoću dugmeta na tool baru ili preko Edit -> Delete.\n\r\n"
+						+ "	Validacija unosa:\n" + "Datum je u formatu - DD\\MM\\GGGG. \r\n"
+						+ "	Broj telefona može sadržati bilo koju cifru i znakove / i -.\r\n"
+						+ " Indeks može da sadrži bilo koja slova i brojeve npr E123,"
+						+ " ali je ако se upotrebljavaju znaci '/' i '-' neophodno je da indeks bude u prvilnom formatu npr. sw-141-2016 ili RA 142/2019\r\n"
+						+ " Indeks mora da bude jedinstven za svakog studenta. "
+						+ " Email – bilo_šta@bilo_šta.\r\n"
+						+ "	Sva polja u dialogu moraju biti popunjena da bi mogli da dodate studenta, u slučaju da ste nešto"
+						+ "pogrešno uneli to polje će da bude crveno. Tek kada sva polja budu zelena moguće je dodati studenta.\n\n\n\r\n"
+						+ "TABELA PREDMETA\n\r\n"
+						+ "1.	Dodavanje predmeta moguće je pomoću dugmeta na tool baru ili preko File->New\r\n"
+						+ "2.	Izmena predmeta moguće je pomoću dugmeta na tool baru ili preko Edit->Edit r\n"
+						+ "3.	Brisanje predmeta moguće je pomoću dugmeta na tool baru ili preko Edit->Delete\r\n"
+						+ "4.	Dodavanje profesora na predmet moguće je u dialogu izmeni, pritskom na dugme '+' pored profesora, ali samo ako nema nijednog profesora koji predaje predmet."
+						+ "\nU suprotnom, u tom polju stoji upisan profesor koji je poslednji dodat na predmet.\r\n"
+						+ "Validacija unosa:\r\n"
+						+ "Šifra predmeta mora da bude jedinstvena za svaki predmet."
+						+ "Sva polja u dialogu moraju biti popunjena i zelena da bi mogli da dodate predmet\n\n\n\r\n"
+						+ "TABELA PROFESORA\n\r\n"
+						+ "1.	Dodavanje profesora je moguće pomoću dugmeta na tool baru\n\r\n"
+						+ "2.	Izmena profesora je moguća je pomoću dugmeta na tool baru ili preko Edit->Edit\n\r\n"
+						+ "3.	Brisanje profesora je moguća pomoću digmeta na tool baru ili preko Edit->Delete \n\r\n"
+						+ "	Validacija unosa:\r\nBroj lične karte - 9 cifara\n\r\n"
+						+ " Datum rođenja u formatu – DD\\MM\\GGGG\n\r\n"
+						+ " Sva polja u dialogu moraju biti korektno popunjena da bi mogli da dodate profesora\n\n\n\r\n"
+						+ "Prečice:\n" + "ctrl + N – Dodavanje novog entiteta u tabelu na koju smo pozicionirani\r\n"
+						+ "ctrl + E – Izmena selektovanog entiteta\r\n"
+						+ "ctrl + D – Brisanje selektovanog entiteta\r\n"
+					    + "ctrl + H – Prikaz dialoga za pomoć\r\n"
+						+ "ctrl + A – Informacija o verziji aplikacije\r\n"
+						+ "ctrl + 1 – Informacije o studentu 1\r\n"
+						+ "ctrl + 2 – Informacije o studentu 2\r\n"
+						+ "ctrl + C - Zatvaranje aplikacije\r\n"
+						+ "\n\n***NAPOMENA:Podrazumeva se da kada želimo da radimo određene izmene ili dodajemo određene entitete\n da smo u odgovarajućem tabu i da smo selektovali određeni entitet ako je to potrebno!!!",
+						20, 60);
 				Font f = new Font("Arial", Font.BOLD, 14);
 				helpTekst.setFont(f);
 				JScrollPane sp = new JScrollPane(helpTekst); // postavljamo panel koji ima mogucnost skrolovanja
