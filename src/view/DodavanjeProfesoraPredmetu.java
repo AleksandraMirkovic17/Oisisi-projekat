@@ -74,7 +74,6 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 			}
 			profesori.add(pf);
 			brojMogucihProfZaDodavanje++;
-
 		}
 
 		final JList<Profesor> list = new JList<Profesor>(profesori);
@@ -103,10 +102,11 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 				// TODO Auto-generated method stub
 				Profesor dodajProf = list.getSelectedValue();
 				if (dodajProf != null) {
-					for(Profesor pf : BazaProfesor.getInstance().getProfesori()) {
-						if(pf.getBrLicneKarte().equals(dodajProf.getBrLicneKarte())) {
-							BazaProfesoriNaPredmetu.getInstance().dodajProfesora(pf);
+					for(int i=0; i<BazaProfesor.getInstance().getProfesori().size(); i++) {
+						if(BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte().equals(dodajProf.getBrLicneKarte())) {
+							BazaProfesoriNaPredmetu.getInstance().dodajProfesora(BazaProfesor.getInstance().getProfesori().get(i));
 							ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
+							BazaProfesor.getInstance().getProfesori().get(i).getPredmeti().add(p);
 						}
 					}
 					setVisible(false);

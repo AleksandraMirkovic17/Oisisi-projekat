@@ -24,10 +24,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import controller.PredmetController;
 import controller.ProfesorController;
 import model.BazaNepolozeni;
 import model.BazaProfesor;
 import model.BazaProfesorPredajePredmet;
+import model.BazaProfesoriNaPredmetu;
+import model.Predmet;
 import model.Profesor;
 import pomocneKlase.MyFocusListener;
 
@@ -501,6 +504,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			int red = ProfesorPredmetJTabel.getInstance().getSelectedRow(); // selektovali smo red u tabeli
+			Predmet predmet = BazaProfesorPredajePredmet.getInstance().getRow(red);
 			if (red != -1) {
 				Object[] options = { "Da", "Ne" };
 
@@ -508,8 +512,10 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 						"Da li ste sigurni?", "Ukloni predmet",
 						JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 				if (code == JOptionPane.YES_OPTION) {
+					PredmetController.getInstance().ukloniProfesoraSaPredmetaPrekoProfesora(profesor, predmet );
 					BazaProfesorPredajePredmet.getInstance().getPredmeti().remove(red);
 					ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+					IzmenaPredmetaDialog.instanceIzmenaPredmeta.azurirajPoslednjegProfesora();
 					JOptionPane.showMessageDialog(instanceIzmenaProfesor, "Predmet je obrisan!");
 				}
 

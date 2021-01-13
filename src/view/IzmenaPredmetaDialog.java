@@ -420,5 +420,11 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		return ok;
 	}
+	
+	public void azurirajPoslednjegProfesora() {
+		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
+			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+			txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
+	}
 
-}
+}}

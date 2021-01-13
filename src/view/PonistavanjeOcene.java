@@ -51,7 +51,7 @@ public class PonistavanjeOcene extends JDialog {
 				BazaPolozeni.getInstance().izbrisiOcenu(row);
 				PolozeniJTable.getInstance().azurirajPrikaz();
 				
-				/*for (int i1 = 0; i1 < BazaPredmet.getInstance().getPredmeti().size(); i1++) {
+				for (int i1 = 0; i1 < BazaPredmet.getInstance().getPredmeti().size(); i1++) {
 					for (int i2 = 0; i2 < BazaPredmet.getInstance().getPredmeti().get(i1).getPoloziliPredmet()
 							.size(); i2++) {
 						if ((BazaPredmet.getInstance().getPredmeti().get(i1).getSifraPredmeta()
@@ -61,7 +61,7 @@ public class PonistavanjeOcene extends JDialog {
 							BazaPredmet.getInstance().getPredmeti().get(i1).getPoloziliPredmet().remove(i2);
 						}
 					}
-				}*/
+				}
 
 				IzmenaStudentaDialog.instanceIzmenaStudenta.setBtnPonistiAkoNemaPolozenih();
 

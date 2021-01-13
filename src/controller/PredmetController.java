@@ -4,6 +4,7 @@ import model.BazaPredmet;
 import model.BazaProfesor;
 import model.BazaStudent;
 import model.Predmet;
+import model.Profesor;
 import view.IzmenaPredmetaDialog;
 import view.PredmetJTable;
 import view.ProfesoriJTable;
@@ -46,5 +47,17 @@ public class PredmetController {
 		 BazaStudent.getInstance().izbrisiPredmet(p.getSifraPredmeta());
 		 PredmetJTable.getInstance().refresTabelu();//ayuriranje tabele	
  }
+	public void ukloniProfesoraSaPredmetaPrekoProfesora(Profesor profesor, Predmet predmet) {
+		for(int i=0; i<BazaProfesor.getInstance().getProfesori().size(); i++) {
+			if(BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte().equals(profesor.getBrLicneKarte())) {
+				for(int j=0; j<BazaPredmet.getInstance().getPredmeti().size(); j++) {
+					if(BazaPredmet.getInstance().getPredmeti().get(j).getSifraPredmeta().equals(predmet.getSifraPredmeta())) {
+						BazaPredmet.getInstance().getPredmeti().get(j).getProfesori().remove(BazaProfesor.getInstance().getProfesori().get(i));
+					}
+				}
+			}
+		
+		}
+	}
 
 }
