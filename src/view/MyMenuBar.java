@@ -136,6 +136,7 @@ public class MyMenuBar extends JMenuBar {
 				}
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
+					System.out.println(red);
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
 						ProfesorController.getInstance().izmeniProfesora(red);
 					} else {

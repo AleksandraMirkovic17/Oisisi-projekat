@@ -6,6 +6,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 
 
@@ -21,18 +22,21 @@ public class ProfesoriJTable extends  JTable {
 	}
 	private static final long serialVersionUID = -7475213618819842792L;
    //vrsimo neku konfiguraciju 
+	private static TableRowSorter<AbstractTableModelProfesori> sort;
 	public ProfesoriJTable()
 	{
+		
 		this.setRowSelectionAllowed(true); //selektovanje redova
 		this.setColumnSelectionAllowed(true); //selektovanje kolona
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //da mozemo samo jednu koloonu da selektujemo
 		this.setModel(new AbstractTableModelProfesori());
-	
+	    
 		
 	}
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
+		
 		// selektovani red ce imati drugaciju boju od ostalih
 		if (isRowSelected(row)) {
 			c.setBackground(Color.LIGHT_GRAY);

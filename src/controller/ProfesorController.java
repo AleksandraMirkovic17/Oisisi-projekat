@@ -33,11 +33,17 @@ public class ProfesorController {
 
 	public void izmeniProfesora(int red) {
 		// izmena modela
+		if(red<0)
+			return;
+		
+	
 		Profesor p = BazaProfesor.getInstance().getRow(red);
+		System.out.println(p.toString());
+		
 		IzmenaProfesorDialog dialog = new IzmenaProfesorDialog(p);
 		dialog.setVisible(true);
 		// azuriranje prikaza
-		ProfesoriJTable.getInstance().azurirajPrikaz();
+		
 	}
 
 	public void izbrisiProfesora(int red) {

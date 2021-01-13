@@ -89,16 +89,24 @@ public class ToolBar extends JToolBar {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
+					
 				}
 				// izmena profesora
+		         
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
+					
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
+					int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+					System.out.println(red);
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-						ProfesorController.getInstance().izmeniProfesora(red);
+						
+						ProfesorController.getInstance().izmeniProfesora(model);
+					
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
+			
 				}
 				/* izmena predmeta */
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
