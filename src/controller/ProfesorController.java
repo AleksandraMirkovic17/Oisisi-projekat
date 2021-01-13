@@ -33,17 +33,16 @@ public class ProfesorController {
 
 	public void izmeniProfesora(int red) {
 		// izmena modela
-		if(red<0)
+		if (red < 0)
 			return;
-		
-	
+
 		Profesor p = BazaProfesor.getInstance().getRow(red);
 		System.out.println(p.toString());
-		
+
 		IzmenaProfesorDialog dialog = new IzmenaProfesorDialog(p);
 		dialog.setVisible(true);
 		// azuriranje prikaza
-		
+
 	}
 
 	public void izbrisiProfesora(int red) {
@@ -61,7 +60,9 @@ public class ProfesorController {
 				if (profesor.getBrLicneKarte().equals(profesor1.getBrLicneKarte())) {
 					BazaPredmet.getInstance().getPredmeti().get(i).getProfesori().remove(i1);
 				}
-				IzmenaPredmetaDialog.instanceIzmenaPredmeta.setTxtProfesor();
+				if (IzmenaPredmetaDialog.instanceIzmenaPredmeta != null) {
+					IzmenaPredmetaDialog.instanceIzmenaPredmeta.setTxtProfesor();
+				}
 			}
 			ProfesoriJTable.getInstance().azurirajPrikaz();
 		}

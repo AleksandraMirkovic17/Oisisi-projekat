@@ -45,7 +45,8 @@ public class PredmetController {
 		 BazaPredmet.getInstance().izbrisiPredmet(p.getSifraPredmeta());//saljemo sifru predmeta jer se oni po tome identifikuju, i u ovoj liniji vrsimo brisanje predmeta
 		 BazaProfesor.getInstance().izbrisiPredmet(p.getSifraPredmeta());
 		 BazaStudent.getInstance().izbrisiPredmet(p.getSifraPredmeta());
-		 PredmetJTable.getInstance().refresTabelu();//ayuriranje tabele	
+		 PredmetJTable.getInstance().refresTabelu();//azuriranje tabele	
+
  }
 	public void ukloniProfesoraSaPredmetaPrekoProfesora(Profesor profesor, Predmet predmet) {
 		for(int i=0; i<BazaProfesor.getInstance().getProfesori().size(); i++) {

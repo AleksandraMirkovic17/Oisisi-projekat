@@ -133,7 +133,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 
 		// datum rodjenja
 		JPanel panDatumRodjenja = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDatumRodjenja = new JLabel("Datum rodjenja*:");
+		JLabel lblDatumRodjenja = new JLabel("Datum rođenja*:");
 		lblDatumRodjenja.setPreferredSize(dim);
 
 		txtDatumRodjenja = new JTextField();
@@ -376,8 +376,8 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 
 		// Nacin finansiranja
 		JPanel panFinans = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblFinans = new JLabel("Nacin finansiranja*:");
-		String finansiranje[] = { "Budzet", "Samofinansiranje" };
+		JLabel lblFinans = new JLabel("Način finansiranja*:");
+		String finansiranje[] = { "Budžet", "Samofinansiranje" };
 		finansCombo = new JComboBox<String>(finansiranje);
 		lblFinans.setPreferredSize(dim);
 		finansCombo.setPreferredSize(dim);
@@ -490,7 +490,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		boolean ok = true;
 		boolean ok1 = true;
 		if (tekst[0].length() != 0) {
-			if (!Pattern.matches("[a-šA-Š ]*", tekst[0])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ ]*", tekst[0])) {
 				txtIme.setBackground(incorrect);
 				txtIme.setForeground(Color.black);
 				ok1 = false;
@@ -503,7 +503,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		}
 		if (tekst[1].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-šA-Š ]*", tekst[1])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ ]*", tekst[1])) {
 				txtPrezime.setBackground(incorrect);
 				txtPrezime.setForeground(Color.black);
 				ok1 = false;
@@ -529,7 +529,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		}
 		if (tekst[3].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-šA-Š 0-9,]*", tekst[3])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ  0-9,]*", tekst[3])) {
 				txtAdresa.setBackground(incorrect);
 				txtAdresa.setForeground(Color.black);
 				ok1 = false;
@@ -570,7 +570,7 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		if (tekst[6].length() != 0) {
 			ok1 = true;
 			if (!Pattern.matches("[a-z]{2,3}-[0-9]{1,3}-[0-9]{4}", tekst[6])
-					&& !Pattern.matches("[a-šA-Š0-9 ]*", tekst[6])) {
+					&& !Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ0-9 ]*", tekst[6]) && !Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ]{2,3} [0-9]{1,3}/[0-9]{4}", tekst[6])) {
 				txtIndeks.setBackground(incorrect);
 				txtIndeks.setForeground(Color.black);
 				ok1 = false;

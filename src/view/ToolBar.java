@@ -77,11 +77,9 @@ public class ToolBar extends JToolBar {
 				// TODO Auto-generated method stub
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
-					int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
-
-					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+					if (red >= 0 && (red < BazaStudent.getInstance().getStudenti().size())) {
+						int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
 						Student student = BazaStudent.getInstance().getRow(model);
-						// BazaNepolozeni.getInstance().setS(student);
 						StudentController.getInstance().izmeniStudenta(model);
 
 					} else {
@@ -95,10 +93,9 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
-					int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 					System.out.println(red);
-					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-
+					if (red >= 0 && (red < BazaProfesor.getInstance().getProfesori().size())) {
+						int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						ProfesorController.getInstance().izmeniProfesora(model);
 
 					} else {
@@ -136,14 +133,15 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da zelide da izbrisete studenta "
-								+ BazaStudent.getInstance().getRow(red).getBrIndeksa() + " "
-								+ BazaStudent.getInstance().getRow(red).getIme() + " "
-								+ BazaStudent.getInstance().getRow(red).getPrezime() + "?";
+								+ BazaStudent.getInstance().getRow(model).getBrIndeksa() + " "
+								+ BazaStudent.getInstance().getRow(model).getIme() + " "
+								+ BazaStudent.getInstance().getRow(model).getPrezime() + "?";
 						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							StudentController.getInstance().izbrisiStudenta(red);
+							StudentController.getInstance().izbrisiStudenta(model);
 							;
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Student je obrisan!");
 						}
@@ -156,14 +154,15 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
+						int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da zelide da izbrisete profesora "
-								+ BazaProfesor.getInstance().getRow(red).getTitula() + " "
-								+ BazaProfesor.getInstance().getRow(red).getIme() + " "
-								+ BazaProfesor.getInstance().getRow(red).getPrezime() + "?";
+								+ BazaProfesor.getInstance().getRow(model).getTitula() + " "
+								+ BazaProfesor.getInstance().getRow(model).getIme() + " "
+								+ BazaProfesor.getInstance().getRow(model).getPrezime() + "?";
 						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							ProfesorController.getInstance().izbrisiProfesora(red);
+							ProfesorController.getInstance().izbrisiProfesora(model);
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Profesor je obrisan!");
 						}
 					} else {
