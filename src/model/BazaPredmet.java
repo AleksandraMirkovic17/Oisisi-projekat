@@ -37,8 +37,17 @@ public class BazaPredmet {
 	}
 
 	private void initPredmet() {
-
 		this.predmeti = new ArrayList<Predmet>();
+		Semestar s = Semestar.LETNJI;
+		Profesor pr = new Profesor("Nikola","Nikolic",LocalDate.of(1980, 4, 17),"069667633","Tolstojeva 1","nikolanikolic@gmail.com","Radnicka 17","1980777166111",Titula.DR,Zvanje.DOCENT,new ArrayList<Predmet>());
+		Predmet p1=new Predmet("EE123","Verovatnoca",Semestar.LETNJI,3,new ArrayList<Profesor>(),9);
+		Predmet p2=new Predmet("E12RR3","Analiza Matematicka",Semestar.LETNJI,1,new ArrayList<Profesor>(),9);
+		List<Profesor> prof = new ArrayList<Profesor>();
+		prof.add(pr);
+		p1.setProfesori(prof);
+		predmeti.add(p1);
+		predmeti.add(p2);
+		brojac++;
 	}
 	
 

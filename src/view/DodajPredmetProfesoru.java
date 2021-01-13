@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -12,89 +13,67 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.ListModel;
 
-import controller.StudentController;
 import model.BazaNepolozeni;
-import model.BazaPolozeni;
 import model.BazaPredmet;
+import model.BazaProfesorPredajePredmet;
 import model.Ocena;
 import model.Predmet;
-import model.Student;
-import java.awt.List;
+import model.Profesor;
 
-public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemListener {
+public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3887024701864527674L;
-
-	Student student;
-
+	Profesor profesor;
 	@SuppressWarnings("deprecation")
-	public DodavanjePredmetaStudentuDialog(Student s, IzmenaStudentaDialog parent) {
+	public DodajPredmetProfesoru(Profesor p, IzmenaProfesorDialog parent)
+	{
 		super();
-		setTitle("Dodavanje predmeta");
+		setTitle("Dodaj predmet");
 		setResizable(true);
 		setModal(true);
 		setSize(400, 400);
-		setLocationRelativeTo(parent);
-
-		this.student = s;
-
-		// setLayout(new BorderLayout(2,4));
-
+		
+		
+		
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
-
-		JPanel nemaNistaZaDodati = new JPanel();
-		JLabel nemaPredmeta = new JLabel("Nema nepolozenih predmeta!");
-		nemaNistaZaDodati.add(nemaPredmeta);
-
+		this.profesor=p;
+		
 		List list = new List();
 		list.setMultipleSelections(true);
-
+		
 		int brojMogucihPredmetaZaDodavanje = 0;
-
-		for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
-			boolean dodaj = true;
-			// proveravamo da li se predmet nalazi u listi polozenih predmeta
-			for (Ocena o : s.getPolozeniPredmeti()) {
-				if (p.getSifraPredmeta().equals(o.getPredmet().getSifraPredmeta())) {
-					dodaj = false;
+		
+		
+		for(Predmet p1 : BazaPredmet.getInstance().getPredmeti())
+		{
+		
+			boolean dodaj=true;
+			for(Predmet p2 : p.getPredmeti())
+			{
+				if((p1.getSifraPredmeta().equals(p2.getSifraPredmeta()))) {
+					dodaj=false;
 				}
+			
 			}
-			// proveravamo da li se predmet vec nalazi u listi nepolozenih predmeta
-			for (Predmet p1 : s.getNepolozeniPredmeti()) {
-				if (p.getSifraPredmeta().equals(p1.getSifraPredmeta())) {
-					dodaj = false;
-				}
-			}
-			// proveravamo da li je student na odgovarajucoj godini studija
-			if (s.getTrenutnaGodinaStudija() < p.getGodinaStudija()) {
-				dodaj = false;
-			}
-			if (dodaj) {
-				String moguceDodati = p.getSifraPredmeta() + " " + "-" + " " + p.getNazivPredmeta();
+			
+			if(dodaj)
+			{
+				String moguceDodati = p1.getSifraPredmeta() + " " + "-" + " " + p1.getNazivPredmeta();
 				list.add(moguceDodati);
 				++brojMogucihPredmetaZaDodavanje;
 			}
 		}
-
+		
 		if (brojMogucihPredmetaZaDodavanje > 0) {
 			panCenter.add(list);
-		} else {
-			panCenter.add(nemaNistaZaDodati);
 		}
 		
 		
-		
-		JButton btnOk = new JButton("DODAJ");
+		JButton btnOk = new JButton("Potvrdi");
 		list.addItemListener(new ItemListener() {
 
 			@Override
@@ -108,8 +87,9 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 				}
 			}
 		});
-
+		
 		btnOk.setEnabled(false);
+		btnOk.setPreferredSize(new Dimension(100, 25));
 		btnOk.addActionListener(new ActionListener() {
 
 			@Override
@@ -120,34 +100,29 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 					JOptionPane.showMessageDialog(null, "Niste selektovali predmet za dodavanje!", "Upozorenje!",
 							JOptionPane.WARNING_MESSAGE);
 				}
-			}
-		});
-		JButton btnCancel = new JButton("ODUSTANI");
-
-		btnOk.setPreferredSize(new Dimension(100, 25));
-		btnOk.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String[] dodatiPredmete = list.getSelectedItems();
+				else {
 				for (int i = 0; i < list.getSelectedItems().length; i++) {
 					String[] splited = dodatiPredmete[i].split("-");
 					String sifraPredmeta = splited[0].trim();
 					for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
 						if (p.getSifraPredmeta().equals(sifraPredmeta)) {
-							BazaNepolozeni.getInstance().dodajPredmet(p);
-							NepolozeniJTable.getInstance().azurirajPrikaz();
-							
-							p.getNisuPoloziliPredmet().add(s); //dodajemo i tom predmetu na spisak studenta
+							BazaProfesorPredajePredmet.getInstance().dodajPredmet(p);
+							ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+							            //dodajemo i tom predmetu na spisak studenta
 						}
 						
 					}
+					
 				}
-				
-				setVisible(false);
+	              
 			}
+				
+		  setVisible(false);
+		}
+			
 		});
+		
+		JButton btnCancel = new JButton("ODUSTANI");
 
 		btnCancel.setPreferredSize(new Dimension(100, 25));
 		btnCancel.addActionListener(new ActionListener() {
@@ -183,9 +158,10 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 		add(panTop, BorderLayout.BEFORE_FIRST_LINE);
 
 	}
-
-	public void itemStateChanged(ItemEvent e) {
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
 		repaint();
 	}
+
 }

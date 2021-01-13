@@ -31,7 +31,7 @@ public class BazaPodataka {
 	}
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public void citanje() {
-		ObjectInputStream o = null;
+		/*ObjectInputStream o = null;
 		try {
 			o = new ObjectInputStream(new BufferedInputStream(new FileInputStream("podaci1.raw")));
 			BazaStudent.getInstance().setStudenti((List<Student>)o.readObject());
@@ -51,7 +51,7 @@ public class BazaPodataka {
 			}catch (Exception e) {
 				// TODO: handle exception
 			}	
-		}
+		}*/
 	}
 	public void cuvanje() {
 		ObjectOutputStream os = null;

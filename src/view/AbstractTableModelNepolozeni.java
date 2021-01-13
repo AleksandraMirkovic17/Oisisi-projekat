@@ -2,13 +2,17 @@ package view;
 import javax.swing.table.AbstractTableModel;
 
 import model.BazaNepolozeni;
-import model.Student;
 
 
 
 public class AbstractTableModelNepolozeni  extends AbstractTableModel {
 
-	 public AbstractTableModelNepolozeni()
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AbstractTableModelNepolozeni()
 	   {
 		   
 	   }

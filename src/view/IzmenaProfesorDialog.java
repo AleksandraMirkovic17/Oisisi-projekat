@@ -483,6 +483,15 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	
 	btnDodaj.setPreferredSize(new Dimension(150,25));
 	btnDodaj.addActionListener(this);
+	btnDodaj.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			DodajPredmetProfesoru dialog = new DodajPredmetProfesoru(profesor,instanceIzmenaProfesor);
+			dialog.setVisible(true);
+		}
+	});
 	btnUkloni.setPreferredSize(new Dimension(150,25));
 	btnUkloni.addActionListener(new ActionListener() {
 		

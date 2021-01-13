@@ -6,6 +6,11 @@ import model.BazaPolozeni;
 
 public class AbstractTableModelPolozeni extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public AbstractTableModelPolozeni() {
 
 	}

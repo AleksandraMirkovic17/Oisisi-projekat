@@ -12,7 +12,8 @@ public class BazaProfesorPredajePredmet {
 	private static BazaProfesorPredajePredmet instance = null;
 
 	public static BazaProfesorPredajePredmet getInstance() {
-		instance = new BazaProfesorPredajePredmet();
+		if(instance==null)
+		{instance = new BazaProfesorPredajePredmet();}
 		return instance;
 
 	}
@@ -36,6 +37,7 @@ public class BazaProfesorPredajePredmet {
 
 		this.predmeti = new ArrayList<Predmet>();
 		int red = ProfesoriJTable.getInstance().getSelectedRow();
+		System.out.printf("Red je %d",red);
 		Profesor p = BazaProfesor.getInstance().getRow(red);
 		this.predmeti = p.getPredmeti();
 		// **** dodati ove da ti proverava da li uopste postoje predmeti koje drzi i
@@ -105,5 +107,9 @@ public class BazaProfesorPredajePredmet {
 		default:
 			return null;
 		}
+	}
+	
+	public void dodajPredmet(Predmet p) {
+		this.predmeti.add(p);
 	}
 }

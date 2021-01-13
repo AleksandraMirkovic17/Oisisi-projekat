@@ -1,6 +1,8 @@
 package controller;
 
 import model.BazaPredmet;
+import model.BazaProfesor;
+import model.BazaStudent;
 import model.Predmet;
 import view.IzmenaPredmetaDialog;
 import view.PredmetJTable;
@@ -39,7 +41,9 @@ public class PredmetController {
 	
 	public void izbrisiPredmet(int red) {
 		 Predmet p=BazaPredmet.getInstance().getRow(red);//znamo koji je to predmet kog mi zelimo da izbrisemo
-		 BazaPredmet.getInstance().izbrisiPredmet(p.getSifraPredmeta()); //saljemo sifru predmeta jer se oni po tome identifikuju, i u ovoj liniji vrsimo brisanje predmeta
+		 BazaPredmet.getInstance().izbrisiPredmet(p.getSifraPredmeta());//saljemo sifru predmeta jer se oni po tome identifikuju, i u ovoj liniji vrsimo brisanje predmeta
+		 BazaProfesor.getInstance().izbrisiPredmet(p.getSifraPredmeta());
+		 BazaStudent.getInstance().izbrisiPredmet(p.getSifraPredmeta());
 		 PredmetJTable.getInstance().refresTabelu();//ayuriranje tabele	
  }
 
