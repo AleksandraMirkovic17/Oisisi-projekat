@@ -57,7 +57,7 @@ public class GlavniProzor extends JFrame {
 	Dimension screenSize = kit.getScreenSize(); //Dimenziju koja sadrzi screenHeigh i screenWidth
 	int screenHeight = screenSize.height;
 	int screenWidth = screenSize.width;
-	setTitle("Studentska sluzba"); 
+	setTitle("Studentska služba"); 
 	setSize(screenWidth * 3/4, screenHeight * 3/4); 
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,7 +109,7 @@ public class GlavniProzor extends JFrame {
 		@Override
 		public void windowClosing(WindowEvent e) {
 			JFrame frame = (JFrame) e.getComponent();
-			int izbor = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da zatvorite aplikaciju?",
+			int izbor = JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da zatvorite aplikaciju?",
 					"Pitanje", JOptionPane.YES_NO_OPTION);
 			if (izbor == JOptionPane.YES_OPTION) {
 

@@ -500,8 +500,10 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int red = NepolozeniJTable.getInstance().getSelectedRow();
-				Predmet p = BazaNepolozeni.getInstance().getRow(red);
+				
 				if (red >= 0 && (red < BazaNepolozeni.getInstance().getInc())) {
+					int model = NepolozeniJTable.getInstance().convertRowIndexToModel(red);
+					Predmet p = BazaNepolozeni.getInstance().getRow(model);
 					Ocena o = new Ocena(p, student);
 					UnosOcene dialog = new UnosOcene(p, o);
 					dialog.setVisible(true);

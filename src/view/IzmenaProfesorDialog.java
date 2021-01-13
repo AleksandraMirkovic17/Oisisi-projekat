@@ -80,7 +80,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
         JPanel panIme=new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lblIme=new JLabel("Ime*:");
         lblIme.setPreferredSize(dim);
-        txtIme=new JTextField(profesor.getIme());
+        txtIme=new JTextField(profesor.getPrezime());
         txtIme.setPreferredSize(dim);
         txtIme.setName("txtIme");
 		txtIme.addFocusListener(focusListener);
@@ -117,7 +117,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
     JLabel lblPrezime=new JLabel("Prezime*:");
     lblPrezime.setPreferredSize(dim);
 
-    txtPrezime=new JTextField(profesor.getPrezime());
+    txtPrezime=new JTextField(profesor.getIme());
     txtPrezime.setPreferredSize(dim);
     txtPrezime.setName("txtPrezime");
 	txtPrezime.addFocusListener(focusListener);
@@ -602,8 +602,9 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 			/*REFERENCIRAN KOD ZA PARSIRANJE DATUMA > https://mkyong.com/java8/java-8-how-to-convert-string-to-localdate/*/
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 			String brLicne=profesor.getBrLicneKarte();
-			BazaProfesor.getInstance().IzmeniProfesora(tekst[1], tekst[0], LocalDate.parse(tekst[2], formatter), tekst[4], tekst[3], tekst[5],
-						tekst[6], brLicne, tekst[8],tekst[9]);
+			BazaProfesor.getInstance().IzmeniProfesora(brLicne,tekst[0], tekst[1], LocalDate.parse(tekst[2], formatter), tekst[4], tekst[3], tekst[5],
+						tekst[6], tekst[7], tekst[8],tekst[9]);
+			ProfesoriJTable.getInstance().azurirajPrikaz();
 			//ProfesorController.getInstance().dodajProfesora();
 			setVisible(false);	
 	}
@@ -722,21 +723,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 				txtBrLicneKarte.setBackground(correct);
 		} else {
 			ok = false;
-		}
-		
-		if (tekst[8].length() != 0) {
-			ok1 = true;
-			if (!Pattern.matches("[0-9]{9}", tekst[8])) {
-				txtBrLicneKarte.setBackground(incorrect);
-				txtBrLicneKarte.setForeground(Color.black);
-				ok1 = false;
-				ok = false;
-			}
-			if (ok1)
-				txtBrLicneKarte.setBackground(correct);
-		} else {
-			ok = false;
-		}
+	}
 
 		return ok;
   }

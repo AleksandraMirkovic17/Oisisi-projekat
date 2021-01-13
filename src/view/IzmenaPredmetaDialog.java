@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
@@ -26,6 +27,7 @@ import javax.swing.WindowConstants;
 
 import controller.PredmetController;
 import model.BazaPredmet;
+import model.BazaProfesor;
 import model.BazaProfesorPredajePredmet;
 import model.BazaProfesoriNaPredmetu;
 import model.BazaStudent;
@@ -132,7 +134,61 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		panProfesor.add(lblProfesor);
 		panProfesor.add(txtProfesor);
 
-		JButton plus = new JButton();
+		JButton plus = new JButton("+");
+		JButton btnminus = new JButton("-");
+		btnminus.setMargin(new Insets(0, 0, 0, 0));
+		plus.setMargin(new Insets(0, 0, 0, 0));
+		btnminus.setToolTipText("Uklanjanje profesora sa predmeta");
+		btnminus.setPreferredSize(new Dimension(20, 20));
+	
+		panProfesor.add(btnminus);
+		btnminus.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Profesor pr = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+				if(pr==null)
+				{
+					btnminus.setEnabled(false);
+					JOptionPane.showMessageDialog(instanceIzmenaPredmeta,
+							"Ne možete da ukolnite profesora!", "Upozorenje",
+							JOptionPane.WARNING_MESSAGE);
+				}
+				System.out.println(pr.toString());// selektovali smo red u tabeli
+
+					Object[] options = { "Da", "Ne" };
+
+					int code = JOptionPane.showOptionDialog(instanceIzmenaPredmeta,
+							"Da li ste sigurni?", "Ukloni predmet",
+							JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+					if (code == JOptionPane.YES_OPTION) {
+						System.out.println(pr.toString());
+						System.out.println(predmet.toString());
+						for(int i=0;i<BazaProfesor.getInstance().getbroj_profesora();i++) {
+							if(BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte().equals(pr.getBrLicneKarte()))
+							{
+						      BazaProfesoriNaPredmetu.getInstance().getProfesori().remove(pr);
+						      ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
+						      BazaProfesor.getInstance().izbrisiPredmet1(BazaProfesor.getInstance().getProfesori().get(i),predmet.getSifraPredmeta());
+						     
+							}
+						}
+
+						Profesor p1=BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+						if(p1==null)
+						{
+							plus.setEnabled(true);
+							txtProfesor.setText(" ");
+						}
+						else {
+						txtProfesor.setText(p1.getIme() + " " + p1.getPrezime());
+						}
+						
+				}
+
+			}
+		});
 		plus.setText("+");
 		ImageIcon ii = new ImageIcon("Slike//plus.png");
 
@@ -151,12 +207,14 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 				dialog.setVisible(true);
 				if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 					Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+				
 					txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
 				}
 			}
 		});
 
 		panProfesor.add(plus);
+		panProfesor.add(btnminus);
 
 		// naziv
 		JPanel panNaziv = new JPanel(new FlowLayout(FlowLayout.LEFT));

@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import model.BazaNepolozeni;
@@ -47,13 +48,15 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		setSize(400, 400);
 		
 		this.profesor=p;
+		JScrollPane scrollPane = new JScrollPane(); //pravimo scrollPane da bi mogli da skrolujemo ako budemo imali vise redova
+		add(scrollPane,BorderLayout.CENTER);
 		
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		
 		JPanel nemaNistaZaDodati = new JPanel();
-		JLabel nemaPredmeta = new JLabel("Nema nepolozenih predmeta!");
+		JLabel nemaPredmeta = new JLabel("Nema predmeta!");
 		nemaNistaZaDodati.add(nemaPredmeta);
 		
 		List list = new List();
@@ -168,6 +171,15 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(Box.createVerticalStrut(40));
 
+
+		JPanel panNorth = new JPanel();
+	
+
+	
+		JLabel n = new JLabel("Predmeti: ");
+		panNorth.add(n);
+
+
 		JPanel panWest = new JPanel();
 		JPanel panEast = new JPanel();
 		JPanel panTop = new JPanel();
@@ -181,6 +193,8 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		add(panWest, BorderLayout.WEST);
 		add(panEast, BorderLayout.EAST);
 		add(panTop, BorderLayout.BEFORE_FIRST_LINE);
+		add(panNorth,BorderLayout.NORTH);
+		
 		setLocationRelativeTo(IzmenaProfesorDialog.instanceIzmenaProfesor);
 
 	}

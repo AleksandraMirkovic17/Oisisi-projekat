@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,6 +11,7 @@ import javax.swing.table.TableRowSorter;
 
 public class PredmetiTablePanel extends JPanel {
 
+	public static int selektovan_red = -1;
 	/**
 	 * 
 	 */
@@ -26,8 +29,48 @@ public class PredmetiTablePanel extends JPanel {
 
 		TableRowSorter<TableModel> sortiranje = new TableRowSorter<TableModel>(predmetiTable.getModel());
 		predmetiTable.setRowSorter(sortiranje);
-		JScrollPane scrollPane = new JScrollPane(predmetiTable);
-		add(scrollPane, BorderLayout.CENTER);
+		predmetiTable.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				PredmetJTable tabela = (PredmetJTable) e.getComponent();
+				setSelektovan_red(tabela.convertRowIndexToModel(tabela.getSelectedRow()));
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				PredmetJTable tabela = (PredmetJTable) e.getComponent();
+				setSelektovan_red(tabela.convertRowIndexToModel(tabela.getSelectedRow()));
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		JScrollPane scrollPane = new JScrollPane(predmetiTable); //pravimo scrollPane da bi mogli da skrolujemo ako budemo imali vise redova
+		add(scrollPane,BorderLayout.CENTER);
+	    }
+	public static int getSelektovan_red() {
+		return selektovan_red;
 	}
-	
+
+	public static void setSelektovan_red(int selektovan_red) {
+		PredmetiTablePanel.selektovan_red = selektovan_red;
+	}
 }
+	

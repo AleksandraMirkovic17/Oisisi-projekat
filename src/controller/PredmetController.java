@@ -5,6 +5,7 @@ import model.BazaProfesor;
 import model.BazaStudent;
 import model.Predmet;
 import model.Profesor;
+import view.GlavniProzor;
 import view.IzmenaPredmetaDialog;
 import view.PredmetJTable;
 import view.ProfesoriJTable;
@@ -27,7 +28,6 @@ public class PredmetController {
 		// azuriranje prikaza
 		PredmetJTable.getInstance().refresTabelu();
 	}
-	
 	public void izmeniPredmet(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {
 			return;

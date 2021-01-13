@@ -28,8 +28,8 @@ public class BazaProfesor {
 	
 		this.kolone = new ArrayList<String>(); //kreiramo novu listu za kolonu
 		initProfesor();
-		this.kolone.add("IME");
 		this.kolone.add("PREZIME");
+		this.kolone.add("IME");
 		this.kolone.add("TITULA");
 		this.kolone.add("ZVANJE");
 	}
@@ -148,12 +148,12 @@ public class BazaProfesor {
 		this.profesori.add(new Profesor(ime,prezime,datumRodjena,brojTelefona,adresaStanovanja,email,adresaKancelarije,brLicneKarte,t,z,new ArrayList<Predmet>()));
 	}
 
-	public void IzmeniProfesora(String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
+	public void IzmeniProfesora(String brLicne,String ime, String prezime, LocalDate datumRodjena, String brojTelefona, String adresaStanovanja,
 			String email, String adresaKancelarije, String brLicneKarte, String titula, String zvanjeProfesora) {
 		
 		for(Profesor p: profesori)
 		{
-			if(p.getBrLicneKarte().equals(brLicneKarte))
+			if(p.getBrLicneKarte().equals(brLicne))
                 {
                 	p.setIme(ime);
                 	p.setPrezime(prezime);
@@ -180,5 +180,29 @@ public class BazaProfesor {
 					p.getPredmeti().remove(pp);
 			}
 		}
+	}
+	
+	public void izbrisiPredmet1(Profesor p1,String sifra)
+	{
+		
+		System.out.println();
+		for(Profesor p : profesori)
+		{
+	
+			if(p1.getBrLicneKarte().equals(p.getBrLicneKarte()))
+			{
+				for(Predmet p11 : p.getPredmeti())
+				{
+					if(p11.getSifraPredmeta().equals(sifra))
+					{
+						System.out.println(p1.toString());
+						System.out.println(p.toString());
+						p.getPredmeti().remove(p11);
+						break;
+					}
+				}
+			}
+		}
+		
 	}
 }

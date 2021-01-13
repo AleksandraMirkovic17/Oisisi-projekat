@@ -54,6 +54,11 @@ public class BazaProfesoriNaPredmetu {
 	}
 
 	public Profesor getPoslednjiProfesor() {
+		if(this.profesori.size()== 0)
+	      {
+			System.out.println(this.profesori.size());
+		return null;
+	      }
 		Profesor p = this.profesori.get(this.profesori.size() - 1);
 		return p;
 	}
