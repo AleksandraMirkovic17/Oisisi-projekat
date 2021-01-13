@@ -34,21 +34,19 @@ import model.Predmet;
 import model.Profesor;
 import pomocneKlase.MyFocusListener;
 
-
-public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
+public class IzmenaProfesorDialog extends JDialog implements ActionListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte;
-	JComboBox<String> titulaCombo,zvanjeCombo;
+	JComboBox<String> titulaCombo, zvanjeCombo;
 	Profesor profesor;
-	
+
 	public static IzmenaProfesorDialog instanceIzmenaProfesor;
 
-	public IzmenaProfesorDialog(Profesor profesor)
-	{
+	public IzmenaProfesorDialog(Profesor profesor) {
 		super();
 		setTitle("Izmena profesora");
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -58,8 +56,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		IzmenaProfesorDialog.instanceIzmenaProfesor = this;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setVisible(true);
-		
-		
+
 		JPanel panel1 = new JPanel();
 		BoxLayout boxPanel1 = new BoxLayout(panel1, BoxLayout.Y_AXIS);
 		panel1.setLayout(boxPanel1);
@@ -75,14 +72,14 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 
 		// dimenzije labela i tekstualnih komponenti
 		Dimension dim = new Dimension(150, 20);
-		
-		//ime
-        JPanel panIme=new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lblIme=new JLabel("Ime*:");
-        lblIme.setPreferredSize(dim);
-        txtIme=new JTextField(profesor.getPrezime());
-        txtIme.setPreferredSize(dim);
-        txtIme.setName("txtIme");
+
+		// ime
+		JPanel panIme = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblIme = new JLabel("Ime*:");
+		lblIme.setPreferredSize(dim);
+		txtIme = new JTextField(profesor.getPrezime());
+		txtIme.setPreferredSize(dim);
+		txtIme.setName("txtIme");
 		txtIme.addFocusListener(focusListener);
 		txtIme.addKeyListener(new KeyListener() {
 
@@ -107,455 +104,444 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 				// TODO Auto-generated method stub
 			}
 		});
-        panIme.add(lblIme);
-        panIme.add(txtIme);
-		
-		
-	
-	//prezime
-	JPanel panPrezime=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblPrezime=new JLabel("Prezime*:");
-    lblPrezime.setPreferredSize(dim);
+		panIme.add(lblIme);
+		panIme.add(txtIme);
 
-    txtPrezime=new JTextField(profesor.getIme());
-    txtPrezime.setPreferredSize(dim);
-    txtPrezime.setName("txtPrezime");
-	txtPrezime.addFocusListener(focusListener);
-	txtPrezime.addKeyListener(new KeyListener() {
+		// prezime
+		JPanel panPrezime = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblPrezime = new JLabel("Prezime*:");
+		lblPrezime.setPreferredSize(dim);
 
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
+		txtPrezime = new JTextField(profesor.getIme());
+		txtPrezime.setPreferredSize(dim);
+		txtPrezime.setName("txtPrezime");
+		txtPrezime.addFocusListener(focusListener);
+		txtPrezime.addKeyListener(new KeyListener() {
 
-		}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
 			}
-		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-		}
-	});
-	panPrezime.add(lblPrezime);
-    panPrezime.add(txtPrezime);
-    //datum rodjenja
-    
-    JPanel panDatumRodjenja = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	JLabel lblDatumRodjenja = new JLabel("Datum rodjenja*:");
-    LocalDate dr = profesor.getDatumRodjena();
-	String formattedDate = dr.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	lblDatumRodjenja.setPreferredSize(dim);
-
-	txtDatumRodjenja = new JTextField(formattedDate);
-	txtDatumRodjenja.setPreferredSize(dim);
-	txtDatumRodjenja.setName("txtDatumRodjenja");
-	txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
-	txtDatumRodjenja.addFocusListener(focusListener);
-	txtDatumRodjenja.addKeyListener(new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
 			}
-		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-		}
-	});
-    panDatumRodjenja.add(lblDatumRodjenja);
-    panDatumRodjenja.add(txtDatumRodjenja);
-    
-    //adresa stanovanja
-    JPanel panAdresa=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblAdresa=new JLabel("Adresa*:");
-    lblAdresa.setPreferredSize(dim);
-    txtAdresa=new JTextField(profesor.getAdresaStanovanja());
-    txtAdresa.setPreferredSize(dim);
-    txtAdresa.setName("txtAdresa");
-	txtAdresa.addFocusListener(focusListener);
-	txtAdresa.addKeyListener(new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
 			}
-		}
+		});
+		panPrezime.add(lblPrezime);
+		panPrezime.add(txtPrezime);
+		// datum rodjenja
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
+		JPanel panDatumRodjenja = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblDatumRodjenja = new JLabel("Datum rodjenja*:");
+		LocalDate dr = profesor.getDatumRodjena();
+		String formattedDate = dr.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		lblDatumRodjenja.setPreferredSize(dim);
 
-		}
-	});
-    panAdresa.add(lblAdresa);
-    panAdresa.add(txtAdresa);
-    
-    //broj telefona
-    JPanel panTel=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblTel=new JLabel("Broj telefona*:");
-    lblTel.setPreferredSize(dim);
-    txtTel=new JTextField(profesor.getBrojTelefona());
-    txtTel.setPreferredSize(dim);
-    txtTel.setName("txtTel");
-	txtTel.addFocusListener(focusListener);
-	txtTel.addKeyListener(new KeyListener() {
+		txtDatumRodjenja = new JTextField(formattedDate);
+		txtDatumRodjenja.setPreferredSize(dim);
+		txtDatumRodjenja.setName("txtDatumRodjenja");
+		txtDatumRodjenja.setToolTipText("Neophodan format: dd/mm/gggg");
+		txtDatumRodjenja.addFocusListener(focusListener);
+		txtDatumRodjenja.addKeyListener(new KeyListener() {
 
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
 			}
-		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-	});
-    panTel.add(lblTel);
-    panTel.add(txtTel);
-
-    //E-mail adresa
-    JPanel panEmail=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblEmail=new JLabel("E-mail adresa*:");
-    lblEmail.setPreferredSize(dim);
-    txtEmail=new JTextField(profesor.getEmail());
-    txtEmail.setPreferredSize(dim);
-    txtEmail.setName("txtEmail");
-	txtEmail.addFocusListener(focusListener);
-	txtEmail.addKeyListener(new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
 			}
-		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-	});
-    panEmail.add(lblEmail);
-    panEmail.add(txtEmail);
-    
-    //Adresa kancelarije
-    JPanel panKancelarija=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblKancelarija=new JLabel("Adresa kancelarije*:");
-    lblKancelarija.setPreferredSize(dim);
-    txtKancelarija=new JTextField(profesor.getAdresaKancelarije());
-    txtKancelarija.setPreferredSize(dim);
-    txtKancelarija.setName("txtKancelarija");
-    txtKancelarija.addFocusListener(focusListener);
-    txtKancelarija.addKeyListener(new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
 			}
-		}
+		});
+		panDatumRodjenja.add(lblDatumRodjenja);
+		panDatumRodjenja.add(txtDatumRodjenja);
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
+		// adresa stanovanja
+		JPanel panAdresa = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblAdresa = new JLabel("Adresa*:");
+		lblAdresa.setPreferredSize(dim);
+		txtAdresa = new JTextField(profesor.getAdresaStanovanja());
+		txtAdresa.setPreferredSize(dim);
+		txtAdresa.setName("txtAdresa");
+		txtAdresa.addFocusListener(focusListener);
+		txtAdresa.addKeyListener(new KeyListener() {
 
-		}
-	});
-    panKancelarija.add(lblKancelarija);
-    panKancelarija.add(txtKancelarija);
-    
-    //Broj licne karte
-    JPanel panBrLicneKarte=new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel lblBrLicneKarte=new JLabel("Broj licne karte*:");
-    lblBrLicneKarte.setPreferredSize(dim);
-    txtBrLicneKarte=new JTextField(profesor.getBrLicneKarte());
-    txtBrLicneKarte.setPreferredSize(dim);
-    txtBrLicneKarte.setName("txtBrLicneKarte");
-    txtBrLicneKarte.addFocusListener(focusListener);
-    txtBrLicneKarte.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
 			}
-		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-	});
-    panBrLicneKarte.add(lblBrLicneKarte);
-    panBrLicneKarte.add(txtBrLicneKarte);
-    
-    
-    //Titula
-    JPanel panTitula = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	JLabel lblTitula = new JLabel("Titula*:");
-	String titule[] = { "Profesor doktor", "Doktor" };
-	titulaCombo = new JComboBox<String>(titule);
-	lblTitula.setPreferredSize(dim);
-	titulaCombo.setPreferredSize(dim);
-	if (profesor.getTitulaString() == "PROF_DR") {
-		titulaCombo.setSelectedIndex(0);
-	} else {
-		titulaCombo.setSelectedIndex(1);
-	}
-	panTitula.add(lblTitula);
-	panTitula.add(titulaCombo);
-    titulaCombo.addKeyListener(new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
 			}
-		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-		}
-	});
-    panTitula.add(lblTitula);
-    panTitula.add(titulaCombo);
-    
-    //Zvanje
-    JPanel panZvanje = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	JLabel lblZvanje = new JLabel("Zvanje*:");
-	String zvanje[] = { "REDOVNI_PROFESOR", "VANREDNI_PROFESOR","DOCENT"};
-	zvanjeCombo = new JComboBox<String>(zvanje);
-	lblZvanje.setPreferredSize(dim);
-	zvanjeCombo.setPreferredSize(dim);
-	if (profesor.getZvanjeString() == "PROF_DR") {
-		zvanjeCombo.setSelectedIndex(0);
-	} else if(profesor.getZvanjeString()=="VANREDNI_PROFESOR"){
-		zvanjeCombo.setSelectedIndex(1);
-	}
-	else
-	{
-		zvanjeCombo.setSelectedIndex(2);
-	}
-	panZvanje.add(lblZvanje);
-	panZvanje.add(zvanjeCombo);   
-	zvanjeCombo.addKeyListener(new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			if (provera()) {
-				btnOk.setEnabled(true);
-			} else {
-				btnOk.setEnabled(false);
 			}
+		});
+		panAdresa.add(lblAdresa);
+		panAdresa.add(txtAdresa);
+
+		// broj telefona
+		JPanel panTel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblTel = new JLabel("Broj telefona*:");
+		lblTel.setPreferredSize(dim);
+		txtTel = new JTextField(profesor.getBrojTelefona());
+		txtTel.setPreferredSize(dim);
+		txtTel.setName("txtTel");
+		txtTel.addFocusListener(focusListener);
+		txtTel.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panTel.add(lblTel);
+		panTel.add(txtTel);
+
+		// E-mail adresa
+		JPanel panEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblEmail = new JLabel("E-mail adresa*:");
+		lblEmail.setPreferredSize(dim);
+		txtEmail = new JTextField(profesor.getEmail());
+		txtEmail.setPreferredSize(dim);
+		txtEmail.setName("txtEmail");
+		txtEmail.addFocusListener(focusListener);
+		txtEmail.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panEmail.add(lblEmail);
+		panEmail.add(txtEmail);
+
+		// Adresa kancelarije
+		JPanel panKancelarija = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblKancelarija = new JLabel("Adresa kancelarije*:");
+		lblKancelarija.setPreferredSize(dim);
+		txtKancelarija = new JTextField(profesor.getAdresaKancelarije());
+		txtKancelarija.setPreferredSize(dim);
+		txtKancelarija.setName("txtKancelarija");
+		txtKancelarija.addFocusListener(focusListener);
+		txtKancelarija.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panKancelarija.add(lblKancelarija);
+		panKancelarija.add(txtKancelarija);
+
+		// Broj licne karte
+		JPanel panBrLicneKarte = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblBrLicneKarte = new JLabel("Broj licne karte*:");
+		lblBrLicneKarte.setPreferredSize(dim);
+		txtBrLicneKarte = new JTextField(profesor.getBrLicneKarte());
+		txtBrLicneKarte.setPreferredSize(dim);
+		txtBrLicneKarte.setName("txtBrLicneKarte");
+		txtBrLicneKarte.addFocusListener(focusListener);
+		txtBrLicneKarte.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panBrLicneKarte.add(lblBrLicneKarte);
+		panBrLicneKarte.add(txtBrLicneKarte);
+
+		// Titula
+		JPanel panTitula = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblTitula = new JLabel("Titula*:");
+		String titule[] = { "PROF_DR", "Doktor" };
+		titulaCombo = new JComboBox<String>(titule);
+		lblTitula.setPreferredSize(dim);
+		titulaCombo.setPreferredSize(dim);
+		if (profesor.getTitulaString() == "PROF_DR") {
+			titulaCombo.setSelectedIndex(0);
+		} else {
+			titulaCombo.setSelectedIndex(1);
 		}
+		panTitula.add(lblTitula);
+		panTitula.add(titulaCombo);
+		titulaCombo.addKeyListener(new KeyListener() {
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		panTitula.add(lblTitula);
+		panTitula.add(titulaCombo);
+
+		// Zvanje
+		JPanel panZvanje = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel lblZvanje = new JLabel("Zvanje*:");
+		String zvanje[] = { "REDOVNI_PROFESOR", "VANREDNI_PROFESOR", "DOCENT" };
+		zvanjeCombo = new JComboBox<String>(zvanje);
+		lblZvanje.setPreferredSize(dim);
+		zvanjeCombo.setPreferredSize(dim);
+		if (profesor.getZvanjeString() == "PROF_DR") {
+			zvanjeCombo.setSelectedIndex(0);
+		} else if (profesor.getZvanjeString() == "VANREDNI_PROFESOR") {
+			zvanjeCombo.setSelectedIndex(1);
+		} else {
+			zvanjeCombo.setSelectedIndex(2);
 		}
-	});
-    panZvanje.add(lblZvanje);
-    panZvanje.add(zvanjeCombo);
-    
+		panZvanje.add(lblZvanje);
+		panZvanje.add(zvanjeCombo);
+		zvanjeCombo.addKeyListener(new KeyListener() {
 
-    panCenter.add(panIme);
-    panCenter.add(panPrezime);
-    panCenter.add(panDatumRodjenja);
-    panCenter.add(panAdresa);
-    panCenter.add(panTel);
-    panCenter.add(panEmail);
-    panCenter.add(panKancelarija);
-    panCenter.add(panBrLicneKarte);
-    panCenter.add(panTitula);
-    panCenter.add(panZvanje);
-    panCenter.add(Box.createVerticalStrut(25));  
-    panel1.add(panCenter,BorderLayout.CENTER);
-   
-  
-	
-	JPanel panBottom=new JPanel();
-	BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
-	panBottom.setLayout(box);
-	
-	
-	btnOk.setPreferredSize(new Dimension(150,25));
-	btnOk.addActionListener(this);
-	btnOk.setEnabled(true); //na pocetku je true kako bismo mogli da sacuvamo profesora sa neizenjenim podacima
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-	
+			}
 
-	btnCancel.setPreferredSize(new Dimension(150,25));
-	btnCancel.addActionListener(this);
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (provera()) {
+					btnOk.setEnabled(true);
+				} else {
+					btnOk.setEnabled(false);
+				}
+			}
 
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-	panBottom.add(Box.createHorizontalStrut(10));
-	panBottom.add(btnOk);
-	panBottom.add(Box.createHorizontalStrut(10));
-	panBottom.add(btnCancel);
-	panBottom.add(Box.createHorizontalStrut(10));
-	panBottom.add(Box.createVerticalStrut(40));
-	
-	panel1.add(panBottom, BorderLayout.SOUTH);
-	
-	btnDodaj.setPreferredSize(new Dimension(150,25));
-	btnDodaj.addActionListener(new ActionListener() {
+			}
+		});
+		panZvanje.add(lblZvanje);
+		panZvanje.add(zvanjeCombo);
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			DodajPredmetProfesoru dialog = new DodajPredmetProfesoru(profesor);
-			dialog.setVisible(true);
-		}
-	});
-	btnUkloni.setPreferredSize(new Dimension(150,25));
-	btnUkloni.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			int red = ProfesorPredmetJTabel.getInstance().getSelectedRow(); // selektovali smo red u tabeli
-			Predmet predmet = BazaProfesorPredajePredmet.getInstance().getRow(red);
-			if (red != -1) {
-				Object[] options = { "Da", "Ne" };
+		panCenter.add(panIme);
+		panCenter.add(panPrezime);
+		panCenter.add(panDatumRodjenja);
+		panCenter.add(panAdresa);
+		panCenter.add(panTel);
+		panCenter.add(panEmail);
+		panCenter.add(panKancelarija);
+		panCenter.add(panBrLicneKarte);
+		panCenter.add(panTitula);
+		panCenter.add(panZvanje);
+		panCenter.add(Box.createVerticalStrut(25));
+		panel1.add(panCenter, BorderLayout.CENTER);
 
-				int code = JOptionPane.showOptionDialog(instanceIzmenaProfesor,
-						"Da li ste sigurni?", "Ukloni predmet",
-						JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-				if (code == JOptionPane.YES_OPTION) {
-					PredmetController.getInstance().ukloniProfesoraSaPredmetaPrekoProfesora(profesor, predmet );
-					BazaProfesorPredajePredmet.getInstance().getPredmeti().remove(red);
-					ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
-					IzmenaPredmetaDialog.instanceIzmenaPredmeta.azurirajPoslednjegProfesora();
-					JOptionPane.showMessageDialog(instanceIzmenaProfesor, "Predmet je obrisan!");
+		JPanel panBottom = new JPanel();
+		BoxLayout box = new BoxLayout(panBottom, BoxLayout.X_AXIS);
+		panBottom.setLayout(box);
+
+		btnOk.setPreferredSize(new Dimension(150, 25));
+		btnOk.addActionListener(this);
+		btnOk.setEnabled(true); // na pocetku je true kako bismo mogli da sacuvamo profesora sa neizenjenim
+								// podacima
+
+		btnCancel.setPreferredSize(new Dimension(150, 25));
+		btnCancel.addActionListener(this);
+
+		panBottom.add(Box.createHorizontalStrut(10));
+		panBottom.add(btnOk);
+		panBottom.add(Box.createHorizontalStrut(10));
+		panBottom.add(btnCancel);
+		panBottom.add(Box.createHorizontalStrut(10));
+		panBottom.add(Box.createVerticalStrut(40));
+
+		panel1.add(panBottom, BorderLayout.SOUTH);
+
+		btnDodaj.setPreferredSize(new Dimension(150, 25));
+		btnDodaj.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DodajPredmetProfesoru dialog = new DodajPredmetProfesoru(profesor);
+				dialog.setVisible(true);
+			}
+		});
+		btnUkloni.setPreferredSize(new Dimension(150, 25));
+		btnUkloni.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int red = ProfesorPredmetJTabel.getInstance().getSelectedRow(); // selektovali smo red u tabeli
+				Predmet predmet = BazaProfesorPredajePredmet.getInstance().getRow(red);
+				if (red != -1) {
+					Object[] options = { "Da", "Ne" };
+
+					int code = JOptionPane.showOptionDialog(instanceIzmenaProfesor, "Da li ste sigurni?",
+							"Ukloni predmet", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+							options[0]);
+					if (code == JOptionPane.YES_OPTION) {
+						PredmetController.getInstance().ukloniProfesoraSaPredmetaPrekoProfesora(profesor, predmet);
+						BazaProfesorPredajePredmet.getInstance().getPredmeti().remove(red);
+						ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+						if (IzmenaPredmetaDialog.instanceIzmenaPredmeta != null) {
+							IzmenaPredmetaDialog.instanceIzmenaPredmeta.azurirajPoslednjegProfesora();
+						}
+						JOptionPane.showMessageDialog(instanceIzmenaProfesor, "Predmet je obrisan!");
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(instanceIzmenaProfesor,
+							"Niste selektovali predmet koji želite da uklonite profesoru!", "Upozorenje",
+							JOptionPane.WARNING_MESSAGE);
 				}
 
-			} else {
-				JOptionPane.showMessageDialog(instanceIzmenaProfesor,
-						"Niste selektovali predmet koji �elite da uklonite profesoru!", "Upozorenje",
-						JOptionPane.WARNING_MESSAGE);
 			}
+		});
 
-		}
-	});
-	
-	JPanel panBottom1=new JPanel();
-	BoxLayout box1=new BoxLayout(panBottom1, BoxLayout.X_AXIS);
-	panBottom1.setLayout(box1);
-	panBottom1.add(Box.createHorizontalStrut(10));
-	panBottom1.add(btnDodaj);
-	panBottom1.add(Box.createHorizontalStrut(10));
-	panBottom1.add(btnUkloni);
-	panBottom1.add(Box.createHorizontalStrut(10));
-	panBottom1.add(Box.createVerticalStrut(40));
-	
-	JPanel panel2=new JPanel();
-	ProfPredmetTablePane predaje = new ProfPredmetTablePane();
-	BoxLayout boxPanel3 = new BoxLayout(panel2, BoxLayout.Y_AXIS);
-	panel2.setLayout(boxPanel3);
-	
-	panel2.add(panBottom1,BorderLayout.NORTH);
-	panel2.add(predaje);
-	
+		JPanel panBottom1 = new JPanel();
+		BoxLayout box1 = new BoxLayout(panBottom1, BoxLayout.X_AXIS);
+		panBottom1.setLayout(box1);
+		panBottom1.add(Box.createHorizontalStrut(10));
+		panBottom1.add(btnDodaj);
+		panBottom1.add(Box.createHorizontalStrut(10));
+		panBottom1.add(btnUkloni);
+		panBottom1.add(Box.createHorizontalStrut(10));
+		panBottom1.add(Box.createVerticalStrut(40));
 
-	
-	tabbedPane.addTab("Informacije", null,panel1,"Osnovne informacije o profesoru");
-	tabbedPane.addTab("Predmeti", null,panel2,"Predmeti koje profesor predaje");
-	add(tabbedPane,BorderLayout.CENTER);
-	pack();
-	setLocationRelativeTo(GlavniProzor.getInstance());
-	provera();
-}
-	
+		JPanel panel2 = new JPanel();
+		ProfPredmetTablePane predaje = new ProfPredmetTablePane();
+		BoxLayout boxPanel3 = new BoxLayout(panel2, BoxLayout.Y_AXIS);
+		panel2.setLayout(boxPanel3);
+
+		panel2.add(panBottom1, BorderLayout.NORTH);
+		panel2.add(predaje);
+
+		tabbedPane.addTab("Informacije", null, panel1, "Osnovne informacije o profesoru");
+		tabbedPane.addTab("Predmeti", null, panel2, "Predmeti koje profesor predaje");
+		add(tabbedPane, BorderLayout.CENTER);
+		pack();
+		setLocationRelativeTo(GlavniProzor.getInstance());
+		provera();
+	}
+
 	public String[] pokupiTekst() {
 		String tekst[] = new String[10];
 		for (int i = 0; i < tekst.length; i++) {
@@ -568,11 +554,10 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		tekst[4] = txtTel.getText().toString();
 		tekst[5] = txtEmail.getText().toString();
 		tekst[6] = txtKancelarija.getText().toString();
-		tekst[7]= txtBrLicneKarte.getText().toString();
+		tekst[7] = txtBrLicneKarte.getText().toString();
 		tekst[8] = titulaCombo.getSelectedItem().toString();
 		tekst[9] = zvanjeCombo.getSelectedItem().toString();
-		
-		
+
 		return tekst;
 
 	}
@@ -581,7 +566,8 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String tekst[] = pokupiTekst();
-		boolean izmeni = true; // flag koji nam pokazuje da li je dozvoljeno dodati profesora sa tim parametrima
+		boolean izmeni = true; // flag koji nam pokazuje da li je dozvoljeno dodati profesora sa tim
+								// parametrima
 
 		// metoda getActionCommand(), vraca string koji je ispisan na kliknutom
 		// JButton-u
@@ -599,19 +585,22 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 			}
 
 			if (izmeni) {
-			/*REFERENCIRAN KOD ZA PARSIRANJE DATUMA > https://mkyong.com/java8/java-8-how-to-convert-string-to-localdate/*/
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-			String brLicne=profesor.getBrLicneKarte();
-			BazaProfesor.getInstance().IzmeniProfesora(brLicne,tekst[0], tekst[1], LocalDate.parse(tekst[2], formatter), tekst[4], tekst[3], tekst[5],
-						tekst[6], tekst[7], tekst[8],tekst[9]);
-			ProfesoriJTable.getInstance().azurirajPrikaz();
-			//ProfesorController.getInstance().dodajProfesora();
-			setVisible(false);	
-	}
+				/*
+				 * REFERENCIRAN KOD ZA PARSIRANJE DATUMA >
+				 * https://mkyong.com/java8/java-8-how-to-convert-string-to-localdate/
+				 */
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+				String brLicne = profesor.getBrLicneKarte();
+				BazaProfesor.getInstance().IzmeniProfesora(brLicne, tekst[0], tekst[1],
+						LocalDate.parse(tekst[2], formatter), tekst[4], tekst[3], tekst[5], tekst[6], tekst[7],
+						tekst[8], tekst[9]);
+				ProfesoriJTable.getInstance().azurirajPrikaz();
+				// ProfesorController.getInstance().dodajProfesora();
+				setVisible(false);
+			}
 
-	
-   }
-}
+		}
+	}
 
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();
@@ -620,7 +609,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		boolean ok = true;
 		boolean ok1 = true;
 		if (tekst[0].length() != 0) {
-			if (!Pattern.matches("[a-zA-Z ]*", tekst[0])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ ]*", tekst[0])) {
 				txtIme.setBackground(incorrect);
 				txtIme.setForeground(Color.black);
 				ok1 = false;
@@ -633,7 +622,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		}
 		if (tekst[1].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z ]*", tekst[1])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ ]*", tekst[1])) {
 				txtPrezime.setBackground(incorrect);
 				txtPrezime.setForeground(Color.black);
 				ok1 = false;
@@ -659,7 +648,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		}
 		if (tekst[3].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[3])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ 0-9,]*", tekst[3])) {
 				txtAdresa.setBackground(incorrect);
 				txtAdresa.setForeground(Color.black);
 				ok1 = false;
@@ -699,7 +688,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		}
 		if (tekst[6].length() != 0) {
 			ok1 = true;
-			if (!Pattern.matches("[a-zA-Z 0-9,]*", tekst[6])) {
+			if (!Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ 0-9,]*", tekst[6])) {
 				txtKancelarija.setBackground(incorrect);
 				txtKancelarija.setForeground(Color.black);
 				ok1 = false;
@@ -723,8 +712,8 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 				txtBrLicneKarte.setBackground(correct);
 		} else {
 			ok = false;
-	}
+		}
 
 		return ok;
-  }
+	}
 }

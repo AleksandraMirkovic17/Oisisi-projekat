@@ -34,65 +34,60 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 	/**
 	 * 
 	 */
-	
+
 	Profesor profesor;
+
 	@SuppressWarnings("deprecation")
-	public DodajPredmetProfesoru(Profesor p)
-	{
+	public DodajPredmetProfesoru(Profesor p) {
 		super();
 		setTitle("Dodaj predmet");
-		
+
 		setModal(true);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
 		setSize(400, 400);
-		
-		this.profesor=p;
-		JScrollPane scrollPane = new JScrollPane(); //pravimo scrollPane da bi mogli da skrolujemo ako budemo imali vise redova
-		add(scrollPane,BorderLayout.CENTER);
-		
+
+		this.profesor = p;
+		JScrollPane scrollPane = new JScrollPane(); // pravimo scrollPane da bi mogli da skrolujemo ako budemo imali
+													// vise redova
+		add(scrollPane, BorderLayout.CENTER);
+
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
-		
+
 		JPanel nemaNistaZaDodati = new JPanel();
 		JLabel nemaPredmeta = new JLabel("Nema predmeta!");
 		nemaNistaZaDodati.add(nemaPredmeta);
-		
+
 		List list = new List();
 		list.setMultipleSelections(true);
-		
+
 		int brojMogucihPredmetaZaDodavanje = 0;
-		
-		
-		for(Predmet p1 : BazaPredmet.getInstance().getPredmeti())
-		{
-		
-			boolean dodaj=true;
-			for(Predmet p2 : p.getPredmeti())
-			{
-				if((p1.getSifraPredmeta().equals(p2.getSifraPredmeta()))) {
-					dodaj=false;
+
+		for (Predmet p1 : BazaPredmet.getInstance().getPredmeti()) {
+
+			boolean dodaj = true;
+			for (Predmet p2 : p.getPredmeti()) {
+				if ((p1.getSifraPredmeta().equals(p2.getSifraPredmeta()))) {
+					dodaj = false;
 				}
-			
+
 			}
-			
-			if(dodaj)
-			{
+
+			if (dodaj) {
 				String moguceDodati = p1.getSifraPredmeta() + " " + "-" + " " + p1.getNazivPredmeta();
 				list.add(moguceDodati);
 				++brojMogucihPredmetaZaDodavanje;
 			}
 		}
-		
+
 		if (brojMogucihPredmetaZaDodavanje > 0) {
 			panCenter.add(list);
-		}
-		else {
+		} else {
 			panCenter.add(nemaNistaZaDodati);
 		}
-		
-		
+
 		JButton btnOk = new JButton("Potvrdi");
 		list.addItemListener(new ItemListener() {
 
@@ -120,10 +115,7 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 				}
 			}
 		});
-		
 
-
-		
 		btnOk.setPreferredSize(new Dimension(100, 25));
 		btnOk.addActionListener(new ActionListener() {
 
@@ -134,21 +126,28 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 				for (int i = 0; i < list.getSelectedItems().length; i++) {
 					String[] splited = dodatiPredmete[i].split("-");
 					String sifraPredmeta = splited[0].trim();
-					for(int j=0;j<BazaPredmet.getInstance().getPredmeti().size();j++)
-					         if(BazaPredmet.getInstance().getPredmeti().get(j).equals(sifraPredmeta)) {
-						      	BazaProfesorPredajePredmet.getInstance().dodajPredmet(BazaPredmet.getInstance().getPredmeti().get(j));
-							    ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
-							            //dodajemo i tom predmetu na spisak studenta
+					for (int j = 0; j < BazaPredmet.getInstance().getPredmeti().size(); j++) {
+						System.out.println(j);
+						System.out.println(BazaPredmet.getInstance().getPredmeti().get(j));
+						if (BazaPredmet.getInstance().getPredmeti().get(j).getSifraPredmeta().equals(sifraPredmeta)) {
+
+							BazaProfesorPredajePredmet.getInstance()
+									.dodajPredmet(BazaPredmet.getInstance().getPredmeti().get(j));
+							ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+							BazaPredmet.getInstance().getPredmeti().get(j).getProfesori().add(p);
+							// dodajemo i tom predmetu na spisak studenta
 						}
-						
+
 					}
-					
+
+				}
+
 				setVisible(false);
-	              
+
 			}
-			
+
 		});
-		
+
 		JButton btnCancel = new JButton("ODUSTANI");
 
 		btnCancel.setPreferredSize(new Dimension(100, 25));
@@ -170,14 +169,10 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(Box.createVerticalStrut(40));
 
-
 		JPanel panNorth = new JPanel();
-	
 
-	
 		JLabel n = new JLabel("Predmeti: ");
 		panNorth.add(n);
-
 
 		JPanel panWest = new JPanel();
 		JPanel panEast = new JPanel();
@@ -192,11 +187,12 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		add(panWest, BorderLayout.WEST);
 		add(panEast, BorderLayout.EAST);
 		add(panTop, BorderLayout.BEFORE_FIRST_LINE);
-		add(panNorth,BorderLayout.NORTH);
-		
+		add(panNorth, BorderLayout.NORTH);
+
 		setLocationRelativeTo(IzmenaProfesorDialog.instanceIzmenaProfesor);
 
 	}
+
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub

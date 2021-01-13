@@ -78,12 +78,9 @@ public class ToolBar extends JToolBar {
 				// TODO Auto-generated method stub
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
-					
-
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
 						int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
 						Student student = BazaStudent.getInstance().getRow(model);
-						// BazaNepolozeni.getInstance().setS(student);
 						StudentController.getInstance().izmeniStudenta(model);
 
 					} else {
@@ -139,14 +136,15 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da elite da izbrišete studenta "
-								+ BazaStudent.getInstance().getRow(red).getBrIndeksa() + " "
-								+ BazaStudent.getInstance().getRow(red).getIme() + " "
-								+ BazaStudent.getInstance().getRow(red).getPrezime() + "?";
+								+ BazaStudent.getInstance().getRow(model).getBrIndeksa() + " "
+								+ BazaStudent.getInstance().getRow(model).getIme() + " "
+								+ BazaStudent.getInstance().getRow(model).getPrezime() + "?";
 						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							StudentController.getInstance().izbrisiStudenta(red);
+							StudentController.getInstance().izbrisiStudenta(model);
 							;
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Student je obrisan!");
 						}
@@ -159,14 +157,14 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getProfesori().size())) {
+						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da zelide da izbrisete profesora "
-								+ BazaProfesor.getInstance().getRow(red).getTitula() + " "
-								+ BazaProfesor.getInstance().getRow(red).getIme() + " "
-								+ BazaProfesor.getInstance().getRow(red).getPrezime() + "?";
+								+ BazaProfesor.getInstance().getRow(model).getTitula() + " "
+								+ BazaProfesor.getInstance().getRow(model).getIme() + " "
+								+ BazaProfesor.getInstance().getRow(model).getPrezime() + "?";
 						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 							ProfesorController.getInstance().izbrisiProfesora(model);
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Profesor je obrisan!");
 						}
@@ -179,12 +177,12 @@ public class ToolBar extends JToolBar {
 					int red = PredmetJTable.getInstance().getSelectedRow(); // selektovali smo red u tabeli
 					// provera da li smo dobro selektovali red
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
+						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
 						// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
 						int code = JOptionPane.showConfirmDialog(null,
 								"Da li ste sigurni da zelite da izbrisete predmet?", "Brisanje predmeta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
 							PredmetController.getInstance().izbrisiPredmet(model);
 							JOptionPane.showMessageDialog(null, "Predmet je obrisan!");
 						}
@@ -202,14 +200,14 @@ public class ToolBar extends JToolBar {
 
 		});
 
-		ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike/kanta.png").getImage());
+		ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike"+File.separator+"kanta.png").getImage());
 		btnIzbrisi.setIcon(imageIcon2);
 		add(btnIzbrisi);
 		addSeparator();
 
 		JButton btnPretrazi = new JButton();
 		btnPretrazi.setToolTipText("PRETRAZI");
-		ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike/lupa.png").getImage());
+		ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike"+File.separator+"lupa.png").getImage());
 		btnPretrazi.setIcon(imageIcon22);
 		add(btnPretrazi);
 		addSeparator();

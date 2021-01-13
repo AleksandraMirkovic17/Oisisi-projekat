@@ -127,8 +127,8 @@ public class MyMenuBar extends JMenuBar {
 				// TODO Auto-generated method stub
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
-					int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
+						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
 						StudentController.getInstance().izmeniStudenta(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
@@ -139,7 +139,8 @@ public class MyMenuBar extends JMenuBar {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					System.out.println(red);
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-						ProfesorController.getInstance().izmeniProfesora(red);
+						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+						ProfesorController.getInstance().izmeniProfesora(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
@@ -149,7 +150,8 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red <= BazaPredmet.getInstance().getPredmeti().size())) {
-						PredmetController.getInstance().izmeniPredmet(red);
+						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
+						PredmetController.getInstance().izmeniPredmet(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
@@ -171,14 +173,15 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						String ispis = "Da li ste sigurni da zelide da izbrišete studenta "
-								+ BazaStudent.getInstance().getRow(red).getBrIndeksa() + " "
-								+ BazaStudent.getInstance().getRow(red).getIme() + " "
-								+ BazaStudent.getInstance().getRow(red).getPrezime() + "?";
+						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
+						String ispis = "Da li ste sigurni da želite da izbrišete studenta "
+								+ BazaStudent.getInstance().getRow(model).getBrIndeksa() + " "
+								+ BazaStudent.getInstance().getRow(model).getIme() + " "
+								+ BazaStudent.getInstance().getRow(model).getPrezime() + "?";
 						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis, "Brisanje studenta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							StudentController.getInstance().izbrisiStudenta(red);
+							StudentController.getInstance().izbrisiStudenta(model);
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Student je obrisan!");
 						}
 					} else {
@@ -190,14 +193,15 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
+						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da želite da izbrišete profesora "
-								+ BazaProfesor.getInstance().getRow(red).getTitula() + " "
-								+ BazaProfesor.getInstance().getRow(red).getIme() + " "
-								+ BazaProfesor.getInstance().getRow(red).getPrezime() + "?";
+								+ BazaProfesor.getInstance().getRow(model).getTitula() + " "
+								+ BazaProfesor.getInstance().getRow(model).getIme() + " "
+								+ BazaProfesor.getInstance().getRow(model).getPrezime() + "?";
 						int code = JOptionPane.showConfirmDialog(GlavniProzor.getInstance(), ispis,
 								"Brisanje profesora", JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							ProfesorController.getInstance().izbrisiProfesora(red);
+							ProfesorController.getInstance().izbrisiProfesora(model);
 							JOptionPane.showMessageDialog(GlavniProzor.getInstance(), "Profesor je obrisan!");
 						}
 					} else {
@@ -210,11 +214,12 @@ public class MyMenuBar extends JMenuBar {
 					// provera da li smo dobro selektovali red
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
 						// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
+						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
 						int code = JOptionPane.showConfirmDialog(null,
 								"Da li ste sigurni da želite da izbrisete predmet?", "Brisanje predmeta",
 								JOptionPane.YES_NO_OPTION);
 						if (code == JOptionPane.YES_OPTION) {
-							PredmetController.getInstance().izbrisiPredmet(red);
+							PredmetController.getInstance().izbrisiPredmet(model);
 							JOptionPane.showMessageDialog(null, "Predmet je obrisan!");
 						}
 						if (code == JOptionPane.NO_OPTION) {
@@ -240,7 +245,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem help1 = new JMenuItem("Help"); // treba da sadzi detaljan opis o nacinu koriscenja aplikacije
 		help1.setMnemonic(KeyEvent.VK_H);
 		help1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
-		help1.setIcon(new ImageIcon("Slike/help.png"));
+		help1.setIcon(new ImageIcon("Slike"+File.separator+"help.png"));
 		help1.addActionListener(new ActionListener() {
 
 			@Override
@@ -359,7 +364,7 @@ public class MyMenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				SimpleDialog sd = new SimpleDialog(parent, "Informacije o studentu 2", true);
-				Label ls2 = new Label("Student 2: Aleksandra Mirkovic");
+				Label ls2 = new Label("Student 2: Aleksandra Mirković");
 				Font f = new Font("Sherif", Font.BOLD, 15);
 				ls2.setFont(f);
 				ls2.setAlignment(WIDTH);

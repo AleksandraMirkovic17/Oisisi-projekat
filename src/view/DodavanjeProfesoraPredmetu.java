@@ -48,7 +48,7 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 		setTitle("Odaberi profesora");
 		setResizable(true);
 		setModal(true);
-		setSize(400, 400);
+		setSize(400, 500);
 		setLocationRelativeTo(parent);
 
 		this.predmet = p;

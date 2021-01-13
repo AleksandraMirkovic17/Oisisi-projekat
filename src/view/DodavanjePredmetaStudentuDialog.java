@@ -91,9 +91,7 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 		} else {
 			panCenter.add(nemaNistaZaDodati);
 		}
-		
-		
-		
+
 		JButton btnOk = new JButton("DODAJ");
 		list.addItemListener(new ItemListener() {
 
@@ -138,13 +136,11 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 						if (p.getSifraPredmeta().equals(sifraPredmeta)) {
 							BazaNepolozeni.getInstance().dodajPredmet(p);
 							NepolozeniJTable.getInstance().azurirajPrikaz();
-							
-							//p.getNisuPoloziliPredmet().add(s); //dodajemo i tom predmetu na spisak studenta
 						}
-						
+
 					}
 				}
-				
+
 				setVisible(false);
 			}
 		});

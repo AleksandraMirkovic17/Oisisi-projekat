@@ -61,8 +61,9 @@ public class Ocena implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ocena [student=" + student + ", predmet=" + predmet + ", brojcanaVrednost=" + brojcanaVrednost
-				+ ", datumPolaganja=" + datumPolaganja + "]";
+		/*return "Ocena [student=" + student + ", predmet=" + predmet + ", brojcanaVrednost=" + brojcanaVrednost
+				+ ", datumPolaganja=" + datumPolaganja + "]";*/
+		return "";
 	}
 
 }

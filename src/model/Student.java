@@ -216,11 +216,12 @@ public class Student implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Student [prezime=" + prezime + ", ime=" + ime + ", datumRodjenja=" + datumRodjenja
+		/*return "Student [prezime=" + prezime + ", ime=" + ime + ", datumRodjenja=" + datumRodjenja
 				+ ", adresaStanovanja=" + adresaStanovanja + ", kontaktTelefon=" + kontaktTelefon + ", email=" + email
 				+ ", brIndeksa=" + brIndeksa + ", godinaUpisa=" + godinaUpisa + ", trenutnaGodinaStudija="
 				+ trenutnaGodinaStudija + ", status=" + status + ", prosecnaOcena=" + prosecnaOcena
-				+ ", polozeniPredmeti=" + polozeniPredmeti + ", nepolozeniPredmeti=" + nepolozeniPredmeti + "]";
+				+ ", polozeniPredmeti=" + polozeniPredmeti + ", nepolozeniPredmeti=" + nepolozeniPredmeti + "]";*/
+		return " ";
 	}
 
 
