@@ -51,6 +51,7 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 		setResizable(false);
 		setModal(true);
 		this.profesor = profesor;
+		IzmenaProfesorDialog.instanceIzmenaProfesor = this;
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setVisible(true);
 		
@@ -482,13 +483,12 @@ public  class IzmenaProfesorDialog extends JDialog implements ActionListener{
 	panel1.add(panBottom, BorderLayout.SOUTH);
 	
 	btnDodaj.setPreferredSize(new Dimension(150,25));
-	btnDodaj.addActionListener(this);
 	btnDodaj.addActionListener(new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			DodajPredmetProfesoru dialog = new DodajPredmetProfesoru(profesor,instanceIzmenaProfesor);
+			DodajPredmetProfesoru dialog = new DodajPredmetProfesoru(profesor);
 			dialog.setVisible(true);
 		}
 	});

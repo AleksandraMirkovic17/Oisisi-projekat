@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import model.BazaNepolozeni;
 import model.BazaPredmet;
@@ -25,22 +26,35 @@ import model.Profesor;
 
 public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2615893345062305472L;
+	/**
+	 * 
+	 */
+	
 	Profesor profesor;
 	@SuppressWarnings("deprecation")
-	public DodajPredmetProfesoru(Profesor p, IzmenaProfesorDialog parent)
+	public DodajPredmetProfesoru(Profesor p)
 	{
 		super();
 		setTitle("Dodaj predmet");
-		setResizable(true);
+		
 		setModal(true);
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		setResizable(false);
 		setSize(400, 400);
 		
-		
+		this.profesor=p;
 		
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
-		this.profesor=p;
+		
+		JPanel nemaNistaZaDodati = new JPanel();
+		JLabel nemaPredmeta = new JLabel("Nema nepolozenih predmeta!");
+		nemaNistaZaDodati.add(nemaPredmeta);
 		
 		List list = new List();
 		list.setMultipleSelections(true);
@@ -71,6 +85,9 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		if (brojMogucihPredmetaZaDodavanje > 0) {
 			panCenter.add(list);
 		}
+		else {
+			panCenter.add(nemaNistaZaDodati);
+		}
 		
 		
 		JButton btnOk = new JButton("Potvrdi");
@@ -87,9 +104,7 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 				}
 			}
 		});
-		
 		btnOk.setEnabled(false);
-		btnOk.setPreferredSize(new Dimension(100, 25));
 		btnOk.addActionListener(new ActionListener() {
 
 			@Override
@@ -100,7 +115,19 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 					JOptionPane.showMessageDialog(null, "Niste selektovali predmet za dodavanje!", "Upozorenje!",
 							JOptionPane.WARNING_MESSAGE);
 				}
-				else {
+			}
+		});
+		
+
+
+		
+		btnOk.setPreferredSize(new Dimension(100, 25));
+		btnOk.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String[] dodatiPredmete = list.getSelectedItems();
 				for (int i = 0; i < list.getSelectedItems().length; i++) {
 					String[] splited = dodatiPredmete[i].split("-");
 					String sifraPredmeta = splited[0].trim();
@@ -114,11 +141,9 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 					}
 					
 				}
+				setVisible(false);
 	              
 			}
-				
-		  setVisible(false);
-		}
 			
 		});
 		
@@ -156,6 +181,7 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 		add(panWest, BorderLayout.WEST);
 		add(panEast, BorderLayout.EAST);
 		add(panTop, BorderLayout.BEFORE_FIRST_LINE);
+		setLocationRelativeTo(IzmenaProfesorDialog.instanceIzmenaProfesor);
 
 	}
 	@Override
