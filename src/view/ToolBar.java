@@ -77,36 +77,35 @@ public class ToolBar extends JToolBar {
 				// TODO Auto-generated method stub
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
+					int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
+
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						
-						Student student = BazaStudent.getInstance().getRow(red); //
-						//BazaNepolozeni.getInstance().setS(student);
-						
-						
-						StudentController.getInstance().izmeniStudenta(red);
-						
+						Student student = BazaStudent.getInstance().getRow(model);
+						// BazaNepolozeni.getInstance().setS(student);
+						StudentController.getInstance().izmeniStudenta(model);
+
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
-					
+
 				}
 				// izmena profesora
-		         
+
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
-					
+
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
-					int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+					int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 					System.out.println(red);
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-						
+
 						ProfesorController.getInstance().izmeniProfesora(model);
-					
+
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);
 					}
-			
+
 				}
 				/* izmena predmeta */
 				if (TabPane.getInstance().getSelectedIndex() == 2) {

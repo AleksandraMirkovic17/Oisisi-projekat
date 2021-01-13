@@ -127,8 +127,9 @@ public class MyMenuBar extends JMenuBar {
 				// TODO Auto-generated method stub
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
+					int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						StudentController.getInstance().izmeniStudenta(red);
+						StudentController.getInstance().izmeniStudenta(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
 								JOptionPane.WARNING_MESSAGE);

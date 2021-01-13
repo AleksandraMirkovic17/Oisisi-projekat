@@ -45,7 +45,8 @@ public class BazaNepolozeni {
 			private void initnepolozeni() {
 				this.nepolozeniPredmeti = new ArrayList<Predmet>();
 				int red = StudentiJTable.getInstance().getSelectedRow();
-				Student d = BazaStudent.getInstance().getRow(red);
+				int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
+				Student d = BazaStudent.getInstance().getRow(model);
 			
 				nepolozeniPredmeti=d.getNepolozeniPredmeti();
 				

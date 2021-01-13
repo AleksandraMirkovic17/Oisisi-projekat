@@ -70,5 +70,9 @@ public class StudentTablePanel extends JPanel {
 	public static void setSelektovanRed(int selected) {
 		selektovanRed = selected;
 	}
+	
+	public static int getSelectovanRed() {
+		return selektovanRed;
+	}
 
 }

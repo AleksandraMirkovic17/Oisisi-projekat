@@ -33,11 +33,14 @@ public class StudentController {
 
 	public void izmeniStudenta(int rowSelectedIndex) {
 		if (rowSelectedIndex < 0) {
-			return;
+			return; // u slučaju kada je indeks manje od 0 nemamo dobru informaciju o tome kog
+					// studenta treba da izmenimo pa samo izađemo iz funkcije
 		}
 		// izmena modela
-		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex); 
+		Student student = BazaStudent.getInstance().getRow(rowSelectedIndex);
+		System.out.println(student);
 		IzmenaStudentaDialog dialog = new IzmenaStudentaDialog(student);
+		
 		dialog.setVisible(true);
 		// azuriranje prikaza
 		StudentiJTable.getInstance().refresTabelu();
@@ -52,23 +55,23 @@ public class StudentController {
 		}
 		StudentiJTable.getInstance().refresTabelu();
 	}
-	
+
 	public void dodajPredmetStudentu(Student student, Predmet predmet) {
 		student.getNepolozeniPredmeti().add(predmet);
 		NepolozeniJTable.getInstance().azurirajPrikaz();
 		StudentiJTable.getInstance().refresTabelu();
 	}
-	
+
 	public void ukloniPredmetStudentu(Student student, int rowSlectedIndexNepolozeni) {
 		Predmet predmet = BazaNepolozeni.getInstance().getRow(rowSlectedIndexNepolozeni);
-		for(int i=0; i<student.getNepolozeniPredmeti().size(); i++) {
-			if(student.getNepolozeniPredmeti().get(i).getSifraPredmeta().equals(predmet.getSifraPredmeta())) {
+		for (int i = 0; i < student.getNepolozeniPredmeti().size(); i++) {
+			if (student.getNepolozeniPredmeti().get(i).getSifraPredmeta().equals(predmet.getSifraPredmeta())) {
 				student.getNepolozeniPredmeti().remove(i);
 				break;
 			}
 		}
 		StudentiJTable.getInstance().refresTabelu();
-		//NepolozeniJTable.getInstance().azurirajPrikaz();
+		// NepolozeniJTable.getInstance().azurirajPrikaz();
 	}
-	
+
 }

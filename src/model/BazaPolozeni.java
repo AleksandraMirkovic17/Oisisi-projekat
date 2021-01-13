@@ -35,7 +35,8 @@ public class BazaPolozeni {
 
 		this.polozeniPredmeti = new ArrayList<Ocena>();
 		int red = StudentiJTable.getInstance().getSelectedRow();
-		Student s = BazaStudent.getInstance().getRow(red);
+		int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
+		Student s = BazaStudent.getInstance().getRow(model);
 		polozeniPredmeti = s.getPolozeniPredmeti();
 		for (Ocena o : polozeniPredmeti) {
 			inc++;
