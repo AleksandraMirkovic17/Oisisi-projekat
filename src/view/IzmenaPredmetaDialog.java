@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
@@ -126,19 +127,58 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 			System.out.println("Broj prof" + predmet.getProfesori().size());
 			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
-			txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
+		     txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
 		}
 
 		panProfesor.add(lblProfesor);
 		panProfesor.add(txtProfesor);
 
 		JButton plus = new JButton();
+		JButton btnminus =new JButton();
 		plus.setText("+");
-		ImageIcon ii = new ImageIcon("Slike//plus.png");
 
+		btnminus.setToolTipText("Uklanjanje profesora sa predmeta");
+		btnminus.setPreferredSize(new Dimension(30, 30));
+		ImageIcon ii = new ImageIcon("Slike//plus.png");
+		ImageIcon image=new ImageIcon(new ImageIcon("minus.png").getImage().getScaledInstance(10, 10, java.awt.Image.SCALE_SMOOTH));
+		btnminus.setIcon(image);
+		panProfesor.add(btnminus);
+		btnminus.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Profesor pr = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+				System.out.println(pr.toString());// selektovali smo red u tabeli
+				
+					Object[] options = { "Da", "Ne" };
+
+					int code = JOptionPane.showOptionDialog(instanceIzmenaPredmeta,
+							"Da li ste sigurni?", "Ukloni predmet",
+							JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+					if (code == JOptionPane.YES_OPTION) {
+						BazaProfesoriNaPredmetu.getInstance().getProfesori().remove(pr);
+						
+						Profesor p1=BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+						if(p1==null)
+						{
+							plus.setEnabled(true);
+							txtProfesor.setText(" ");
+						}
+						else {
+						txtProfesor.setText(p1.getIme() + " " + p1.getPrezime());}
+						
+						BazaProfesorPredajePredmet.getInstance().izbrisiPredmet(predmet.getSifraPredmeta(), pr);
+						ProfesorPredmetJTabel.getInstance().azurirajPrikaz();
+				}
+
+			}
+		});
 		// plus.setIcon();
 		plus.setToolTipText("Dodaj profesora na predmet");
+	
 		plus.setPreferredSize(new Dimension(20, 20));
+		
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 			plus.setEnabled(false);
 		}
@@ -157,6 +197,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		});
 
 		panProfesor.add(plus);
+		panProfesor.add(btnminus);
 
 		// naziv
 		JPanel panNaziv = new JPanel(new FlowLayout(FlowLayout.LEFT));

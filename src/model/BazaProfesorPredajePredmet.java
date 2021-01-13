@@ -12,8 +12,8 @@ public class BazaProfesorPredajePredmet {
 	private static BazaProfesorPredajePredmet instance = null;
 
 	public static BazaProfesorPredajePredmet getInstance() {
-		if(instance==null)
-		{instance = new BazaProfesorPredajePredmet();}
+		
+		instance = new BazaProfesorPredajePredmet();
 		return instance;
 
 	}
@@ -37,8 +37,9 @@ public class BazaProfesorPredajePredmet {
 
 		this.predmeti = new ArrayList<Predmet>();
 		int red = ProfesoriJTable.getInstance().getSelectedRow();
+		int model =ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 		System.out.printf("Red je %d",red);
-		Profesor p = BazaProfesor.getInstance().getRow(red);
+		Profesor p = BazaProfesor.getInstance().getRow(model);
 		this.predmeti = p.getPredmeti();
 		// **** dodati ove da ti proverava da li uopste postoje predmeti koje drzi i
 		// izmeniti konstruktor tako da ne postavljas novog profesora, sa null listom
@@ -112,4 +113,16 @@ public class BazaProfesorPredajePredmet {
 	public void dodajPredmet(Predmet p) {
 		this.predmeti.add(p);
 	}
+	public void izbrisiPredmet(String sifraPredmeta,Profesor p) {
+		
+		predmeti=p.getPredmeti();
+		for(Predmet p1 : predmeti)
+		{
+			if(p1.getSifraPredmeta()==sifraPredmeta) {
+				predmeti.remove(p1);
+				break;
+			}
+		
+	}
+}
 }

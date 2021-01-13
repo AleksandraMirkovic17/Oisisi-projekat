@@ -30,6 +30,9 @@ public class Predmet implements Serializable{
 		this.semestar = semestar;
 		this.godinaStudija = godinaStudija;
 		this.espb = espb;
+		this.poloziliPredmet=new ArrayList<Student>();
+		this.nisuPoloziliPredmet=new ArrayList<Student>();
+		this.profesori= new ArrayList<Profesor>();
 	}
 
 	public Predmet(String sifraPredmeta, String nazivPredmeta, Semestar semestar, int godinaStudija,
@@ -41,6 +44,9 @@ public class Predmet implements Serializable{
 		this.godinaStudija = godinaStudija;
 		this.profesori = profesori;
 		this.espb = espb;
+		this.poloziliPredmet=new ArrayList<Student>();
+		this.nisuPoloziliPredmet=new ArrayList<Student>();
+		
 	}
 
 	public Predmet(String sifraPredmeta, String nazivPredmeta, Semestar semestar, int godinaStudija,

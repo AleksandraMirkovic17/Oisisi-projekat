@@ -43,6 +43,7 @@ public class ProfesorController {
 		IzmenaProfesorDialog dialog = new IzmenaProfesorDialog(p);
 		dialog.setVisible(true);
 		// azuriranje prikaza
+		ProfesoriJTable.getInstance().azurirajPrikaz();
 		
 	}
 

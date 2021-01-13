@@ -35,7 +35,8 @@ public class BazaProfesoriNaPredmetu {
 
 		this.profesori = new ArrayList<Profesor>();
 		int red = PredmetJTable.getInstance().getSelectedRow();
-		Predmet p = BazaPredmet.getInstance().getRow(red);
+		int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
+		Predmet p = BazaPredmet.getInstance().getRow(model);
 		if (p.getProfesori() != null) {
 			this.profesori = p.getProfesori();
 		} else {
@@ -54,7 +55,11 @@ public class BazaProfesoriNaPredmetu {
 	}
 
 	public Profesor getPoslednjiProfesor() {
-		Profesor p = this.profesori.get(this.profesori.size() - 1);
+		if(this.profesori.size()== 0)
+		{
+			return null;
+		}
+		Profesor p = this.profesori.get(this.profesori.size()-1);
 		return p;
 	}
 
