@@ -37,14 +37,53 @@ import model.BazaProfesor;
 import model.BazaStudent;
 import pomocneKlase.SimpleDialog;
 
+/**
+ * Klasa koja modeluje meni aplikacije. Instanca ove klase se smešta na glavni
+ * prozor aplikacije. Nasleđuje klasu JMenuBar. Klasa ima sledeće
+ * funkcionalnosti:
+ * 
+ * File - New - dodavanje novog entiteta.
+ * 
+ * File - Close - zatvaranje aplikacije.
+ * 
+ * Edit - Edit - Izmena postojećeg entiteta.
+ * 
+ * Edit - Delete - Brisanje postojećeg entiteta.
+ * 
+ * Help - Help - Ova sekcija sadrži detaljan opis o načinu korisćenja
+ * aplikacije.
+ * 
+ * Hel - About - About App - Prikaz verzije aplikacije, kao i kratak opis
+ * aplikacije.
+ * 
+ * Help - About - About Student - Sadrži sažetu biografija svakog autora.
+ * 
+ * Sve stavke menija imaju odgovarajuću ikonicu, akcelerator i mnemonik.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
 public class MyMenuBar extends JMenuBar {
 	/**
-	 * 
+	 * serijski broj
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * referenca na instancu klase MyMenuBar
+	 */
 	private static MyMenuBar instance = null;
+	/**
+	 * prozor roditelj, na koji se postavlja meni.
+	 */
 	private static GlavniProzor parent;
 
+	/**
+	 * Ova klasa je Singleton. Ova metoda omogućuje postojanje samo jedne instance
+	 * ove klase.
+	 * 
+	 * @return vraća instancu ove klase, u slučaju da prvi put pozivamo ovu metodu
+	 *         vrećena instanca je tu kreirana.
+	 */
 	public static MyMenuBar getInstance() {
 		if (instance == null) {
 			instance = new MyMenuBar();
@@ -52,6 +91,9 @@ public class MyMenuBar extends JMenuBar {
 		return instance;
 	}
 
+	/**
+	 * Konstruktor klase
+	 */
 	public MyMenuBar() {
 		JMenu file = new JMenu("File");
 		BazaPodataka bp = new BazaPodataka();
@@ -128,7 +170,7 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
+						int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
 						StudentController.getInstance().izmeniStudenta(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali studenta!", "Upozorenje!",
@@ -139,7 +181,7 @@ public class MyMenuBar extends JMenuBar {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					System.out.println(red);
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+						int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						ProfesorController.getInstance().izmeniProfesora(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali profesora!", "Upozorenje!",
@@ -150,7 +192,7 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red <= BazaPredmet.getInstance().getPredmeti().size())) {
-						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
+						int model = PredmetJTable.getInstance().convertRowIndexToModel(red);
 						PredmetController.getInstance().izmeniPredmet(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
@@ -173,7 +215,7 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
+						int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da želite da izbrišete studenta "
 								+ BazaStudent.getInstance().getRow(model).getBrIndeksa() + " "
 								+ BazaStudent.getInstance().getRow(model).getIme() + " "
@@ -193,7 +235,7 @@ public class MyMenuBar extends JMenuBar {
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getbroj_profesora())) {
-						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+						int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da želite da izbrišete profesora "
 								+ BazaProfesor.getInstance().getRow(model).getTitula() + " "
 								+ BazaProfesor.getInstance().getRow(model).getIme() + " "
@@ -214,7 +256,7 @@ public class MyMenuBar extends JMenuBar {
 					// provera da li smo dobro selektovali red
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
 						// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
-						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
+						int model = PredmetJTable.getInstance().convertRowIndexToModel(red);
 						int code = JOptionPane.showConfirmDialog(null,
 								"Da li ste sigurni da želite da izbrisete predmet?", "Brisanje predmeta",
 								JOptionPane.YES_NO_OPTION);
@@ -245,7 +287,7 @@ public class MyMenuBar extends JMenuBar {
 		JMenuItem help1 = new JMenuItem("Help"); // treba da sadzi detaljan opis o nacinu koriscenja aplikacije
 		help1.setMnemonic(KeyEvent.VK_H);
 		help1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
-		help1.setIcon(new ImageIcon("Slike"+File.separator+"help.png"));
+		help1.setIcon(new ImageIcon("Slike" + File.separator + "help.png"));
 		help1.addActionListener(new ActionListener() {
 
 			@Override
@@ -260,8 +302,7 @@ public class MyMenuBar extends JMenuBar {
 						+ "	Broj telefona može sadržati bilo koju cifru i znakove / i -.\r\n"
 						+ " Indeks može da sadrži bilo koja slova i brojeve npr E123,"
 						+ " ali je ако se upotrebljavaju znaci '/' i '-' neophodno je da indeks bude u prvilnom formatu npr. sw-141-2016 ili RA 142/2019\r\n"
-						+ " Indeks mora da bude jedinstven za svakog studenta. "
-						+ " Email – bilo_šta@bilo_šta.\r\n"
+						+ " Indeks mora da bude jedinstven za svakog studenta. " + " Email – bilo_šta@bilo_šta.\r\n"
 						+ "	Sva polja u dialogu moraju biti popunjena da bi mogli da dodate studenta, u slučaju da ste nešto"
 						+ "pogrešno uneli to polje će da bude crveno. Tek kada sva polja budu zelena moguće je dodati studenta.\n\n\n\r\n"
 						+ "TABELA PREDMETA\n\r\n"
@@ -270,8 +311,7 @@ public class MyMenuBar extends JMenuBar {
 						+ "3.	Brisanje predmeta moguće je pomoću dugmeta na tool baru ili preko Edit->Delete\r\n"
 						+ "4.	Dodavanje profesora na predmet moguće je u dialogu izmeni, pritskom na dugme '+' pored profesora, ali samo ako nema nijednog profesora koji predaje predmet."
 						+ "\nU suprotnom, u tom polju stoji upisan profesor koji je poslednji dodat na predmet.\r\n"
-						+ "Validacija unosa:\r\n"
-						+ "Šifra predmeta mora da bude jedinstvena za svaki predmet."
+						+ "Validacija unosa:\r\n" + "Šifra predmeta mora da bude jedinstvena za svaki predmet."
 						+ "Sva polja u dialogu moraju biti popunjena i zelena da bi mogli da dodate predmet\n\n\n\r\n"
 						+ "TABELA PROFESORA\n\r\n"
 						+ "1.	Dodavanje profesora je moguće pomoću dugmeta na tool baru\n\r\n"
@@ -282,12 +322,9 @@ public class MyMenuBar extends JMenuBar {
 						+ " Sva polja u dialogu moraju biti korektno popunjena da bi mogli da dodate profesora\n\n\n\r\n"
 						+ "Prečice:\n" + "ctrl + N – Dodavanje novog entiteta u tabelu na koju smo pozicionirani\r\n"
 						+ "ctrl + E – Izmena selektovanog entiteta\r\n"
-						+ "ctrl + D – Brisanje selektovanog entiteta\r\n"
-					    + "ctrl + H – Prikaz dialoga za pomoć\r\n"
-						+ "ctrl + A – Informacija o verziji aplikacije\r\n"
-						+ "ctrl + 1 – Informacije o studentu 1\r\n"
-						+ "ctrl + 2 – Informacije o studentu 2\r\n"
-						+ "ctrl + C - Zatvaranje aplikacije\r\n"
+						+ "ctrl + D – Brisanje selektovanog entiteta\r\n" + "ctrl + H – Prikaz dialoga za pomoć\r\n"
+						+ "ctrl + A – Informacija o verziji aplikacije\r\n" + "ctrl + 1 – Informacije o studentu 1\r\n"
+						+ "ctrl + 2 – Informacije o studentu 2\r\n" + "ctrl + C - Zatvaranje aplikacije\r\n"
 						+ "\n\n***NAPOMENA:Podrazumeva se da kada želimo da radimo određene izmene ili dodajemo određene entitete\n da smo u odgovarajućem tabu i da smo selektovali određeni entitet ako je to potrebno!!!",
 						20, 60);
 				Font f = new Font("Arial", Font.BOLD, 14);

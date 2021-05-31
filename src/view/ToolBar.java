@@ -26,13 +26,26 @@ import model.BazaNepolozeni;
 import model.BazaPredmet;
 import model.BazaProfesor;
 
+/**
+ * 
+ * Klasa koja nasleđuje JToolBar i služi za predstvljanje ToolBara. Na ToolBaru
+ * se nalaze dugmići za dodavanje, brisanje i modifikovanje različitih entiteta.
+ * Kako i polje za unos parametara za pretragu, nakon klika na ikonicu za
+ * pretraživanje prikazuju se entiteti koji zadavoljavaju date parametre.
+ * 
+ * @author Aleksandra Mirković
+ *
+ *
+ * 
+ */
 public class ToolBar extends JToolBar {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -491100101152257518L;
 
-	private static ToolBar instance = null;
+	private static ToolBar instance = null; 
+	/**
+	 * Ova metoda nam omogućuje da ne možemo da instanciramo više objekata ove klase.
+	 * @return vraća instancu objekta ove klase
+	 */
 
 	public static ToolBar getInstance() {
 		if (instance == null) {
@@ -40,13 +53,26 @@ public class ToolBar extends JToolBar {
 		}
 		return instance;
 	}
+	
+	/**
+	 * Konstruktor klase
+	 */
 
 	public ToolBar() {
 		super(SwingConstants.HORIZONTAL);
 		JButton btnNew = new JButton();
 		btnNew.setToolTipText("DODAJ");
-		btnNew.addActionListener(new ActionListener() { // dodali smo akciju koja ce da pozove diaolg dodavanje
-														// studenta, profesora..
+		btnNew.addActionListener(new ActionListener() { // dodali
+														// smo
+														// akciju
+														// koja
+														// ce
+														// da
+														// pozove
+														// diaolg
+														// dodavanje
+														// studenta,
+														// profesora..
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
@@ -63,7 +89,7 @@ public class ToolBar extends JToolBar {
 				}
 			}
 		});
-		ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike"+File.separator+"plus.png").getImage());
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon("Slike" + File.separator + "plus.png").getImage());
 		btnNew.setIcon(imageIcon);
 		add(btnNew);
 		addSeparator();
@@ -75,7 +101,7 @@ public class ToolBar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+// TODO Auto-generated method stub
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
@@ -89,15 +115,15 @@ public class ToolBar extends JToolBar {
 					}
 
 				}
-				// izmena profesora
+// izmena profesora
 
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
-					
+
 					System.out.println(red);
 					if (red >= 0 && (red < BazaProfesor.getInstance().getProfesori().size())) {
-						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+						int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						ProfesorController.getInstance().izmeniProfesora(model);
 
 					} else {
@@ -110,7 +136,7 @@ public class ToolBar extends JToolBar {
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
 					int red = PredmetJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaPredmet.getInstance().getPredmeti().size())) {
-						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
+						int model = PredmetJTable.getInstance().convertRowIndexToModel(red);
 						PredmetController.getInstance().izmeniPredmet(model);
 					} else {
 						JOptionPane.showMessageDialog(null, "Niste selektovali predmet!", "Upozorenje!",
@@ -120,24 +146,24 @@ public class ToolBar extends JToolBar {
 			}
 		});
 
-		ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike"+File.separator+"olovka.png").getImage());
+		ImageIcon imageIcon1 = new ImageIcon(new ImageIcon("Slike" + File.separator + "olovka.png").getImage());
 		btnIzmeni.setIcon(imageIcon1);
 
 		add(btnIzmeni);
 		addSeparator();
 
 		JButton btnIzbrisi = new JButton();
-		btnIzbrisi.setToolTipText("IZBRI�I");
+		btnIzbrisi.setToolTipText("IZBRIŠI");
 		btnIzbrisi.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// u slucaju da smo na tabu studenti
+// u slucaju da smo na tabu studenti
 				if (TabPane.getInstance().getSelectedIndex() == 0) {
 					int red = StudentiJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaStudent.getInstance().getBrojStudenata())) {
-						int model=StudentiJTable.getInstance().convertRowIndexToModel(red);
-						String ispis = "Da li ste sigurni da �elite da izbri�ete studenta "
+						int model = StudentiJTable.getInstance().convertRowIndexToModel(red);
+						String ispis = "Da li ste sigurni da želite da izbrišete studenta "
 								+ BazaStudent.getInstance().getRow(model).getBrIndeksa() + " "
 								+ BazaStudent.getInstance().getRow(model).getIme() + " "
 								+ BazaStudent.getInstance().getRow(model).getPrezime() + "?";
@@ -153,11 +179,11 @@ public class ToolBar extends JToolBar {
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
-				// u slucaju da smo na tabu profesori
+// u slucaju da smo na tabu profesori
 				if (TabPane.getInstance().getSelectedIndex() == 1) {
 					int red = ProfesoriJTable.getInstance().getSelectedRow();
 					if (red >= 0 && (red < BazaProfesor.getInstance().getProfesori().size())) {
-						int model=ProfesoriJTable.getInstance().convertRowIndexToModel(red);
+						int model = ProfesoriJTable.getInstance().convertRowIndexToModel(red);
 						String ispis = "Da li ste sigurni da zelide da izbrisete profesora "
 								+ BazaProfesor.getInstance().getRow(model).getTitula() + " "
 								+ BazaProfesor.getInstance().getRow(model).getIme() + " "
@@ -174,11 +200,15 @@ public class ToolBar extends JToolBar {
 					}
 				}
 				if (TabPane.getInstance().getSelectedIndex() == 2) {
-					int red = PredmetJTable.getInstance().getSelectedRow(); // selektovali smo red u tabeli
-					// provera da li smo dobro selektovali red
+					int red = PredmetJTable.getInstance().getSelectedRow(); // selektovali
+																			// smo
+																			// red
+																			// u
+																			// tabeli
+// provera da li smo dobro selektovali red
 					if (red >= 0 && (red < BazaPredmet.getInstance().getBrojac())) {
-						int model=PredmetJTable.getInstance().convertRowIndexToModel(red);
-						// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
+						int model = PredmetJTable.getInstance().convertRowIndexToModel(red);
+// REFERENCIRAN KOD ZA DIJALOG YES/NO: vezbe4 MyWindowListener
 						int code = JOptionPane.showConfirmDialog(null,
 								"Da li ste sigurni da zelite da izbrisete predmet?", "Brisanje predmeta",
 								JOptionPane.YES_NO_OPTION);
@@ -200,14 +230,14 @@ public class ToolBar extends JToolBar {
 
 		});
 
-		ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike"+File.separator+"kanta.png").getImage());
+		ImageIcon imageIcon2 = new ImageIcon(new ImageIcon("Slike" + File.separator + "kanta.png").getImage());
 		btnIzbrisi.setIcon(imageIcon2);
 		add(btnIzbrisi);
 		addSeparator();
 
 		JButton btnPretrazi = new JButton();
-		btnPretrazi.setToolTipText("PRETRAZI");
-		ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike"+File.separator+"lupa.png").getImage());
+		btnPretrazi.setToolTipText("PRETRAŽI");
+		ImageIcon imageIcon22 = new ImageIcon(new ImageIcon("Slike" + File.separator + "lupa.png").getImage());
 		btnPretrazi.setIcon(imageIcon22);
 		add(btnPretrazi);
 		addSeparator();

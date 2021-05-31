@@ -4,26 +4,101 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Enumeracija u kojoj su nabrojani načini finansiranja jednog studenta
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
 enum StatusStudenta {
-	B, S
+	/**
+	 * budžetski
+	 */
+	B,
+	/**
+	 * samofinansirajući
+	 */
+	S
 };
 
-public class Student implements Serializable{
+/**
+ * Klasa koja modeluje entitet student u informacionom sistemu.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+public class Student implements Serializable {
+	/**
+	 * prezime student
+	 */
 	private String prezime;
+	/**
+	 * ime studenta
+	 */
 	private String ime;
+	/**
+	 * datum rođenja studenta
+	 */
 	private LocalDate datumRodjenja;
+	/**
+	 * adresa stanovanja studenta
+	 */
 	private String adresaStanovanja;
+	/**
+	 * kontakt telefon studenta
+	 */
 	private String kontaktTelefon;
+	/**
+	 * adresa elektornske pošte studenta
+	 */
 	private String email;
+	/**
+	 * broj indeksa studenta, jedinstveno određuje svakog studenta u sistemu
+	 */
 	private String brIndeksa;
+	/**
+	 * godina upisa studenta na fakultet
+	 */
 	private int godinaUpisa;
+	/**
+	 * trenutna godina studija
+	 */
 	private int trenutnaGodinaStudija;
+	/**
+	 * način finansiranja studija
+	 */
 	private StatusStudenta status;
+	/**
+	 * prosecna ocena studenta
+	 */
 	private double prosecnaOcena;
+	/**
+	 * lista položenih predmeta studenta, tj. lista ocena
+	 */
 	private ArrayList<Ocena> polozeniPredmeti;
+	/**
+	 * lista nepoloženih predmeta studenta
+	 */
 	private ArrayList<Predmet> nepolozeniPredmeti;
 
-	// constructor using fields
+	/**
+	 * Konstruktor sa parametrima, kreira objekat tipa student i inicijalizuje polja
+	 * na prosleđene vrednosti.
+	 * 
+	 * @param prezime               - prezime studenta
+	 * @param ime                   - ime studenta
+	 * @param datumRodjenja         - datum rođenja
+	 * @param adresaStanovanja      - adresa stanovanja
+	 * @param kontaktTelefon        - broj telefona
+	 * @param email                 - adresa elekstronske pošte
+	 * @param brIndeksa             - broj indeksa
+	 * @param godinaUpisa           - godina upisa
+	 * @param trenutnaGodinaStudija - trenutna godina studija
+	 * @param status                - način finansiranja
+	 * @param prosecnaOcena         - prosečna ocena
+	 * @param polozeniPredmeti      - lista položenih predmeta
+	 * @param nepolozeniPredmeti    -lista nepoloženih predmeta
+	 */
 	public Student(String prezime, String ime, LocalDate datumRodjenja, String adresaStanovanja, String kontaktTelefon,
 			String email, String brIndeksa, int godinaUpisa, int trenutnaGodinaStudija, StatusStudenta status,
 			double prosecnaOcena, ArrayList<Ocena> polozeniPredmeti, ArrayList<Predmet> nepolozeniPredmeti) {
@@ -42,7 +117,11 @@ public class Student implements Serializable{
 		this.nepolozeniPredmeti = nepolozeniPredmeti;
 		this.prosecnaOcena = getProsecnaOcena();
 	}
-		// constructor from superclass
+
+	/**
+	 * Prazan konstruktor. Inicijalizuje polja klase na neke predefinisane
+	 * vrednosti.
+	 */
 	public Student() {
 		super();
 		this.prezime = new String("Prezime");
@@ -58,6 +137,13 @@ public class Student implements Serializable{
 		this.nepolozeniPredmeti = new ArrayList<Predmet>();
 
 	}
+
+	/**
+	 * Konstruktor kopije. Vrednosti polja novog objekta postavlja na vrednosti
+	 * polja objekta koji mu se prosleđuje i kreira novi objekat tipa Student.
+	 * 
+	 * @param s objekat tipa Student čiju kopiju pravimo
+	 */
 	public Student(Student s) {
 		super();
 		this.prezime = s.getPrezime();
@@ -72,7 +158,6 @@ public class Student implements Serializable{
 		this.nepolozeniPredmeti = s.getNepolozeniPredmeti();
 		this.prosecnaOcena = s.getProsecnaOcena();
 	}
-	
 
 	// getters and setters
 	public String getPrezime() {
@@ -155,6 +240,9 @@ public class Student implements Serializable{
 		this.status = status;
 	}
 
+	/**
+	 * @return status studenta u obliku tipa ,,char"
+	 */
 	public char getStatusChar() {
 		if (this.status == StatusStudenta.B) {
 			return 'B';
@@ -163,6 +251,11 @@ public class Student implements Serializable{
 		}
 	}
 
+	/**
+	 * Na osnovu prosleđenog znaka metoda postavlja status studenta.
+	 * 
+	 * @param s status studenta u obliku ,,char"
+	 */
 	public void setStatusChar(char s) {
 		if (s == 'B') {
 			this.status = StatusStudenta.B;
@@ -171,6 +264,11 @@ public class Student implements Serializable{
 		}
 	}
 
+	/**
+	 * Prosečnu oceu dobavlja tako što sračuna prosek iz liste položenih predmeta
+	 * 
+	 * @return povratna vrednost je prosečna ocena studenta
+	 */
 	public double getProsecnaOcena() {
 		double po = 0.0;
 		double ukupno = 0.0;
@@ -183,10 +281,16 @@ public class Student implements Serializable{
 		return po;
 
 	}
-	
+
+	/**
+	 * Metoda koja računa ukupan broj ESPB bodova, tako što sabira ESPB bodove za
+	 * svaki od položenih predmeta.
+	 * 
+	 * @return povratna vrednost je ukupno ostvareni broj ESPB bodova studenta
+	 */
 	public int getUkupnoEspb() {
-		int espb=0;
-		if(polozeniPredmeti.size()>0) {
+		int espb = 0;
+		if (polozeniPredmeti.size() > 0) {
 			for (int i = 0; i < polozeniPredmeti.size(); i++) {
 				espb += polozeniPredmeti.get(i).getPredmet().getEspb();
 			}
@@ -213,16 +317,22 @@ public class Student implements Serializable{
 	public void setNepolozeniPredmeti(ArrayList<Predmet> nepolozeniPredmeti) {
 		this.nepolozeniPredmeti = nepolozeniPredmeti;
 	}
-	
+
+	/**
+	 * Vraća ovaj objekat u obliku stringa
+	 */
 	@Override
 	public String toString() {
-		/*return "Student [prezime=" + prezime + ", ime=" + ime + ", datumRodjenja=" + datumRodjenja
-				+ ", adresaStanovanja=" + adresaStanovanja + ", kontaktTelefon=" + kontaktTelefon + ", email=" + email
-				+ ", brIndeksa=" + brIndeksa + ", godinaUpisa=" + godinaUpisa + ", trenutnaGodinaStudija="
-				+ trenutnaGodinaStudija + ", status=" + status + ", prosecnaOcena=" + prosecnaOcena
-				+ ", polozeniPredmeti=" + polozeniPredmeti + ", nepolozeniPredmeti=" + nepolozeniPredmeti + "]";*/
+		/*
+		 * return "Student [prezime=" + prezime + ", ime=" + ime + ", datumRodjenja=" +
+		 * datumRodjenja + ", adresaStanovanja=" + adresaStanovanja +
+		 * ", kontaktTelefon=" + kontaktTelefon + ", email=" + email + ", brIndeksa=" +
+		 * brIndeksa + ", godinaUpisa=" + godinaUpisa + ", trenutnaGodinaStudija=" +
+		 * trenutnaGodinaStudija + ", status=" + status + ", prosecnaOcena=" +
+		 * prosecnaOcena + ", polozeniPredmeti=" + polozeniPredmeti +
+		 * ", nepolozeniPredmeti=" + nepolozeniPredmeti + "]";
+		 */
 		return " ";
 	}
-
 
 }

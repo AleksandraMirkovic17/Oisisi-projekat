@@ -16,20 +16,35 @@ import model.BazaPolozeni;
 import model.BazaPredmet;
 import model.Ocena;
 
+/**
+ * Klasa koja modeluje dijalog za poništavanje ocene kod studenta. Nakon potvrde
+ * poništavanja predmet se iz tabele položenih predmeta kod studenta premešta u
+ * tabelu nepoloženih predmeta. Nasleđuje klasu JDialog.
+ * Dijalog poseduje pitanje i dva dugmića ,,Da" i ,,Ne".
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
 public class PonistavanjeOcene extends JDialog {
 
+	/**
+	 * Konstruktor klase
+	 * @param o objekat klase ocena koji želimo da poništimo
+	 * @param row broj reda u kome se ta ocena nalazi u tabeli položenih predmeta studenta
+	 */
 	public PonistavanjeOcene(Ocena o, int row) {
 		setModal(true);
 		setSize(300, 250);
 		setResizable(false);
-		setTitle("Poni�tavanje ocene");
+		setTitle("Poništavanje ocene");
 
 		JPanel dialogPanel1 = new JPanel();
 		BoxLayout boxDialogPanel1 = new BoxLayout(dialogPanel1, BoxLayout.Y_AXIS);
 		dialogPanel1.setLayout(boxDialogPanel1);
 
 		JPanel dialogPanel2 = new JPanel();
-		JLabel dialogLabel2 = new JLabel("Da li ste sigurni da �elite da poni�tite ocenu?");
+		JLabel dialogLabel2 = new JLabel("Da li ste sigurni da želite da poništite ocenu?");
 		dialogPanel2.add(dialogLabel2);
 
 		JPanel dialogPanel3 = new JPanel();
@@ -46,11 +61,9 @@ public class PonistavanjeOcene extends JDialog {
 				BazaNepolozeni.getInstance().dodajPredmet(o.getPredmet());
 				NepolozeniJTable.getInstance().azurirajPrikaz();
 
-
-
 				BazaPolozeni.getInstance().izbrisiOcenu(row);
 				PolozeniJTable.getInstance().azurirajPrikaz();
-				
+
 				for (int i1 = 0; i1 < BazaPredmet.getInstance().getPredmeti().size(); i1++) {
 					for (int i2 = 0; i2 < BazaPredmet.getInstance().getPredmeti().get(i1).getPoloziliPredmet()
 							.size(); i2++) {

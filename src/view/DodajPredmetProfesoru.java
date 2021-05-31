@@ -25,17 +25,37 @@ import model.Ocena;
 import model.Predmet;
 import model.Profesor;
 
+/**
+ * Klasa služi za modelovanje dijaloga za dodavanje predmeta profesoru.
+ * Prikazuje se lista svih predmeta koje profesor može da predaje. Iz te liste
+ * se bira koji se dodaje tom profesoru. Omogućena je i višestruka selekcija.
+ * Nasleđuje klasu JDialog i implementira interfejs ItemListener. Nakon uspešno
+ * odrađene akcije tabela predmeta profesora se ažurira.
+ * 
+ * @author Aleksandra Mirković
+ *
+ */
+
 public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 
 	/**
-	 * 
+	 * serijski broj
 	 */
 	private static final long serialVersionUID = -2615893345062305472L;
 	/**
 	 * 
 	 */
+	/**
+	 * Profesor kome se dodaje predmet
+	 */
 
 	Profesor profesor;
+
+	/**
+	 * Konstruktor klase.
+	 * 
+	 * @param p predstavlja profesora, kome želimo da dodamo predmet.
+	 */
 
 	@SuppressWarnings("deprecation")
 	public DodajPredmetProfesoru(Profesor p) {
@@ -193,6 +213,10 @@ public class DodajPredmetProfesoru extends JDialog implements ItemListener {
 
 	}
 
+	/**
+	 * Metoda koja omogućava da se nakon selekcije određenog predmeta, njegovo polje
+	 * oboji u plavo.
+	 */
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub

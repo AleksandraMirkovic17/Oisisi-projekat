@@ -11,25 +11,46 @@ import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Klasa koja služi za modelovanje status bara koji se postavlja na dno glavnog
+ * prozora. Nasleđuje klasu JPAnel i implementira interfejs Runnable. StatusBar
+ * sadrži naziv aplikacije i trenutni datum i vreme.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
 public class StatusBar extends JPanel implements Runnable {
 	/**
-	 * 
+	 * serijski broj
 	 */
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * nit
+	 */
 	private Thread nit;
+	/**
+	 * labela sa datumom i vremenom
+	 */
 	private JLabel datumVreme;
-
+	/**
+	 * format prikaza datuma
+	 */
 	protected SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
+	/**
+	 * format prikaza vremena
+	 */
 	protected SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
 
+	/**
+	 * konstruktor klase, kreira status bar
+	 */
 	StatusBar() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize(); // Dimenziju koja sadrzi screenHeigh i screenWidth
 		setPreferredSize(new Dimension(screenSize.width, 25));
 		setLayout(new BorderLayout());
 
-		JLabel nazivApp = new JLabel("		Studentska slu�ba");
+		JLabel nazivApp = new JLabel("		Studentska služba");
 		add(nazivApp, BorderLayout.WEST);
 
 		datumVreme = new JLabel();
@@ -47,6 +68,10 @@ public class StatusBar extends JPanel implements Runnable {
 	 * https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
 	 * klasa Calendar je apstraktna klasa, pozivanjem metode getInstance() ove klase
 	 * dobijamo trenutno vreme
+	 */
+	/**
+	 * nakon pokretanja niti, poziva se ova metoda i izvršava se sve dok je nit
+	 * pozivaoc u životu
 	 */
 	@Override
 	public void run() {
@@ -66,4 +91,3 @@ public class StatusBar extends JPanel implements Runnable {
 	}
 
 }
-

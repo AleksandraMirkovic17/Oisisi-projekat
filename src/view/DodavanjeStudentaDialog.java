@@ -28,16 +28,77 @@ import model.BazaStudent;
 import model.Student;
 import pomocneKlase.MyFocusListener;
 
+/**
+ * Klasa koja modeluje dijalog za dodavanje novog studenta u bazu studenata.
+ * Ukoliko referent u tabu Studenti odabere neku od opcija za dodavanje novog
+ * entiteta(dugme ToolBar-a, stavka menija, odgovarajući akcelerator ili
+ * mnemonik) otvara se dijalog koji je modalan i centriran u odnosu na glavni
+ * prozor. Prikazuje se forma za unos informacija o studentu, kao i dva dugmeta
+ * za potvrdu i odustanak. Pritisak na dugme "Potvrdi" je moguće samo ako su sva
+ * polja validno popunjena. Nakon dodavanja novog studenta u sistem, prikaz
+ * tabele sa studentima se osvežava i sadržaj se ažurira.
+ * 
+ * Nasleđuje klasu JDialog i implementira interfejs ActionListener.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
 public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 
 	/**
-	* 
-	*/
+	 * serijski broj
+	 */
 	private static final long serialVersionUID = 5282385078335739861L;
-	
+
+	/**
+	 * predstavlja roditeljski dijalog koji je pozvao ovaj dijalog
+	 */
 	private static GlavniProzor parent;
-	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtIndeks, txtGodinaUpisa;
-	JComboBox<String> trenutnaGodinaCombo, finansCombo;
+	/**
+	 * tekstualno polje za unos imena
+	 */
+	JTextField txtIme;
+	/**
+	 * tekstualno polje za unos prezimena
+	 */
+	JTextField txtPrezime;
+	/**
+	 * tekstualno polje za unos datuma rođenja
+	 */
+	JTextField txtDatumRodjenja;
+	/**
+	 * tekstualno polje za unos adrese
+	 */
+	JTextField txtAdresa;
+	/**
+	 * tekstualno polje za unos broja telefona
+	 */
+	JTextField txtTel;
+	/**
+	 * tekstualno polje za unos elektronske pošte
+	 */
+	JTextField txtEmail;
+	/**
+	 * tekstualno polje za unos broja indeksa
+	 */
+	JTextField txtIndeks;
+	/**
+	 * tekstualno polje za unos godine upisa
+	 */
+	JTextField txtGodinaUpisa;
+	/**
+	 * ComboBox za odabir odgovarajuće vrednosti za trenutnu godinu studija
+	 */
+	JComboBox<String> trenutnaGodinaCombo;
+	/**
+	 * ComboBox za odabir načina finansiranja
+	 */
+	JComboBox<String> finansCombo;
+
+	/**
+	 * Konstruktor klase
+	 */
 
 	DodavanjeStudentaDialog() {
 		super();
@@ -46,7 +107,6 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setResizable(false);
-
 
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
@@ -420,10 +480,16 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		setModal(true);
 		pack();
 		setLocationRelativeTo(GlavniProzor.getInstance()); // da bi dialog bio centriran neophodno je pozvati metodu
-														   // setLocationRelativeTo(parent frame) posle pozivanja
-														   // metode pack
+															// setLocationRelativeTo(parent frame) posle pozivanja
+															// metode pack
 
 	}
+
+	/**
+	 * Metoda koja kupi unete podatke
+	 * 
+	 * @return povratna vrednost je niz unetih podataka konvertovan u String
+	 */
 
 	public String[] pokupiTekst() {
 		String tekst[] = new String[10];
@@ -444,6 +510,12 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		return tekst;
 
 	}
+
+	/**
+	 * Metoda iz interfejsa ActionListener. Omogućuje odgovarajući odgovor od
+	 * sistema nakon klika na ,,ODUSTANI" ili ,,POTVRDI". Omogućuje kreiranje novog
+	 * studenta na osnovu unetih podataka.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -482,6 +554,15 @@ public class DodavanjeStudentaDialog extends JDialog implements ActionListener {
 		}
 
 	}
+
+	/**
+	 * Metoda koja omogućava proveru da li su sva polja ispravno popunjena. U
+	 * slučaju ispravno popunjenog tekstualnog polja polje se boji u zeleno, a u
+	 * slučaju neispravnog u crveno.
+	 * 
+	 * @return predstavlja da li su sva polja ispravno popunjena, povratna vrednost
+	 *         je TRUE ako jesu
+	 */
 
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();

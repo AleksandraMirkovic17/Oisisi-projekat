@@ -7,16 +7,37 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class ProfesorPredmetJTabel extends JTable{
+/**
+ * 
+ * Klasa koja pravi tabelu predmeta kod selektovanog profesora. Biće postavljena
+ * na tab na dijalog za izmenu profesora (klasa IzmenaProfesorDialog). Nasleđuje
+ * klasu JTable.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
+public class ProfesorPredmetJTabel extends JTable {
+	/**
+	 * instanca klase
+	 */
 	private static ProfesorPredmetJTabel instance = null;
 
+	/**
+	 * Metoda koja omogućava postojanje samo jedne instance ove klase.
+	 * 
+	 * @return povratna vrednost je instanca ove klase
+	 */
 	public static ProfesorPredmetJTabel getInstance() {
-		 if(instance==null)
+		if (instance == null)
 			instance = new ProfesorPredmetJTabel();
-		
+
 		return instance;
 	}
 
+	/**
+	 * konstruktor klase
+	 */
 	private ProfesorPredmetJTabel() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
@@ -25,6 +46,10 @@ public class ProfesorPredmetJTabel extends JTable{
 
 	}
 
+	/**
+	 * Metoda koja omogućuje da se nakon selektovanja nekog reda taj red promeni
+	 * boju
+	 */
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
@@ -36,10 +61,15 @@ public class ProfesorPredmetJTabel extends JTable{
 		}
 		return c;
 	}
+
+	/**
+	 * Metoda koja omogućava ažuriranje prikaza tabele predmeta na kojima predaje
+	 * profesornakon što je došlo do nekih izmena.
+	 */
 	public void azurirajPrikaz() {
-		AbstractTableModelProfPredmet model = (AbstractTableModelProfPredmet) this.getModel(); 
-		model.fireTableDataChanged(); //obavestavamo da je doslo do promene podatak i da model treba da se azurira
-		validate(); //ugradjena metoda
+		AbstractTableModelProfPredmet model = (AbstractTableModelProfPredmet) this.getModel();
+		model.fireTableDataChanged(); // obavestavamo da je doslo do promene podatak i da model treba da se azurira
+		validate(); // ugradjena metoda
 	}
 
 }

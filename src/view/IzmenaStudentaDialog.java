@@ -36,21 +36,85 @@ import model.Student;
 import pomocneKlase.MyFocusListener;
 import pomocneKlase.SimpleDialog;
 
+/**
+ * Klasa koja modeluje dijalog za izmenu i prikaz prethodno unetog studenta.
+ * Nakon otvaranja dijaloga pojavljuju se tri taba. Prvi tab omogućuje prikaz i
+ * izmenu podataka o studentu, drugi tab prikazuje sve položene predmete
+ * studenta, a treći prikazuje sve nepoložene predmete kod studenta. Nasleđuje
+ * klasu JDialog i implementira interfejs ActionListener.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
 public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 	/**
-	* 
-	*/
+	 * serijski broj
+	 */
 	private static final long serialVersionUID = 5282385078335739861L;
-
-	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtIndeks, txtGodinaUpisa;
-	JComboBox<String> trenutnaGodinaCombo, finansCombo;
+	/**
+	 * tekstualno polje za unos imena
+	 */
+	JTextField txtIme;
+	/**
+	 * tekstualno polje za unos prezimena
+	 */
+	JTextField txtPrezime;
+	/**
+	 * tekstualno polje za unos datuma rođenja
+	 */
+	JTextField txtDatumRodjenja;
+	/**
+	 * tekstualno polje za unos adrese
+	 */
+	JTextField txtAdresa;
+	/**
+	 * tekstualno polje za unos broja telefona
+	 */
+	JTextField txtTel;
+	/**
+	 * tekstualno polje za unos elektronske pošte
+	 */
+	JTextField txtEmail;
+	/**
+	 * tekstualno polje za unos broja indeksa
+	 */
+	JTextField txtIndeks;
+	/**
+	 * tekstualno polje za unos godine upisa
+	 */
+	JTextField txtGodinaUpisa;
+	/**
+	 * ComboBox za odabir trenutne godine studija
+	 */
+	JComboBox<String> trenutnaGodinaCombo;
+	/**
+	 * ComboBox za odabir načina finansiranja studenta
+	 */
+	JComboBox<String> finansCombo;
+	/**
+	 * labela koja prikazuje prosečnu ocenu studenta na osnovu položeih predmeta
+	 */
 	JLabel prosecnaOcena;
+	/**
+	 * Student koji se menja
+	 */
 	Student student;
-
+	/**
+	 * Instanca klase IzmenaStudentaDialog
+	 */
 	public static IzmenaStudentaDialog instanceIzmenaStudenta;
+	/**
+	 * Dugme za poništavanje unosa
+	 */
 	JButton btnPonisti;
 
+	/**
+	 * Konstruktor klase
+	 * 
+	 * @param student objekat klase student kog korisnik želi da izmeni
+	 */
 	public IzmenaStudentaDialog(Student student) {
 		super();
 		setTitle("Izmena studenta");
@@ -479,7 +543,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 						NepolozeniJTable.getInstance().azurirajPrikaz();
 						JOptionPane.showMessageDialog(instanceIzmenaStudenta, "Predmet je obrisan!");
 						for (int i = 0; i < prr.getNisuPoloziliPredmet().size(); i++) {
-							if(prr.getNisuPoloziliPredmet().get(i).getBrIndeksa().equals(student.getBrIndeksa())) {
+							if (prr.getNisuPoloziliPredmet().get(i).getBrIndeksa().equals(student.getBrIndeksa())) {
 								prr.getPoloziliPredmet().remove(i);
 							}
 						}
@@ -500,7 +564,7 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int red = NepolozeniJTable.getInstance().getSelectedRow();
-				
+
 				if (red >= 0 && (red < BazaNepolozeni.getInstance().getInc())) {
 					int model = NepolozeniJTable.getInstance().convertRowIndexToModel(red);
 					Predmet p = BazaNepolozeni.getInstance().getRow(model);
@@ -617,6 +681,11 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 					// upotrebljivo iako jos nista nismo kucali
 	}
 
+	/**
+	 * Metoda koja omogućuje kupljenje teksta iz tekstualnih polja i ComboBox-eva.
+	 * 
+	 * @return povratna vrednost je niz pokupljenih stringova
+	 */
 	public String[] pokupiTekst() {
 		String tekst[] = new String[10];
 		for (int i = 0; i < tekst.length; i++) {
@@ -637,6 +706,13 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 	}
 
+	/**
+	 * Metoda iz interfejsa ActionListener. Omogućuje reakciju na pritusnute dugmiće
+	 * ,,Odustani" ili ,,Potvrdi". Klikom na odustani dijalog se samo gasi, student
+	 * se ne menja, a pritiskom na dugme ,,Potvrdi" podaci o studentu se ažuriraju,
+	 * ako su svi uslovi forme parametara zadovoljeni.Sve to kontroliše klasa
+	 * StudentController.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -675,6 +751,12 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 
 	}
 
+	/**
+	 * Metoda koja proverava da li su sva polja ispravno popunjena. U slučaju da
+	 * neki od formata nije ispoštovan vraća vrednost false.
+	 * 
+	 * @return boolean vrednost pokazuje da li su podaci ispravno uneti
+	 */
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();
 		Color correct = new Color(208, 240, 192);
@@ -762,7 +844,8 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		if (tekst[6].length() != 0) {
 			ok1 = true;
 			if (!Pattern.matches("[a-z]{2,3}-[0-9]{1,3}-[0-9]{4}", tekst[6])
-					&& !Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ0-9 ]*", tekst[6]) && !Pattern.matches("[A-Z]{2,3} [0-9]{1,3}/[0-9]{4}" , tekst[6])) {
+					&& !Pattern.matches("[a-zA-ZćĆčČšŠđĐžŽ0-9 ]*", tekst[6])
+					&& !Pattern.matches("[A-Z]{2,3} [0-9]{1,3}/[0-9]{4}", tekst[6])) {
 				txtIndeks.setBackground(incorrect);
 				txtIndeks.setForeground(Color.black);
 				ok1 = false;
@@ -790,15 +873,32 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		return ok;
 	}
 
+	/**
+	 * Vraća referencu objekta ove klase koji je jedinstven..
+	 * 
+	 * @return instanca klase
+	 */
 	public static IzmenaStudentaDialog getInstance() {
 		return instanceIzmenaStudenta;
 
 	}
 
+	/**
+	 * Metoda koja manipuliše dugmićem ,,Poništi" koje se pojavljuje na tabu na kom
+	 * se prikazuje položeni predmeti. Podešava da li je dugme može da se pritisne
+	 * ili ne.
+	 * 
+	 * @param b boolean vrednost koja pokazuje da li je dugme enabled ili ne
+	 */
 	public void setBtnPonistiEnabled(boolean b) {
 		this.btnPonisti.setEnabled(b);
 	}
 
+	/**
+	 * Podešava dugme ,,Poništi" na tabu za brikaz položenih predmeta na enabled u
+	 * slučaju kada ima položenih predmeta, a na not enabled ako nema nijedan
+	 * položeni predmet.
+	 */
 	public void setBtnPonistiAkoNemaPolozenih() {
 		if (student.getPolozeniPredmeti().size() == 0) {
 			btnPonisti.setEnabled(false);
@@ -807,6 +907,9 @@ public class IzmenaStudentaDialog extends JDialog implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metoda kojom se ispisuje prosečna ocena.
+	 */
 	public void izmenaProsecneOcene() {
 		double prosecnaO = student.getProsecnaOcena();
 		String s = new String("Prosečna ocena: " + String.valueOf(prosecnaO));

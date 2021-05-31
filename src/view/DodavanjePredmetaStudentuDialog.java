@@ -26,14 +26,35 @@ import model.Predmet;
 import model.Student;
 import java.awt.List;
 
+/**
+ * Klasa koja modeluje dijalog za dodelu predmeta određenom studentu. Nasleđuje
+ * klasu JDialog i implementira interfejs ItemListener. Omogućeno je dodavanje
+ * jednog ili više predmeta odjednom.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
 public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemListener {
 
 	/**
-	 * 
+	 * serijski broj
 	 */
 	private static final long serialVersionUID = -3887024701864527674L;
+	/**
+	 * Polje koje predstavlja studenta kom se dodeljuju predmet/i.
+	 */
 
 	Student student;
+
+	/**
+	 * Konstrukton klase
+	 * 
+	 * @param s      predstavlja studenta kom se dodeljuje predmet
+	 * @param parent roditelj dijalog sa kog se poziva ovaj dijalog, potrebno je
+	 *               proslediti kao parametar, da bi mogli dijalog ove klase da
+	 *               centriramo u odnosu na onaj koji ga je pozvao
+	 */
 
 	@SuppressWarnings("deprecation")
 	public DodavanjePredmetaStudentuDialog(Student s, IzmenaStudentaDialog parent) {
@@ -180,6 +201,10 @@ public class DodavanjePredmetaStudentuDialog extends JDialog implements ItemList
 
 	}
 
+	/**
+	 * Metoda koja omogućuje da nakon što čekiramo neki od predmeta, da se oni oboje
+	 * drugom bojom.
+	 */
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
 		repaint();

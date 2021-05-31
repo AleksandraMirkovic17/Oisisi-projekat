@@ -34,18 +34,48 @@ import model.Predmet;
 import model.Profesor;
 import pomocneKlase.MyFocusListener;
 
+/**
+ * Klasa koja modeluje dijalog za izmenu i prikaz informacija prethodno unetog profesora. Dijalog
+ * prikazuje 2 taba, jedan za prikaz i izmenu podataka o profesoru a drugi o
+ * predmetima na kojima profesor predaje.
+ * 
+ * @author Aleksandra Mirković
+ *
+ */
+
 public class IzmenaProfesorDialog extends JDialog implements ActionListener {
 
 	/**
-	 * 
+	 * serijski broj
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Tekstualno polje u koje se unose odgovarajući podaci o profesoru
+	 */
 	JTextField txtIme, txtPrezime, txtDatumRodjenja, txtAdresa, txtTel, txtEmail, txtKancelarija, txtBrLicneKarte;
-	JComboBox<String> titulaCombo, zvanjeCombo;
+	/**
+	 * ComboBox sa enum konstantama, od kojih se bira jedna od titula
+	 */
+	JComboBox<String> titulaCombo;
+	/**
+	 * ComboBox sa enum vrednosima, od kojih se bira zvanje profesora
+	 */
+	JComboBox<String> zvanjeCombo;
+	/**
+	 * Profesor kog želimo da izmenimo
+	 */
 	Profesor profesor;
 
+	/**
+	 * Referenca na instancu ove klase
+	 */
 	public static IzmenaProfesorDialog instanceIzmenaProfesor;
 
+	/**
+	 * Konstruktor klase
+	 * 
+	 * @param profesor objekat klase profesor kome želi da promenimo neki od polja
+	 */
 	public IzmenaProfesorDialog(Profesor profesor) {
 		super();
 		setTitle("Izmena profesora");
@@ -542,6 +572,11 @@ public class IzmenaProfesorDialog extends JDialog implements ActionListener {
 		provera();
 	}
 
+	/**
+	 * Metoda koja omogućava kupljenje teksta iz tekstualnih polja i ComboBox-eva
+	 * 
+	 * @return povratna vrednost su pokupljeni stringovi
+	 */
 	public String[] pokupiTekst() {
 		String tekst[] = new String[10];
 		for (int i = 0; i < tekst.length; i++) {
@@ -562,6 +597,11 @@ public class IzmenaProfesorDialog extends JDialog implements ActionListener {
 
 	}
 
+	/**
+	 * Metoda iz interfejsa ActionLister, omogućava reakciju na pritisnute dugmiće
+	 * ,,Odustani" ili ,,Potvrdi". Poziva metodu proveri(), a zatim inicira izmenu
+	 * atributa objekta profesor.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -602,6 +642,11 @@ public class IzmenaProfesorDialog extends JDialog implements ActionListener {
 		}
 	}
 
+	/**
+	 * Proverava da li smo ispravno uneli parametre prilikom menjanja.
+	 * 
+	 * @return vraća True ako je naš celokupni unos po pravilima ili False ako nije.
+	 */
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();
 		Color correct = new Color(208, 240, 192);

@@ -1,3 +1,6 @@
+/**
+ * Sadži pomoćne klase koje omogućavaju različite mogućnosti aplikacije.
+ */
 package pomocneKlase;
 
 import java.awt.Color;
@@ -6,10 +9,24 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JTextField;
 
+/**
+ * Klasa koja omogućava da nakon što kliknemo na neko obavezno tesktualno polje
+ * u dijalozima za unos podataka, da te podatke odmah i unesemo, bez da skačemo
+ * sa polja na polje. Implementira interfejs FocusListener.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
 public class MyFocusListener implements FocusListener {
-
+	/**
+	 * Polje koje predstavlja ,,zastavicu" koja je true ako je na neko polje
+	 * zatražen fokus i false ako nije.
+	 */
 	boolean focusRequested = false;
 
+	/**
+	 * Poziva se nakon što je neka komponenta dobila fokus tastature.
+	 */
 	@Override
 	public void focusGained(FocusEvent arg0) {
 
@@ -17,6 +34,9 @@ public class MyFocusListener implements FocusListener {
 		txt.setBackground(Color.WHITE);
 	}
 
+	/**
+	 * Poziva se nakon što je komponenta izgubila fokus tastaure.
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		JTextField txt = (JTextField) arg0.getComponent();

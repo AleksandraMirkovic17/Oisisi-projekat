@@ -33,15 +33,35 @@ import model.Profesor;
 import model.Student;
 import java.awt.List;
 
+/**
+ * Klasa koja modeluje dijalog za dodavanje profesora na predmet. Navedenu
+ * funkcionalnost je moguće izvršiti samo ako na izabranom predmetu trenutno ne
+ * predaje nijedan profesor. U dijalogu se prikazuje lista profesora od kojih se
+ * bira jedan.
+ * 
+ * @author Aleksandra Mirković
+ *
+ */
+
 public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener {
 
 	/**
-	 * 
+	 * serijski broj
 	 */
 	private static final long serialVersionUID = -3887024701864527674L;
-
+	/**
+	 * Objekat klase Predmet kom se dodaje profesor u listu profesora koji predaju
+	 * na predmetu.
+	 */
 	Predmet predmet;
 
+	/**
+	 * Konstruktor klase
+	 * 
+	 * @param p      predmet kom želimo da dodamo nastavnika
+	 * @param parent predstavlja dijalog koji poziva ovaj dijalog, potrebno radi
+	 *               pravilnog centriranja dijaloga
+	 */
 	@SuppressWarnings("deprecation")
 	public DodavanjeProfesoraPredmetu(Predmet p, IzmenaPredmetaDialog parent) {
 		super();
@@ -102,9 +122,11 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 				// TODO Auto-generated method stub
 				Profesor dodajProf = list.getSelectedValue();
 				if (dodajProf != null) {
-					for(int i=0; i<BazaProfesor.getInstance().getProfesori().size(); i++) {
-						if(BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte().equals(dodajProf.getBrLicneKarte())) {
-							BazaProfesoriNaPredmetu.getInstance().dodajProfesora(BazaProfesor.getInstance().getProfesori().get(i));
+					for (int i = 0; i < BazaProfesor.getInstance().getProfesori().size(); i++) {
+						if (BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte()
+								.equals(dodajProf.getBrLicneKarte())) {
+							BazaProfesoriNaPredmetu.getInstance()
+									.dodajProfesora(BazaProfesor.getInstance().getProfesori().get(i));
 							ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
 							BazaProfesor.getInstance().getProfesori().get(i).getPredmeti().add(p);
 						}
@@ -116,7 +138,6 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 		JButton btnCancel = new JButton("ODUSTANI");
 
 		btnOk.setPreferredSize(new Dimension(100, 25));
-
 
 		btnCancel.setPreferredSize(new Dimension(100, 25));
 		btnCancel.addActionListener(new ActionListener() {
@@ -153,6 +174,10 @@ public class DodavanjeProfesoraPredmetu extends JDialog implements ItemListener 
 
 	}
 
+	/**
+	 * Metoda koja menja boju okviru, nakon što smo čekirali neki od ponuđenih
+	 * entiteta
+	 */
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
 		repaint();

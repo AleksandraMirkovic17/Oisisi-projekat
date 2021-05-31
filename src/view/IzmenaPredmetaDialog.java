@@ -36,18 +36,37 @@ import model.Profesor;
 import model.Student;
 import pomocneKlase.MyFocusListener;
 
+/**
+ * klasa koja modeluje dijalog za izmenu i prikaz prethodno unetog predmeta.
+ * Nasleđuje klase JDialog i implementira interfejs ActionListener.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
 public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 	/**
-	* 
-	*/
+	 * serijski broj
+	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * instanca klase
+	 */
 	public static IzmenaPredmetaDialog instanceIzmenaPredmeta;
 
+	/**
+	 * Getter koji vraća profesora koji predaje na ovom predmetu.
+	 * 
+	 * @return ime i prezime profesora
+	 */
 	public JTextField getTxtProfesor() {
 		return txtProfesor;
 	}
 
+	/**
+	 * Postavljanje i ažuriranje poslednje dodatog profesora na ovaj predmet
+	 */
 	public void setTxtProfesor() {
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
@@ -55,9 +74,45 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		}
 	}
 
-	JTextField txtSifra, txtNaziv, txtEspb, txtProfesor;
-	JComboBox<String> semestarCombo, godinaCombo;
+	/**
+	 * tekstualno polje za izmenu šifre
+	 */
+	JTextField txtSifra;
+	/**
+	 * tekstualno polje za izmeni naziva
+	 */
+	JTextField txtNaziv;
+	/**
+	 * tekstualno polje za unos broja ESPB bodova
+	 */
+	JTextField txtEspb;
+	/**
+	 * tesktualno polje koje prikazuej poslednje dodatog profesora na ovaj predmet,
+	 * tj. njegogovo ime i prezime, u ovo polje je nemoguće kucati od strane
+	 * korisnika
+	 */
+	JTextField txtProfesor;
+	/**
+	 * ComboBox koji prikazuje odabrane informacije koje je moguće izmeniti.
+	 * Semestar u kom se predmet izvodi
+	 */
+	JComboBox<String> semestarCombo;
+			/**
+			 * ComboBox koji prikazuje odabrane informacije koje je moguće izmeniti. Godina
+			 * izvođenja predmeta.
+			 */
+	JComboBox<String> godinaCombo;
+
+	/**
+	 * Predmet za koji se vrši izmena.
+	 */
 	Predmet predmet;
+
+	/**
+	 * Konstruktor klase
+	 * 
+	 * @param predmet predmet za koji se vrši izmena
+	 */
 
 	public IzmenaPredmetaDialog(Predmet predmet) {
 		super();
@@ -140,7 +195,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		plus.setMargin(new Insets(0, 0, 0, 0));
 		btnminus.setToolTipText("Uklanjanje profesora sa predmeta");
 		btnminus.setPreferredSize(new Dimension(20, 20));
-	
+
 		panProfesor.add(btnminus);
 		btnminus.addActionListener(new ActionListener() {
 
@@ -148,43 +203,39 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Profesor pr = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
-				if(pr==null)
-				{
+				if (pr == null) {
 					btnminus.setEnabled(false);
-					JOptionPane.showMessageDialog(instanceIzmenaPredmeta,
-							"Ne mo�ete da ukolnite profesora!", "Upozorenje",
-							JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(instanceIzmenaPredmeta, "Ne možete da ukolnite profesora!",
+							"Upozorenje", JOptionPane.WARNING_MESSAGE);
 				}
 				System.out.println(pr.toString());// selektovali smo red u tabeli
 
-					Object[] options = { "Da", "Ne" };
+				Object[] options = { "Da", "Ne" };
 
-					int code = JOptionPane.showOptionDialog(instanceIzmenaPredmeta,
-							"Da li ste sigurni?", "Ukloni predmet",
-							JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-					if (code == JOptionPane.YES_OPTION) {
-						System.out.println(pr.toString());
-						System.out.println(predmet.toString());
-						for(int i=0;i<BazaProfesor.getInstance().getbroj_profesora();i++) {
-							if(BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte().equals(pr.getBrLicneKarte()))
-							{
-						      BazaProfesoriNaPredmetu.getInstance().getProfesori().remove(pr);
-						      ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
-						      BazaProfesor.getInstance().izbrisiPredmet1(BazaProfesor.getInstance().getProfesori().get(i),predmet.getSifraPredmeta());
-						     
-							}
-						}
+				int code = JOptionPane.showOptionDialog(instanceIzmenaPredmeta, "Da li ste sigurni?", "Ukloni predmet",
+						JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				if (code == JOptionPane.YES_OPTION) {
+					System.out.println(pr.toString());
+					System.out.println(predmet.toString());
+					for (int i = 0; i < BazaProfesor.getInstance().getbroj_profesora(); i++) {
+						if (BazaProfesor.getInstance().getProfesori().get(i).getBrLicneKarte()
+								.equals(pr.getBrLicneKarte())) {
+							BazaProfesoriNaPredmetu.getInstance().getProfesori().remove(pr);
+							ProfesoriNaPredmetuJTable.getInstance().azurirajPrikaz();
+							BazaProfesor.getInstance().izbrisiPredmet1(BazaProfesor.getInstance().getProfesori().get(i),
+									predmet.getSifraPredmeta());
 
-						Profesor p1=BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
-						if(p1==null)
-						{
-							plus.setEnabled(true);
-							txtProfesor.setText(" ");
 						}
-						else {
+					}
+
+					Profesor p1 = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
+					if (p1 == null) {
+						plus.setEnabled(true);
+						txtProfesor.setText(" ");
+					} else {
 						txtProfesor.setText(p1.getIme() + " " + p1.getPrezime());
-						}
-						
+					}
+
 				}
 
 			}
@@ -207,7 +258,7 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 				dialog.setVisible(true);
 				if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 					Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
-				
+
 					txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
 				}
 			}
@@ -382,6 +433,12 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 	}
 
+	/**
+	 * Metoda koja kupi uneti tekst, poziva se nakon potvrde promene podataka o
+	 * predmetu.
+	 * 
+	 * @return niz stringova koji predstavljaju unete podatke
+	 */
 	public String[] pokupiTekst() {
 		String tekst[] = new String[5];
 		for (int i = 0; i < tekst.length; i++) {
@@ -396,6 +453,10 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 	}
 
+	/**
+	 * Metoda iz interfejsa ActionListener. Omogućuje odgovarajuću reakciju sistema
+	 * nakon unetih izmenjenih podataka o predmetu.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -430,6 +491,13 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 		}
 
 	}
+
+	/**
+	 * Metoda koja proverava svako od tekstualnih polja u koje korisnik kuca, da li
+	 * je sve napisano u odgovarajućem šablonu.
+	 * 
+	 * @return boolean vrednost pokazuje da li su podaci ispravno uneti
+	 */
 
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();
@@ -478,11 +546,16 @@ public class IzmenaPredmetaDialog extends JDialog implements ActionListener {
 
 		return ok;
 	}
-	
+
+	/**
+	 * Metoda koja pregleda listu profesora na ovom predmetu i postavlja polje
+	 * txtProfesor da prikazuje ime i prezime poslednje unetog profesora.
+	 */
 	public void azurirajPoslednjegProfesora() {
 		if ((predmet.getProfesori() != null) && (predmet.getProfesori().size() != 0)) {
 			Profesor profa = BazaProfesoriNaPredmetu.getInstance().getPoslednjiProfesor();
 			txtProfesor.setText(profa.getIme() + " " + profa.getPrezime());
-	}
+		}
 
-}}
+	}
+}

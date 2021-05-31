@@ -28,15 +28,40 @@ import model.BazaPredmet;
 import model.Predmet;
 import pomocneKlase.MyFocusListener;
 
+/**
+ * Klasa koja modeluje dijalog za dodavanje predmeta u bazu predmeta. Ukoliko
+ * referent u tabu Predmeti odabere neku od opcija za dodavanje novog entiteta
+ * (dugme ToolBar-a, stavka menija, odgovarajući akcelerator ili mnemonik)
+ * Otvara se dijalog koji je modalan i centriran u odnosu na glavni prozor.
+ * Prikazuje se forma za unos informacija o predmetu, kao i dva dugmeta za
+ * potvrdu i odustanak. Pritisak na dugme "Potvrdi" je moguće samo ako su sva
+ * polja validno popunjena. Nakon dodavanja novog predmeta u sistem, prikaz
+ * tabele sa predmetima se osvežava i sadržaj se ažurira.
+ * 
+ * 
+ * @author Aleksandra Mirković
+ *
+ */
+
 public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 
 	/**
-	* 
-	*/
+	 * serijski broj
+	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Atribut klase koji predstavlja tekstualno polje
+	 */
 	JTextField txtSifra, txtNaziv, txtGodina, txtEspb;
+	/**
+	 * Atribut koji predstavlja ComboBox pomoću kog se odabira semestar iz opadajuće
+	 * liste.
+	 */
 	JComboBox<String> semestarCombo;
 
+	/**
+	 * Kontruktor klase
+	 */
 	DodavanjePredmetaDialog() {
 		super();
 		setTitle("Dodavanje predmeta");
@@ -258,6 +283,11 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 
 	}
 
+	/**
+	 * Metoda koja omogućava da se tekst unet u tekstualna polja pokupi.
+	 * 
+	 * @return povratna vrednost je pokupljeni uneti tekst
+	 */
 	public String[] pokupiTekst() {
 		String tekst[] = new String[5];
 		for (int i = 0; i < tekst.length; i++) {
@@ -271,6 +301,12 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 		return tekst;
 
 	}
+
+	/**
+	 * Nakon unesenih podataka o predmetu, ova metoda nam omogućuje potvrdu, inicira
+	 * kupljenje teksta ,proverava da li je moguće dodati predmet sa unetim
+	 * parametrima i sl.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -289,7 +325,7 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 				for (Predmet p : BazaPredmet.getInstance().getPredmeti()) {
 					if (p.getSifraPredmeta().equals(tekst[0])) {
 						dodaj = false;
-						JOptionPane.showMessageDialog(null, "Predmet sa unetom sifrom vec postoji!", "Upozorenje",
+						JOptionPane.showMessageDialog(null, "Predmet sa unetom šifrom vec postoji!", "Upozorenje",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -303,6 +339,14 @@ public class DodavanjePredmetaDialog extends JDialog implements ActionListener {
 		}
 
 	}
+
+	/**
+	 * Metoda koja nam prverava da li su ispravno uneti parametri nekog predmeta. U
+	 * zavisti od ispravnosti polje za unos je crveno ili zeleno.
+	 * 
+	 * @return bool vrednost koja ukazuje da li su uneti podaci u ispravnom formatu
+	 *         ili ne
+	 */
 
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();

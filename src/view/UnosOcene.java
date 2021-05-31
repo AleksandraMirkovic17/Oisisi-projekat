@@ -32,16 +32,55 @@ import model.Predmet;
 import model.Student;
 import pomocneKlase.MyFocusListener;
 
-public class UnosOcene extends JDialog implements ActionListener{
-	
-	JTextField txtSifra, txtNaziv, txtDatum;
+/**
+ * Klasa predstavlja dijalog koji se prikazuje klikom na dugme "Polaganje" u
+ * tabu Nepoloženi dijaloga Izmena studenta. Dijalog je centriran u odnosu na
+ * dijalog sa spiskom nepoloženih predmeta i sadrži formu za upis ocene na
+ * označeni nepoloženi predmet. Na dnu su dugmad za potvrdu, odnosno odustanak
+ * od upisa ocene. Dugme za potvrdu je omogućeno samo ako su sva polja validno
+ * popunjena. Nakon uspješto izvršene akcije, predmet se briše iz tabele
+ * nepoloženih i prebacuje u tabelu položenih predmeta studenta. Nasleđuje klasu
+ * JDialog i implementira interfejs ActionListener.
+ * 
+ * @author Andrea Sabo Cibolja
+ *
+ */
+
+public class UnosOcene extends JDialog implements ActionListener {
+	/**
+	 * Polje sa šifrom predmeta(nije moguće menjati)
+	 */
+	JTextField txtSifra;
+	/**
+	 * Polje sa nazivom predmeta(nije moguće menjati)
+	 */
+	JTextField txtNaziv;
+	/**
+	 * Polje za unos datuma polaganja
+	 */
+	JTextField txtDatum;
+	/**
+	 * ComboBox za odabir ocene
+	 */
 	JComboBox<String> ocena;
+	/**
+	 * Predmet koje se polaže
+	 */
 	Predmet predmet;
+	/**
+	 * Ocena
+	 */
 	Ocena o;
 
-	
+	/**
+	 * Konstruktor klase - kreira dijalog, inicijalizuje komponente i postavlja
+	 * odgovarajuće osluškivače događaja i akcije
+	 * 
+	 * @param predmet -za koji predmet se kreira ocena
+	 * @param o       -ocena
+	 */
 
-	public UnosOcene(Predmet predmet,Ocena o) {
+	public UnosOcene(Predmet predmet, Ocena o) {
 		super();
 		setTitle("Unos ocena");
 		setSize(400, 400);
@@ -50,21 +89,19 @@ public class UnosOcene extends JDialog implements ActionListener{
 		setModal(true);
 
 		this.predmet = predmet;
-		this.o=o;
-		
-	
-		
+		this.o = o;
+
 		JPanel panCenter = new JPanel();
 		BoxLayout boxCenter = new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		MyFocusListener focusListener = new MyFocusListener();
-		
+
 		JButton btnOk = new JButton("POTVRDI");
 		JButton btnCancel = new JButton("ODUSTANI");
 
 		// dimenzije labela i tekstualnih komponenti
 		Dimension dim = new Dimension(150, 20);
-		//sifra
+		// sifra
 		JPanel panSifra = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblSifra = new JLabel("Sifra predmeta*:");
 		lblSifra.setPreferredSize(dim);
@@ -72,13 +109,13 @@ public class UnosOcene extends JDialog implements ActionListener{
 		txtSifra = new JTextField(predmet.getSifraPredmeta());
 		txtSifra.setPreferredSize(dim);
 		txtSifra.setName("txtSifra");
-		txtSifra.setEditable(false); //stavljamo da nase polje sifra ne moze da bude menjano
+		txtSifra.setEditable(false); // stavljamo da nase polje sifra ne moze da bude menjano
 		txtSifra.addFocusListener(focusListener);
-		
+
 		panSifra.add(lblSifra);
 		panSifra.add(txtSifra);
-		
-		//naziv
+
+		// naziv
 		JPanel panNaziv = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblNaziv = new JLabel("Naziv predmeta*:");
 		lblNaziv.setPreferredSize(dim);
@@ -86,17 +123,17 @@ public class UnosOcene extends JDialog implements ActionListener{
 		txtNaziv = new JTextField(predmet.getNazivPredmeta());
 		txtNaziv.setPreferredSize(dim);
 		txtNaziv.setName("txtNaziv");
-		txtNaziv.setEditable(false); //stavljamo da nase polje naziv ne moze da bude menjano
+		txtNaziv.setEditable(false); // stavljamo da nase polje naziv ne moze da bude menjano
 		txtNaziv.addFocusListener(focusListener);
-		
+
 		panNaziv.add(lblNaziv);
 		panNaziv.add(txtNaziv);
-		
-		//Ocena
+
+		// Ocena
 		JPanel panOcena = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblOcena = new JLabel("Ocena*:");
 		lblOcena.setPreferredSize(dim);
-	
+
 		ocena = new JComboBox<String>();
 		ocena.setPreferredSize(dim);
 		ocena.addItem("6");
@@ -105,14 +142,12 @@ public class UnosOcene extends JDialog implements ActionListener{
 		ocena.addItem("9");
 		ocena.addItem("10");
 		ocena.setSelectedItem(null);
-	
-	
-	    
-	    panOcena.add(lblOcena);
-	    panOcena.add(ocena);
-	    
-	    //Datum
-	    JPanel panDatum = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+		panOcena.add(lblOcena);
+		panOcena.add(ocena);
+
+		// Datum
+		JPanel panDatum = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblDatum = new JLabel("Datum*:");
 		lblDatum.setPreferredSize(dim);
 
@@ -144,10 +179,9 @@ public class UnosOcene extends JDialog implements ActionListener{
 				// TODO Auto-generated method stub
 			}
 		});
-		
+
 		panDatum.add(lblDatum);
 		panDatum.add(txtDatum);
-
 
 		panCenter.add(panSifra);
 		panCenter.add(panNaziv);
@@ -155,54 +189,49 @@ public class UnosOcene extends JDialog implements ActionListener{
 		panCenter.add(panDatum);
 		panCenter.add(panDatum);
 		add(panCenter, BorderLayout.CENTER);
-		
-		
+
 		JPanel panBottom = new JPanel();
 		BoxLayout box = new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
 
 		btnOk.setPreferredSize(new Dimension(150, 25));
-		btnOk.addActionListener(new ActionListener()
-				{
+		btnOk.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						String tekst[] = pokupiTekst();
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-						
-						String ocene =(String) ocena.getSelectedItem();
-						int ocena = Integer.parseInt(ocene);
-						o.setBrojcanaVrednost(ocena);
-						
-						
-						BazaPolozeni.getInstance().dodajPredmet(o.getStudent(), o.getPredmet(), o.getBrojcanaVrednost(), LocalDate.parse(tekst[3], formatter));
-						 PolozeniJTable.getInstance().azurirajPrikaz();
-						BazaNepolozeni.getInstance().izbrisiPredmet(predmet.getSifraPredmeta(),o.getStudent());
-						
-						
-				
-					     NepolozeniJTable.getInstance().azurirajPrikaz();
-					     PolozeniJTable.getInstance().azurirajPrikaz();
-					     IzmenaStudentaDialog.instanceIzmenaStudenta.setBtnPonistiEnabled(true);
-						setVisible(false);
-						
-					}
-			
-				});
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String tekst[] = pokupiTekst();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+				String ocene = (String) ocena.getSelectedItem();
+				int ocena = Integer.parseInt(ocene);
+				o.setBrojcanaVrednost(ocena);
+
+				BazaPolozeni.getInstance().dodajPredmet(o.getStudent(), o.getPredmet(), o.getBrojcanaVrednost(),
+						LocalDate.parse(tekst[3], formatter));
+				PolozeniJTable.getInstance().azurirajPrikaz();
+				BazaNepolozeni.getInstance().izbrisiPredmet(predmet.getSifraPredmeta(), o.getStudent());
+
+				NepolozeniJTable.getInstance().azurirajPrikaz();
+				PolozeniJTable.getInstance().azurirajPrikaz();
+				IzmenaStudentaDialog.instanceIzmenaStudenta.setBtnPonistiEnabled(true);
+				setVisible(false);
+
+			}
+
+		});
 		btnOk.setEnabled(false);
 
 		btnCancel.setPreferredSize(new Dimension(150, 25));
-		btnCancel.addActionListener(new ActionListener()
-				{
+		btnCancel.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						dispose();
-						
-					}
-			
-				});
-		
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+
+			}
+
+		});
+
 		panBottom.add(Box.createGlue());
 		panBottom.add(Box.createHorizontalStrut(10));
 		panBottom.add(btnOk);
@@ -217,6 +246,11 @@ public class UnosOcene extends JDialog implements ActionListener{
 		setLocationRelativeTo(GlavniProzor.getInstance());
 	}
 
+	/**
+	 * Metoda koja omogućuje da se uneti i odabrani tekst pokupi u obliku stringa.
+	 * 
+	 * @return povratna vrednost je niz pokupljenih stringova
+	 */
 	public String[] pokupiTekst() {
 		String tekst[] = new String[10];
 		for (int i = 0; i < tekst.length; i++) {
@@ -226,11 +260,16 @@ public class UnosOcene extends JDialog implements ActionListener{
 		tekst[1] = txtNaziv.getText().toString();
 		tekst[2] = ocena.getSelectedItem().toString();
 		tekst[3] = txtDatum.getText().toString();
-	
 
 		return tekst;
 
 	}
+
+	/**
+	 * Metoda koja omogućava proveru da li su sva polja ispravno popunjena
+	 * 
+	 * @return bool vrednost koja ukazuje da li su polja ispravno popunjena
+	 */
 	protected boolean provera() {
 		String tekst[] = pokupiTekst();
 		Color correct = new Color(208, 240, 192);
@@ -254,11 +293,14 @@ public class UnosOcene extends JDialog implements ActionListener{
 		return ok;
 	}
 
+	/**
+	 * Metoda iz interfejsa ActionListener, omogućava odgovor na akciju.
+	 */
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }
